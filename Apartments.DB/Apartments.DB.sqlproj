@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>DB</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{5d55a4e4-2f55-4f27-9e1b-4c6fc514aa02}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>DB</RootNamespace>
+    <AssemblyName>DB</AssemblyName>
+    <ModelCollation>1033, CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="Tables" />
+    <Folder Include="Programmability" />
+    <Folder Include="Scripts" />
+    <Folder Include="Programmability\Apartments" />
+    <Folder Include="Programmability\Apartments\BL" />
+    <Folder Include="Programmability\Apartments\CRUD" />
+    <Folder Include="Programmability\Cities" />
+    <Folder Include="Programmability\Cities\CRUD" />
+    <Folder Include="Programmability\Owners" />
+    <Folder Include="Programmability\Owners\CRUD" />
+    <Folder Include="Programmability\Pictures" />
+    <Folder Include="Programmability\Pictures\BL" />
+    <Folder Include="Programmability\Pictures\CRUD" />
+    <Folder Include="Programmability\Reservations" />
+    <Folder Include="Programmability\Reservations\CRUD" />
+    <Folder Include="Programmability\Statuses" />
+    <Folder Include="Programmability\Statuses\CRUD" />
+    <Folder Include="Programmability\Tags" />
+    <Folder Include="Programmability\Tags\BL" />
+    <Folder Include="Programmability\Tags\CRUD" />
+    <Folder Include="Programmability\TagTypes" />
+    <Folder Include="Programmability\TagTypes\CRUD" />
+    <Folder Include="Programmability\Users" />
+    <Folder Include="Programmability\Users\BL" />
+    <Folder Include="Programmability\Users\CRUD" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Tables\Apartments.sql" />
+    <Build Include="Tables\Cities.sql" />
+    <Build Include="Tables\Owners.sql" />
+    <Build Include="Tables\Pictures.sql" />
+    <Build Include="Tables\Reservations.sql" />
+    <Build Include="Tables\Reviews.sql" />
+    <Build Include="Tables\Statuses.sql" />
+    <Build Include="Tables\Tags.sql" />
+    <Build Include="Tables\TagsApartments.sql" />
+    <Build Include="Tables\TagTypes.sql" />
+    <Build Include="Tables\Users.sql" />
+    <Build Include="Programmability\Apartments\BL\UpdateStatus.sql" />
+    <Build Include="Programmability\Apartments\CRUD\Create.sql" />
+    <Build Include="Programmability\Apartments\CRUD\Delete.sql" />
+    <Build Include="Programmability\Apartments\CRUD\Read.sql" />
+    <Build Include="Programmability\Apartments\CRUD\Update.sql" />
+    <Build Include="Programmability\Cities\CRUD\Create.sql" />
+    <Build Include="Programmability\Cities\CRUD\Delete.sql" />
+    <Build Include="Programmability\Cities\CRUD\Read.sql" />
+    <Build Include="Programmability\Cities\CRUD\Update.sql" />
+    <Build Include="Programmability\Owners\CRUD\Create.sql" />
+    <Build Include="Programmability\Owners\CRUD\Delete.sql" />
+    <Build Include="Programmability\Owners\CRUD\Read.sql" />
+    <Build Include="Programmability\Owners\CRUD\Update.sql" />
+    <Build Include="Programmability\Pictures\BL\ReadByApartmentFK.sql" />
+    <Build Include="Programmability\Pictures\BL\MakeRepresentative.sql" />
+    <Build Include="Programmability\Pictures\CRUD\Create.sql" />
+    <Build Include="Programmability\Pictures\CRUD\Delete.sql" />
+    <Build Include="Programmability\Pictures\CRUD\Read.sql" />
+    <Build Include="Programmability\Pictures\CRUD\Update.sql" />
+    <Build Include="Programmability\Reservations\CRUD\CreateReservation.sql" />
+    <Build Include="Programmability\Statuses\CRUD\Create.sql" />
+    <Build Include="Programmability\Statuses\CRUD\Delete.sql" />
+    <Build Include="Programmability\Statuses\CRUD\Read.sql" />
+    <Build Include="Programmability\Statuses\CRUD\Update.sql" />
+    <Build Include="Programmability\Tags\BL\ReadUnassigned.sql" />
+    <Build Include="Programmability\Tags\CRUD\Create.sql" />
+    <Build Include="Programmability\Tags\CRUD\Delete.sql" />
+    <Build Include="Programmability\Tags\CRUD\Read.sql" />
+    <Build Include="Programmability\Tags\CRUD\Update.sql" />
+    <Build Include="Programmability\TagTypes\CRUD\Create.sql" />
+    <Build Include="Programmability\TagTypes\CRUD\Delete.sql" />
+    <Build Include="Programmability\TagTypes\CRUD\Read.sql" />
+    <Build Include="Programmability\TagTypes\CRUD\Update.sql" />
+    <Build Include="Programmability\Users\BL\Login.sql" />
+    <Build Include="Programmability\Users\BL\Register.sql" />
+    <Build Include="Programmability\Users\CRUD\Create.sql" />
+    <Build Include="Programmability\Users\CRUD\Delete.sql" />
+    <Build Include="Programmability\Users\CRUD\Read.sql" />
+    <Build Include="Programmability\Users\CRUD\Update.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DB.publish.xml" />
+  </ItemGroup>
+</Project>

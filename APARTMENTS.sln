@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32526.322
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "DB", "DB\DB.sqlproj", "{5D55A4E4-2F55-4F27-9E1B-4C6FC514AA02}"
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Apartments.DB", "Apartments.DB\Apartments.DB.sqlproj", "{5D55A4E4-2F55-4F27-9E1B-4C6FC514AA02}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
