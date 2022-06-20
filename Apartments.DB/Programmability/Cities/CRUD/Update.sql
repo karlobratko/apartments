@@ -1,17 +1,36 @@
-CREATE PROCEDURE [dbo].[CityUpdate] (@ID AS int,
-                                     @Name AS nvarchar(100),
-                                     @UpdatedBy AS int)
+CREATE PROCEDURE [dbo].[CityUpdate] (@Guid      AS uniqueidentifier,
+                                     @Name      AS nvarchar(100),
+                                     @UpdatedBy AS int = 1)
 AS BEGIN
-  DECLARE @IsUnique AS int = (
-    SELECT ALL 
-      COUNT(*) 
-    FROM [dbo].[Cities] 
-    WHERE [ID] != @ID AND
-          [DeleteDate] IS NULL AND
-          [Name] = @Name
-  )
-  IF @IsUnique > 0 BEGIN
-    RETURN 0
+  DECLARE @Id AS int
+  DECLARE @DeleteDate AS datetime
+  SELECT ALL TOP 1
+    @Id         = [Id],
+    @DeleteDate = [DeleteDate]
+  FROM [dbo].[Cities]
+  WHERE [Guid] = @Guid
+
+  IF @Id IS NULL BEGIN
+    RETURN 2
+  END
+  ELSE IF @Id IS NOT NULL AND
+          @DeleteDate IS NOT NULL BEGIN
+    RETURN 3
+  END
+
+  SELECT ALL TOP 1
+    @Id         = [Id],
+    @DeleteDate = [DeleteDate]
+  FROM [dbo].[Cities]
+  WHERE [Name] = @Name
+
+  IF @Id IS NOT NULL AND
+     @DeleteDate IS NULL BEGIN
+    RETURN 4
+  END
+  ELSE IF @Id IS NOT NULL AND
+          @DeleteDate IS NOT NULL BEGIN
+    RETURN 3
   END
 
   UPDATE [dbo].[Cities]
@@ -19,8 +38,13 @@ AS BEGIN
     [UpdatedBy]     = @UpdatedBy,
     [UpdateDate]    = GETDATE(),
     [Name]          = @Name
-  WHERE [ID] = @ID AND [DeleteDate] IS NULL
+  WHERE [Guid] = @Guid
 
-  RETURN @@ROWCOUNT
+  IF @@ROWCOUNT = 1 BEGIN
+    RETURN 1
+  END
+  ELSE BEGIN
+    RETURN -1
+  END
 END
 GO
