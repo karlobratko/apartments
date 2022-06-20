@@ -18,6 +18,9 @@ AS BEGIN
     RETURN 3
   END
 
+  SET @Id         = NULL
+  SET @DeleteDate = NULL
+
   SELECT ALL TOP 1
     @Id         = [Id],
     @DeleteDate = [DeleteDate]
