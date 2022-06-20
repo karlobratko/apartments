@@ -1,9 +1,14 @@
-CREATE PROCEDURE [dbo].[ApartmentUpdateStatus] (@ID AS int,
-                                                @StatusFK AS int)
+CREATE PROCEDURE [dbo].[ApartmentUpdateStatus] (@Guid      AS uniqueidentifier,
+                                                @StatusFK  AS int,
+                                                @UpdatedBy AS int)
 AS BEGIN
   UPDATE [dbo].[Apartments]
-  SET [StatusFK] = @StatusFK
-  WHERE [ID] = @ID AND [DeleteDate] IS NULL
+    SET 
+      [UpdateDate] = GETDATE(),
+      [UpdatedBy]  = @UpdatedBy,
+      [StatusFK]   = @StatusFK
+  WHERE [DeleteDate] IS NULL AND
+        [Guid] = @Guid
 
   RETURN @@ROWCOUNT
 END
