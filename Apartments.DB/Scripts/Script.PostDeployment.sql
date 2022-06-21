@@ -41,3 +41,93 @@ IF NOT EXISTS (SELECT ALL * FROM [dbo].[Users] WHERE [Email] = N'admin' AND [Use
   ALTER TABLE [Users] CHECK CONSTRAINT [FK_Users_DeletedBy]
 END
 GO
+
+-- OWNERS
+
+IF NOT EXISTS (SELECT ALL * FROM [dbo].[Owners] WHERE [Name] = 'Filip Trn') BEGIN
+  INSERT INTO [dbo].[Owners]
+  (
+    [CreatedBy],
+    [UpdatedBy],
+    [Name]
+  )
+  VALUES
+  (
+    1,
+    1,
+    'Filip Trn'
+  )
+END
+
+-- CITIES
+
+IF NOT EXISTS (SELECT ALL * FROM [dbo].[Cities] WHERE [Name] = 'Zagreb') BEGIN
+  INSERT INTO [dbo].[Cities]
+  (
+    [CreatedBy],
+    [UpdatedBy],
+    [Name]
+  )
+  VALUES
+  (
+    1,
+    1,
+    'Zagreb'
+  )
+END
+
+-- STATUSES
+
+IF NOT EXISTS (SELECT ALL * FROM [dbo].[Statuses] WHERE [Name] = 'Dostupno' AND [NameEng] = 'Available') BEGIN
+  INSERT INTO [dbo].[Statuses]
+  (
+    [CreatedBy],
+    [UpdatedBy],
+    [Name],
+    [NameEng]
+  )
+  VALUES
+  (
+    1,
+    1,
+    'Dostupno',
+    'Available'
+  )
+END
+
+-- APARTMENTS
+
+IF NOT EXISTS (SELECT ALL * FROM [dbo].[Apartments] WHERE [Name] = 'Crni Biser' AND [NameEng] = 'Black Pearl') BEGIN
+    INSERT INTO [dbo].[Apartments]
+  (
+    [CreatedBy],
+    [UpdatedBy],
+    [OwnerFK],
+    [StatusFK],
+    [Name],
+    [NameEng],
+    [CityFK],
+    [Address],
+    [Price],
+    [MaxAdults],
+    [MaxChildren],
+    [TotalRooms],
+    [BeachDistance]
+  )
+  VALUES
+  (
+    1,
+    1,
+    1,
+    1,
+    'Crni Biser',
+    'Black Pearl',
+    1,
+    'Ilica 127',
+    350.00,
+    2,
+    3,
+    15,
+    100
+  )
+END
