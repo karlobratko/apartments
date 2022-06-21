@@ -2,7 +2,7 @@ CREATE PROCEDURE [dbo].[CityUpdate] (@Guid      AS uniqueidentifier,
                                      @Name      AS nvarchar(100),
                                      @UpdatedBy AS int = 1)
 AS BEGIN
-  DECLARE @Id AS int
+  DECLARE @Id         AS int
   DECLARE @DeleteDate AS datetime
   SELECT ALL TOP 1
     @Id         = [Id],
@@ -25,7 +25,8 @@ AS BEGIN
     @Id         = [Id],
     @DeleteDate = [DeleteDate]
   FROM [dbo].[Cities]
-  WHERE [Name] = @Name
+  WHERE [Name] = @Name AND
+        [Guid] <> @Guid
 
   IF @Id IS NOT NULL AND
      @DeleteDate IS NULL BEGIN
