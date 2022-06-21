@@ -1,7 +1,7 @@
 CREATE PROCEDURE [dbo].[OwnerRead] (@Method AS int,
                                     @Guid   AS uniqueidentifier = NULL)
 AS BEGIN
-IF @Method = 1 BEGIN
+  IF @Method = 1 BEGIN
     SELECT ALL
       [Id],
       [Guid],

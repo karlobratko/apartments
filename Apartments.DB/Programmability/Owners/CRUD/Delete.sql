@@ -9,8 +9,6 @@ AS BEGIN
   FROM [dbo].[Owners]
   WHERE [Guid] = @Guid
 
-
-
   IF @Id IS NULL BEGIN
     RETURN 2
   END

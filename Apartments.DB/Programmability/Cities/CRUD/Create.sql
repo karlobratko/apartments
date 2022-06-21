@@ -44,9 +44,10 @@ AS BEGIN
     UPDATE [dbo].[Cities]
     SET
       [DeleteDate] = NULL,
-      [DeletedBy]  = NULL
-    WHERE
-      [Guid] = @Guid
+      [DeletedBy]  = NULL,
+      [UpdateDate] = GETDATE(),
+      [UpdatedBy]  = @CreatedBy
+    WHERE [Guid] = @Guid
 
     SELECT ALL
       [Id],
@@ -65,6 +66,12 @@ AS BEGIN
   END
   ELSE IF @Guid       IS NOT NULL AND 
           @DeleteDate IS NULL BEGIN
+    UPDATE [dbo].[Cities]
+    SET
+      [UpdateDate]       = GETDATE(),
+      [UpdatedBy]        = @CreatedBy
+    WHERE [Guid] = @Guid
+
     SELECT ALL
       [Id],
       [Guid],
