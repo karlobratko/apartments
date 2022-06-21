@@ -13,7 +13,7 @@ CREATE TABLE [dbo].[Pictures]
   [DeletedBy]   int           NULL,
 
   [ApartmentFK]       int           NOT NULL,
-  [Name]              nvarchar(100) NOT NULL,
+  [Title]             nvarchar(100) NOT NULL,
   [Path]              nvarchar(500) NOT NULL,
   [IsRepresentative]  bit           NOT NULL
     CONSTRAINT [DF_Pictures_IsRepresentative] DEFAULT 0,
@@ -29,4 +29,7 @@ CREATE TABLE [dbo].[Pictures]
 GO
 
 CREATE UNIQUE NONCLUSTERED INDEX [IX_Pictures_Guid] ON [dbo].[Pictures] ([Guid] ASC)
+GO
+
+CREATE UNIQUE NONCLUSTERED INDEX [IX_Pictures_TitlePath] ON [dbo].[Pictures] ([Title] ASC)
 GO

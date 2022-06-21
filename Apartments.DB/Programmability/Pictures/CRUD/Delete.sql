@@ -1,50 +1,59 @@
-CREATE PROCEDURE [dbo].[PictureDelete] (@ID AS int,
-                                        @DeletedBy AS int)
+CREATE PROCEDURE [dbo].[PictureDelete] (@Guid      AS uniqueidentifier,
+                                        @DeletedBy AS int = 1)
 AS BEGIN
+  DECLARE @Id AS int
+  DECLARE @DeleteDate AS datetime
+  SELECT ALL TOP 1
+    @Id         = [Id],
+    @DeleteDate = [DeleteDate]
+  FROM [dbo].[Pictures]
+  WHERE [Guid] = @Guid
+
+  IF @Id IS NULL BEGIN
+    RETURN 2
+  END
+  ELSE IF @Id IS NOT NULL AND
+          @DeleteDate IS NOT NULL BEGIN
+    RETURN 3
+  END
+
   DECLARE @IsRepresentative AS bit
-  DECLARE @ApartmentFK AS int
+  DECLARE @ApartmentFK      AS int
 
   SELECT ALL TOP 1
-    @ApartmentFK = [ApartmentFK],
+    @ApartmentFK      = [ApartmentFK],
     @IsRepresentative = [IsRepresentative]
   FROM [dbo].[Pictures]
-  WHERE [ID] = @ID AND [DeleteDate] IS NULL
-
-  IF @ApartmentFK IS NULL BEGIN
-    RETURN 0
-  END
+  WHERE [Guid] = @Guid
 
   UPDATE [dbo].[Pictures]
   SET
     [DeletedBy]   = @DeletedBy,
     [DeleteDate]  = GETDATE()
-  WHERE [ID] = @ID AND [DeleteDate] IS NULL
+  WHERE [Guid] = @Guid
 
-  DECLARE @DeletedRows AS int = @@ROWCOUNT
+  IF @@ROWCOUNT = 1 BEGIN
+    DECLARE @NewRepresentativeGuid AS uniqueidentifier = (
+      SELECT ALL TOP 1
+        [Guid]
+      FROM [dbo].[Pictures]
+      WHERE [ApartmentFK] = @ApartmentFK
+      ORDER BY [CreateDate] DESC
+    )
 
-  IF @IsRepresentative = 0 BEGIN
-    RETURN @DeletedRows
+    IF @NewRepresentativeGuid IS NOT NULL BEGIN
+      UPDATE [dbo].[Pictures]
+      SET 
+        [UpdatedBy]         = @DeletedBy,
+        [UpdateDate]        = GETDATE(),
+        [IsRepresentative]  = 1
+      WHERE [Guid] = @NewRepresentativeGuid
+    END
+
+    RETURN 1
   END
-
-  DECLARE @NewRepresentativeID AS int = (
-    SELECT ALL TOP 1
-      [ID]
-    FROM [dbo].[Pictures]
-    WHERE [ApartmentFK] = @ApartmentFK
-    ORDER BY [CreateDate] DESC
-  )
-
-  IF @NewRepresentativeID IS NULL BEGIN
-    RETURN @DeletedRows
+  ELSE BEGIN
+    RETURN -1
   END
-
-  DECLARE @UpdatedBy AS int = @DeletedBy
-
-  UPDATE [dbo].[Pictures]
-  SET 
-    [UpdatedBy]         = @UpdatedBy,
-    [UpdateDate]        = GETDATE(),
-    [IsRepresentative]  = 1
-  WHERE [ID] = @NewRepresentativeID
 END
 GO

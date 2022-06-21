@@ -9,7 +9,7 @@ AS BEGIN
     [DeleteDate],
     [DeletedBy],
     [ApartmentFK],
-    [Name],
+    [Title],
     [Path],
     [IsRepresentative]
   FROM [dbo].[Pictures]
