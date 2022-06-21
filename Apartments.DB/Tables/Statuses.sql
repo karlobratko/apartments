@@ -26,5 +26,8 @@ GO
 CREATE UNIQUE NONCLUSTERED INDEX [IX_Statuses_Guid] ON [dbo].[Statuses] ([Guid] ASC)
 GO
 
-CREATE UNIQUE NONCLUSTERED INDEX [IX_Statuses_Name] ON [dbo].[Statuses] ([Name] ASC, [NameEng] ASC)
+CREATE UNIQUE NONCLUSTERED INDEX [IX_Statuses_Name] ON [dbo].[Statuses] ([Name] ASC)
+GO
+
+CREATE UNIQUE NONCLUSTERED INDEX [IX_Statuses_NameEng] ON [dbo].[Statuses] ([NameEng] ASC)
 GO
