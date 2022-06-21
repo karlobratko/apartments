@@ -5,8 +5,8 @@ CREATE PROCEDURE [dbo].[PictureCreate] (@ApartmentFK      AS int,
                                         @CreatedBy        AS int = 1)
 AS BEGIN
   DECLARE @PicturesCount AS int
-  DECLARE @Guid AS uniqueidentifier
-  DECLARE @DeleteDate AS datetime
+  DECLARE @Guid          AS uniqueidentifier
+  DECLARE @DeleteDate    AS datetime
   SELECT ALL TOP 1
     @Guid       = [Guid],
     @DeleteDate = [DeleteDate]
@@ -18,7 +18,8 @@ AS BEGIN
       SELECT ALL
         COUNT(*)
       FROM [dbo].[Pictures]
-      WHERE [ApartmentFK] = @ApartmentFK
+      WHERE [ApartmentFK] = @ApartmentFK AND
+            [DeleteDate] IS NULL
     )
 
     IF @PicturesCount = 0 BEGIN
@@ -79,7 +80,8 @@ AS BEGIN
       SELECT ALL
         COUNT(*)
       FROM [dbo].[Pictures]
-      WHERE [ApartmentFK] = @ApartmentFK
+      WHERE [ApartmentFK] = @ApartmentFK AND
+            [DeleteDate] IS NULL
     )
 
     IF @PicturesCount = 0 BEGIN
@@ -131,7 +133,8 @@ AS BEGIN
       SELECT ALL
         COUNT(*)
       FROM [dbo].[Pictures]
-      WHERE [ApartmentFK] = @ApartmentFK
+      WHERE [ApartmentFK] = @ApartmentFK AND
+            [DeleteDate] IS NULL
     )
 
     IF @PicturesCount = 0 BEGIN

@@ -5,7 +5,7 @@ CREATE PROCEDURE [dbo].[PictureUpdate] (@Guid             AS uniqueidentifier,
                                         @IsRepresentative AS bit,
                                         @UpdatedBy        AS int = 1)
 AS BEGIN
-  DECLARE @Id AS int
+  DECLARE @Id         AS int
   DECLARE @DeleteDate AS datetime
   SELECT ALL TOP 1
     @Id         = [Id],
@@ -28,42 +28,13 @@ AS BEGIN
     @Id         = [Id],
     @DeleteDate = [DeleteDate]
   FROM [dbo].[Pictures]
-  WHERE [Title] = @Title
+  WHERE [Title] = @Title AND
+        [Guid] <> @Guid
 
   DECLARE @PicturesCount AS int
 
   IF @Id IS NOT NULL AND
      @DeleteDate IS NULL BEGIN
-    SET @PicturesCount = (
-      SELECT ALL
-        COUNT(*)
-      FROM [dbo].[Pictures]
-      WHERE [ApartmentFK] = @ApartmentFK
-    )
-
-    IF @PicturesCount <= 1 BEGIN
-      SET @IsRepresentative = 1
-    END
-    ELSE BEGIN
-      IF @IsRepresentative = 1 BEGIN
-        UPDATE [dbo].[Pictures]
-        SET
-          [UpdateDate]       = GETDATE(),
-          [UpdatedBy]        = @UpdatedBy,
-          [IsRepresentative] = 0
-        WHERE [ApartmentFK] = @ApartmentFK
-      END
-    END
-
-    UPDATE [dbo].[Pictures]
-    SET
-      [UpdatedBy]        = @UpdatedBy,
-      [UpdateDate]       = GETDATE(),
-      [ApartmentFK]      = @ApartmentFK,
-      [Path]             = @Path,
-      [IsRepresentative] = @IsRepresentative
-    WHERE [Guid] = @Guid
-
     RETURN 4
   END
   ELSE IF @Id IS NOT NULL AND
@@ -75,7 +46,8 @@ AS BEGIN
     SELECT ALL
       COUNT(*)
     FROM [dbo].[Pictures]
-    WHERE [ApartmentFK] = @ApartmentFK
+    WHERE [ApartmentFK] = @ApartmentFK AND
+          [DeleteDate] IS NULL
   )
 
   IF @PicturesCount <= 1 BEGIN

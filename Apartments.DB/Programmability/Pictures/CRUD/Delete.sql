@@ -28,26 +28,32 @@ AS BEGIN
 
   UPDATE [dbo].[Pictures]
   SET
-    [DeletedBy]   = @DeletedBy,
-    [DeleteDate]  = GETDATE()
+    [DeletedBy]  = @DeletedBy,
+    [DeleteDate] = GETDATE(),
+    [IsRepresentative] = 0
   WHERE [Guid] = @Guid
 
   IF @@ROWCOUNT = 1 BEGIN
-    DECLARE @NewRepresentativeGuid AS uniqueidentifier = (
-      SELECT ALL TOP 1
-        [Guid]
-      FROM [dbo].[Pictures]
-      WHERE [ApartmentFK] = @ApartmentFK
-      ORDER BY [CreateDate] DESC
-    )
+    DECLARE @NewRepresentativeGuid AS uniqueidentifier
+    IF @IsRepresentative = 1 BEGIN
+      SET @NewRepresentativeGuid = (
+        SELECT ALL TOP 1
+          [Guid]
+        FROM [dbo].[Pictures]
+        WHERE [DeleteDate] IS NULL AND
+              [ApartmentFK] = @ApartmentFK AND
+              [Guid] <> @Guid
+        ORDER BY [CreateDate] DESC
+      )
 
-    IF @NewRepresentativeGuid IS NOT NULL BEGIN
-      UPDATE [dbo].[Pictures]
-      SET 
-        [UpdatedBy]         = @DeletedBy,
-        [UpdateDate]        = GETDATE(),
-        [IsRepresentative]  = 1
-      WHERE [Guid] = @NewRepresentativeGuid
+      IF @NewRepresentativeGuid IS NOT NULL BEGIN
+        UPDATE [dbo].[Pictures]
+        SET 
+          [UpdatedBy]        = @DeletedBy,
+          [UpdateDate]       = GETDATE(),
+          [IsRepresentative] = 1
+        WHERE [Guid] = @NewRepresentativeGuid
+      END
     END
 
     RETURN 1
