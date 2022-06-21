@@ -1,8 +1,25 @@
-CREATE PROCEDURE [dbo].[TagRead] (@ID AS int = NULL)
+CREATE PROCEDURE [dbo].[TagRead] (@Method AS int,
+                                  @Guid   AS uniqueidentifier = NULL)
 AS BEGIN
-  IF @ID IS NULL BEGIN
+  IF @Method = 1 BEGIN
     SELECT ALL
-      [ID],
+      [Id],
+      [Guid],
+      [CreateDate],
+      [CreatedBy],
+      [UpdateDate],
+      [UpdatedBy],
+      [DeleteDate],
+      [DeletedBy],
+      [Name],
+      [NameEng],
+      [TagTypeFK]
+    FROM [dbo].[Tags]
+  END
+  ELSE IF @Method = 2 BEGIN
+    SELECT ALL
+      [Id],
+      [Guid],
       [CreateDate],
       [CreatedBy],
       [UpdateDate],
@@ -14,11 +31,11 @@ AS BEGIN
       [TagTypeFK]
     FROM [dbo].[Tags]
     WHERE [DeleteDate] IS NULL
-    ORDER BY [Name] ASC
   END
-  ELSE BEGIN
+  ELSE IF @Method = 3 BEGIN
     SELECT ALL
-      [ID],
+      [Id],
+      [Guid],
       [CreateDate],
       [CreatedBy],
       [UpdateDate],
@@ -29,7 +46,24 @@ AS BEGIN
       [NameEng],
       [TagTypeFK]
     FROM [dbo].[Tags]
-    WHERE [ID] = @ID AND [DeleteDate] IS NULL
+    WHERE [Guid] = @Guid
+  END
+  ELSE IF @Method = 4 BEGIN
+    SELECT ALL
+      [Id],
+      [Guid],
+      [CreateDate],
+      [CreatedBy],
+      [UpdateDate],
+      [UpdatedBy],
+      [DeleteDate],
+      [DeletedBy],
+      [Name],
+      [NameEng],
+      [TagTypeFK]
+    FROM [dbo].[Tags]
+    WHERE [DeleteDate] IS NULL AND
+          [Guid] = @Guid
   END
 END
 GO

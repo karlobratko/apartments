@@ -29,5 +29,8 @@ GO
 CREATE UNIQUE NONCLUSTERED INDEX [IX_Tags_Guid] ON [dbo].[Tags] ([Guid] ASC)
 GO
 
-CREATE UNIQUE NONCLUSTERED INDEX [IX_Tags_Name] ON [dbo].[Tags] ([Name] ASC, [NameEng] ASC, [TagTypeFK] ASC)
+CREATE UNIQUE NONCLUSTERED INDEX [IX_Tags_Name] ON [dbo].[Tags] ([Name] ASC)
+GO
+
+CREATE UNIQUE NONCLUSTERED INDEX [IX_Tags_NameEng] ON [dbo].[Tags] ([NameEng] ASC)
 GO
