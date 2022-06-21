@@ -19,8 +19,8 @@ AS BEGIN
 
   UPDATE [dbo].[Cities]
   SET
-    [DeletedBy]   = @DeletedBy,
-    [DeleteDate]  = GETDATE()
+    [DeletedBy]  = @DeletedBy,
+    [DeleteDate] = GETDATE()
   WHERE [Guid] = @Guid
 
   IF @@ROWCOUNT = 1 BEGIN

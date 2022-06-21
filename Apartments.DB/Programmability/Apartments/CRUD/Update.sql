@@ -12,7 +12,7 @@ CREATE PROCEDURE [dbo].[ApartmentUpdate] (@Guid          AS uniqueidentifier,
                                           @BeachDistance AS int,
                                           @UpdateBy      AS int = 1)
 AS BEGIN
-  DECLARE @Id AS int
+  DECLARE @Id         AS int
   DECLARE @DeleteDate AS datetime
   SELECT ALL TOP 1
     @Id         = [Id],

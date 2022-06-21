@@ -1,7 +1,7 @@
 CREATE PROCEDURE [dbo].[CityCreate] (@Name      AS nvarchar(100),
                                      @CreatedBy AS int = 1)
 AS BEGIN
-  DECLARE @Guid AS uniqueidentifier
+  DECLARE @Guid       AS uniqueidentifier
   DECLARE @DeleteDate AS datetime
   SELECT ALL TOP 1
     @Guid       = [Guid],
@@ -68,8 +68,8 @@ AS BEGIN
           @DeleteDate IS NULL BEGIN
     UPDATE [dbo].[Cities]
     SET
-      [UpdateDate]       = GETDATE(),
-      [UpdatedBy]        = @CreatedBy
+      [UpdateDate] = GETDATE(),
+      [UpdatedBy]  = @CreatedBy
     WHERE [Guid] = @Guid
 
     SELECT ALL
