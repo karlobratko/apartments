@@ -1,7 +1,7 @@
 CREATE PROCEDURE [dbo].[PictureReadByApartmentFK] (@ApartmentFK AS int)
 AS BEGIN
   SELECT ALL
-    [ID],
+    [Id],
     [CreateDate],
     [CreatedBy],
     [UpdateDate],

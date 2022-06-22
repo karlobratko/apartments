@@ -15,11 +15,11 @@ CREATE TABLE [dbo].[Reservations]
   [ApartmentFK]       int           NOT NULL,
   [Details]           nvarchar(500) NULL,
   [UserFK]            int           NULL,
-  [UserFName]         nvarchar(50)  NULL,
-  [UserLName]         nvarchar(50)  NULL,
-  [UserEmail]         nvarchar(256) NULL,
-  [UserPhoneNumber]   nvarchar(20)  NULL,
-  [UserAddress]       nvarchar(200) NULL,
+  [UserFName]         nvarchar(50)  NOT NULL,
+  [UserLName]         nvarchar(50)  NOT NULL,
+  [UserEmail]         nvarchar(256) NOT NULL,
+  [UserPhoneNumber]   nvarchar(20)  NOT NULL,
+  [UserAddress]       nvarchar(200) NOT NULL,
 
   CONSTRAINT [PK_Reservations] PRIMARY KEY CLUSTERED ([Id] ASC),
 

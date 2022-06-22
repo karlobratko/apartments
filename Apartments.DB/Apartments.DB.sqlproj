@@ -81,6 +81,10 @@
     <Folder Include="Programmability\Users" />
     <Folder Include="Programmability\Users\BL" />
     <Folder Include="Programmability\Users\CRUD" />
+    <Folder Include="Programmability\Reviews" />
+    <Folder Include="Programmability\Reviews\CRUD" />
+    <Folder Include="Programmability\TagsApartments" />
+    <Folder Include="Programmability\TagsApartments\CRUD" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\Apartments.sql" />
@@ -140,6 +144,17 @@
     <Build Include="Programmability\Users\BL\Register.sql" />
     <Build Include="Programmability\Users\BL\RequestResetPassword.sql" />
     <Build Include="Programmability\Users\BL\ResetPassword.sql" />
+    <Build Include="Programmability\Reservations\CRUD\Read.sql" />
+    <Build Include="Programmability\Reservations\CRUD\Update.sql" />
+    <Build Include="Programmability\Reservations\CRUD\Delete.sql" />
+    <Build Include="Programmability\Reviews\CRUD\Create.sql" />
+    <Build Include="Programmability\Reviews\CRUD\Update.sql" />
+    <Build Include="Programmability\Reviews\CRUD\Delete.sql" />
+    <Build Include="Programmability\Reviews\CRUD\Read.sql" />
+    <Build Include="Programmability\TagsApartments\CRUD\Create.sql" />
+    <Build Include="Programmability\TagsApartments\CRUD\Read.sql" />
+    <Build Include="Programmability\TagsApartments\CRUD\Update.sql" />
+    <Build Include="Programmability\TagsApartments\CRUD\Delete.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DB.publish.xml" />
