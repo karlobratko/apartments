@@ -131,3 +131,22 @@ IF NOT EXISTS (SELECT ALL * FROM [dbo].[Apartments] WHERE [Name] = 'Crni Biser' 
     100
   )
 END
+
+-- TAG TYPES
+
+IF NOT EXISTS (SELECT ALL * FROM [dbo].[TagTypes] WHERE [Name] = 'Kupaona' AND [NameEng] = 'Bathroom') BEGIN
+  INSERT INTO [dbo].[TagTypes]
+  (
+    [CreatedBy],
+    [UpdatedBy],
+    [Name],
+    [NameEng]
+  )
+  VALUES
+  (
+    1,
+    1,
+    'Kupaona',
+    'Bathroom'
+  )
+END
