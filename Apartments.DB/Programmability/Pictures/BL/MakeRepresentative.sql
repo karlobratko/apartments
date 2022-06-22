@@ -1,11 +1,11 @@
-CREATE PROCEDURE [dbo].[PictureMakeRepresentative] (@ID AS int,
-                                                    @UpdatedBy AS int)
+CREATE PROCEDURE [dbo].[PictureMakeRepresentative] (@Guid      AS uniqueidentifier,
+                                                    @UpdatedBy AS int = 1)
 AS BEGIN
   DECLARE @ApartmentFK AS int = (
     SELECT ALL TOP 1
       [ApartmentFK]
     FROM [dbo].[Pictures]
-    where [ID] = @ID
+    where [Guid] = @Guid
   )
 
   UPDATE [dbo].[Pictures]
@@ -20,7 +20,8 @@ AS BEGIN
     [UpdatedBy]         = @UpdatedBy,
     [UpdateDate]        = GETDATE(),
     [IsRepresentative]  = 1
-  WHERE [ID] = @ID AND [DeleteDate] IS NULL
+  WHERE [DeleteDate] IS NULL AND
+        [Guid] = @Guid
 
   RETURN @@ROWCOUNT
 END
