@@ -1,9 +1,9 @@
-﻿CREATE PROCEDURE [dbo].[UserUpdateProfile] (@Guid                   AS uniqueidentifier,
-                                            @FName                  AS nvarchar(50),
-                                            @LName                  AS nvarchar(50),
-                                            @PhoneNumber            AS nvarchar(20),
-                                            @Address                AS nvarchar(200),
-                                            @UpdatedBy              AS int = 1)
+﻿CREATE PROCEDURE [dbo].[UserUpdateProfile] (@Guid        AS uniqueidentifier,
+                                            @FName       AS nvarchar(50),
+                                            @LName       AS nvarchar(50),
+                                            @PhoneNumber AS nvarchar(20),
+                                            @Address     AS nvarchar(200),
+                                            @UpdatedBy   AS int = 1)
 AS BEGIN
   UPDATE [dbo].[Users]
   SET

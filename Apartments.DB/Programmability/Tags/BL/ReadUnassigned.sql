@@ -1,7 +1,8 @@
 CREATE PROCEDURE [dbo].[TagReadUnassigned] (@ApartmentFK AS int)
 AS BEGIN
   SELECT ALL
-    [ID],
+    [Id],
+    [Guid],
     [CreateDate],
     [CreatedBy],
     [UpdateDate],
@@ -13,7 +14,7 @@ AS BEGIN
     [TagTypeFK]
   FROM [dbo].[Tags]
   WHERE [DeleteDate] IS NULL AND
-        [ID] NOT IN (
+        [Id] NOT IN (
           SELECT DISTINCT
             [TagFK]
           FROM [dbo].[TagsApartments]

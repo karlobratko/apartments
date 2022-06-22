@@ -10,7 +10,7 @@ CREATE PROCEDURE [dbo].[ApartmentUpdate] (@Guid          AS uniqueidentifier,
                                           @MaxChildren   AS int,
                                           @TotalRooms    AS int,
                                           @BeachDistance AS int,
-                                          @UpdateBy      AS int = 1)
+                                          @UpdatedBy     AS int = 1)
 AS BEGIN
   DECLARE @Id         AS int
   DECLARE @DeleteDate AS datetime
@@ -30,7 +30,7 @@ AS BEGIN
 
   UPDATE [dbo].[Apartments]
   SET
-    [UpdatedBy]     = @UpdateBy,
+    [UpdatedBy]     = @UpdatedBy,
     [UpdateDate]    = GETDATE(),
     [OwnerFK]       = @OwnerFK,
     [StatusFK]      = @StatusFK,
