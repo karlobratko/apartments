@@ -16,7 +16,7 @@ CREATE TABLE [dbo].[Users]
   [LName]                   nvarchar(50)  NOT NULL,
   [Username]                nvarchar(50)  NOT NULL,
   [Email]                   nvarchar(256) NOT NULL,
-  [PhoneNumber]             nvarchar(20)  NOT NULL,
+  [PhoneNumber]             nvarchar(20)  NULL,
   [PasswordHash]            nvarchar(512) NOT NULL,
   [Address]                 nvarchar(200) NULL,
   [IsAdmin]                 bit           NOT NULL

@@ -1,9 +1,5 @@
-﻿CREATE PROCEDURE [dbo].[UserLogin] (@Username AS nvarchar(100),
-                                    @Email    AS nvarchar(256),
-                                    @Password AS nvarchar(512))
+﻿CREATE PROCEDURE [dbo].[UserReadByEmail] (@Email AS nvarchar(100))
 AS BEGIN
-  DECLARE @PasswordHash AS nvarchar(512) = CONVERT(nvarchar(512), HASHBYTES('SHA2_512', @Password), 2)
-
   SELECT ALL
     [Id],
     [Guid],
@@ -27,9 +23,7 @@ AS BEGIN
     [ResetPasswordStartDate]
   FROM [dbo].[Users]
   WHERE [DeleteDate] IS NULL AND
-        ([Username] = @Username OR
-         [Email]    = @Email) AND
-        [PasswordHash] = @PasswordHash AND
+        [Email] = @Email AND
         [IsRegistered] = 1
 END
 GO

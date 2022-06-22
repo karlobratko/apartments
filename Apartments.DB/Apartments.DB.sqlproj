@@ -113,7 +113,7 @@
     <Build Include="Programmability\Pictures\CRUD\Delete.sql" />
     <Build Include="Programmability\Pictures\CRUD\Read.sql" />
     <Build Include="Programmability\Pictures\CRUD\Update.sql" />
-    <Build Include="Programmability\Reservations\CRUD\CreateReservation.sql" />
+    <Build Include="Programmability\Reservations\CRUD\Create.sql" />
     <Build Include="Programmability\Statuses\CRUD\Create.sql" />
     <Build Include="Programmability\Statuses\CRUD\Delete.sql" />
     <Build Include="Programmability\Statuses\CRUD\Read.sql" />
@@ -127,12 +127,19 @@
     <Build Include="Programmability\TagTypes\CRUD\Delete.sql" />
     <Build Include="Programmability\TagTypes\CRUD\Read.sql" />
     <Build Include="Programmability\TagTypes\CRUD\Update.sql" />
-    <Build Include="Programmability\Users\BL\Login.sql" />
-    <Build Include="Programmability\Users\BL\Register.sql" />
     <Build Include="Programmability\Users\CRUD\Create.sql" />
     <Build Include="Programmability\Users\CRUD\Delete.sql" />
     <Build Include="Programmability\Users\CRUD\Read.sql" />
     <Build Include="Programmability\Users\CRUD\Update.sql" />
+    <Build Include="Programmability\Users\BL\CheckRegistrationStatus.sql" />
+    <Build Include="Programmability\Users\BL\CheckResetPasswordStatus.sql" />
+    <Build Include="Programmability\Users\BL\ConfirmRegistration.sql" />
+    <Build Include="Programmability\Users\BL\EditProfile.sql" />
+    <Build Include="Programmability\Users\BL\Login.sql" />
+    <Build Include="Programmability\Users\BL\ReadByEmail.sql" />
+    <Build Include="Programmability\Users\BL\Register.sql" />
+    <Build Include="Programmability\Users\BL\RequestResetPassword.sql" />
+    <Build Include="Programmability\Users\BL\ResetPassword.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DB.publish.xml" />
