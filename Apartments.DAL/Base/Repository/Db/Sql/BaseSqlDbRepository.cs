@@ -8,8 +8,6 @@ using System.Reflection;
 using Apartments.DAL.Base.Managers;
 using Apartments.DAL.Base.TableModels;
 using Apartments.DAL.Enums;
-using Apartments.DAL.Managers;
-using Apartments.DAL.TableModels;
 
 namespace Apartments.DAL.Base.Repository.Db.Sql {
   public abstract class BaseSqlDbRepository<TKey, TModel> : ITableModelRepository<TKey, TModel>, IDbRepository
@@ -59,9 +57,29 @@ namespace Apartments.DAL.Base.Repository.Db.Sql {
 
     public abstract String EntityName { get; }
 
-    public abstract TModel Model(SqlDataReader reader);
+    public virtual TModel Model(SqlDataReader reader)
+      => typeof(TModel).GetProperties(bindingAttr: BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly)
+                       .Aggregate(seed: Activator.CreateInstance<TModel>(),
+                                  func: (obj, property) => {
+                                    obj.GetType()
+                                       .GetProperty(property.Name)
+                                       .SetValue(obj: obj, 
+                                                 value: reader.GetValue(reader.GetOrdinal(property.Name)));
+                                    return obj;
+                                  });
 
-    public abstract IList<SqlParameter> Parameterize(TModel model);
+    public virtual IList<SqlParameter> Parameterize(TModel model)
+      => typeof(TModel).GetProperties(bindingAttr: BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly)
+                       .Select(selector: property => new SqlParameter {
+                         ParameterName = $"@{property.Name}",
+                         SqlDbType = !(Nullable.GetUnderlyingType(nullableType: property.PropertyType) is null)
+                           ? SqlDbTypeManager.GetSqlDbType(type: Nullable.GetUnderlyingType(nullableType: property.PropertyType))
+                           : SqlDbTypeManager.GetSqlDbType(type: property.PropertyType),
+                         Value = !(Nullable.GetUnderlyingType(nullableType: property.PropertyType) is null) || !property.PropertyType.IsValueType
+                           ? property.GetValue(obj: model) ?? DBNull.Value
+                           : property.GetValue(obj: model)
+                       })
+                       .ToList();
 
     #endregion
 
