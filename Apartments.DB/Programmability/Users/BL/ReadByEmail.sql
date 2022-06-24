@@ -1,6 +1,6 @@
 ﻿CREATE PROCEDURE [dbo].[UserReadByEmail] (@Email AS nvarchar(100))
 AS BEGIN
-  SELECT ALL
+  SELECT ALL TOP 1
     [Id],
     [Guid],
     [CreateDate],
