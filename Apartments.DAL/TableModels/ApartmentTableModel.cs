@@ -3,7 +3,7 @@
 using Apartments.DAL.Base.TableModels;
 
 namespace Apartments.DAL.TableModels {
-  internal class ApartmentTableModel : BaseTableModel<Int32> {
+  public class ApartmentTableModel : BaseTableModel<Int32> {
     public Int32 OwnerFK { get; set; }
     public Int32 StatusFK { get; set; }
     public String Name { get; set; }
