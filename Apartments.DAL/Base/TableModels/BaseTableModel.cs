@@ -1,7 +1,7 @@
 ﻿using System;
 
 namespace Apartments.DAL.Base.TableModels {
-  public class BaseTableModel<TKey> : ITableModel<TKey>
+  public abstract class BaseTableModel<TKey> : ITableModel<TKey>
     where TKey : struct {
     public TKey Id { get; set; }
     public Guid Guid { get; set; }
