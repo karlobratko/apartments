@@ -138,7 +138,7 @@
     <Build Include="Programmability\Users\BL\CheckRegistrationStatus.sql" />
     <Build Include="Programmability\Users\BL\CheckResetPasswordStatus.sql" />
     <Build Include="Programmability\Users\BL\ConfirmRegistration.sql" />
-    <Build Include="Programmability\Users\BL\EditProfile.sql" />
+    <Build Include="Programmability\Users\BL\UpdateProfile.sql" />
     <Build Include="Programmability\Users\BL\Login.sql" />
     <Build Include="Programmability\Users\BL\ReadByEmail.sql" />
     <Build Include="Programmability\Users\BL\Register.sql" />
