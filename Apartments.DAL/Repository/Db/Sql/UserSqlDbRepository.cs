@@ -8,12 +8,12 @@ using Apartments.DAL.Base.Managers;
 using Apartments.DAL.Base.Repository.Db.Sql;
 using Apartments.DAL.Base.Repository.TableModels;
 using Apartments.DAL.Enums;
-using Apartments.DAL.Managers;
 
 using Apartments.DAL.TableModels;
 
 namespace Apartments.DAL.Repository.Db.Sql {
   public class UserSqlDbRepository : BaseSqlDbRepository<Int32, UserTableModel>, IUserTableModelRepository {
+
     #region Constructors
 
     public UserSqlDbRepository(IConnectionStringManager connectionStringManager, ISqlDbTypeManager sqlDbTypeManager)
@@ -129,7 +129,9 @@ namespace Apartments.DAL.Repository.Db.Sql {
     #region Registration
 
     public UserTableModel Register(UserTableModel model, String password, out RegisterStatus registerStatus)
-      => Register(fName: model.FName, lName: model.LName, username: model.Username, email: model.Email, password: password, isAdmin: model.IsAdmin, registerStatus: out registerStatus);
+      => Register(model: model, password: password, createdBy: null, registerStatus: out registerStatus);
+    public UserTableModel Register(UserTableModel model, String password, Int32? createdBy, out RegisterStatus registerStatus)
+      => Register(fName: model.FName, lName: model.LName, username: model.Username, email: model.Email, password: password, isAdmin: model.IsAdmin, createdBy: createdBy, registerStatus: out registerStatus);
     public UserTableModel Register(String fName, String lName, String username, String email, String password, Boolean isAdmin, out RegisterStatus registerStatus)
       => Register(fName: fName, lName: lName, username: username, email: email, password: password, isAdmin: isAdmin, createdBy: null, registerStatus: out registerStatus);
     public UserTableModel Register(String fName, String lName, String username, String email, String password, Boolean isAdmin, Int32? createdBy, out RegisterStatus registerStatus) {
@@ -388,7 +390,9 @@ namespace Apartments.DAL.Repository.Db.Sql {
     }
 
     public UserTableModel ResetPassword(UserTableModel model, String password, out OperationStatus operationStatus)
-      => ResetPassword(guid: model.Guid, password: password, operationStatus: out operationStatus);
+      => ResetPassword(model: model, password: password, updatedBy: null, operationStatus: out operationStatus);
+    public UserTableModel ResetPassword(UserTableModel model, String password, Int32? updatedBy, out OperationStatus operationStatus)
+      => ResetPassword(guid: model.Guid, password: password, updatedBy: updatedBy, operationStatus: out operationStatus);
     public UserTableModel ResetPassword(Guid guid, String password, out OperationStatus operationStatus)
       => ResetPassword(guid: guid, password: password, updatedBy: null, operationStatus: out operationStatus);
     public UserTableModel ResetPassword(Guid guid, String password, Int32? updatedBy, out OperationStatus operationStatus) {
@@ -442,7 +446,9 @@ namespace Apartments.DAL.Repository.Db.Sql {
     #region Profile
 
     public UserTableModel UpdateProfile(UserTableModel model, out OperationStatus operationStatus)
-      => UpdateProfile(guid: model.Guid, fName: model.FName, lName: model.LName, phoneNumber: model.PhoneNumber, address: model.Address, operationStatus: out operationStatus);
+      => UpdateProfile(model: model, updatedBy: null, operationStatus: out operationStatus);
+    public UserTableModel UpdateProfile(UserTableModel model, Int32? updatedBy, out OperationStatus operationStatus)
+      => UpdateProfile(guid: model.Guid, fName: model.FName, lName: model.LName, phoneNumber: model.PhoneNumber, address: model.Address, updatedBy: updatedBy, operationStatus: out operationStatus);
     public UserTableModel UpdateProfile(Guid guid, String fName, String lName, String phoneNumber, String address, out OperationStatus operationStatus)
       => UpdateProfile(guid: guid, fName: fName, lName: lName, phoneNumber: phoneNumber, address: address, updatedBy: null, operationStatus: out operationStatus);
     public UserTableModel UpdateProfile(Guid guid, String fName, String lName, String phoneNumber, String address, Int32? updatedBy, out OperationStatus operationStatus) {
@@ -512,5 +518,6 @@ namespace Apartments.DAL.Repository.Db.Sql {
     #endregion
 
     #endregion
+
   }
 }

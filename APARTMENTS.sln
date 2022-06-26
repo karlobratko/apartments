@@ -7,6 +7,8 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Apartments.DB", "Apartments
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Apartments.DAL", "Apartments.DAL\Apartments.DAL.csproj", "{4BAEF97D-5C50-4599-89F9-1CD7E47CF3BE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Apartments.BLL", "Apartments.BLL\Apartments.BLL.csproj", "{D6D6DE8D-5C3B-47E3-B958-8EED193722D1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,10 @@ Global
 		{4BAEF97D-5C50-4599-89F9-1CD7E47CF3BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4BAEF97D-5C50-4599-89F9-1CD7E47CF3BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4BAEF97D-5C50-4599-89F9-1CD7E47CF3BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6D6DE8D-5C3B-47E3-B958-8EED193722D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6D6DE8D-5C3B-47E3-B958-8EED193722D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6D6DE8D-5C3B-47E3-B958-8EED193722D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6D6DE8D-5C3B-47E3-B958-8EED193722D1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

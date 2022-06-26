@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.SqlClient;
 
 using Apartments.DAL.Base.Managers;
 using Apartments.DAL.Base.Repository.Db.Sql;
 using Apartments.DAL.Base.Repository.TableModels;
-using Apartments.DAL.Managers;
 using Apartments.DAL.TableModels;
 
 namespace Apartments.DAL.Repository.Db.Sql {
   public class PictureSqlDbRepository : BaseSqlDbRepository<Int32, PictureTableModel>, IPictureTableModelRepository {
+
     #region Constructors
 
     public PictureSqlDbRepository(IConnectionStringManager connectionStringManager, ISqlDbTypeManager sqlDbTypeManager)
@@ -52,5 +51,6 @@ namespace Apartments.DAL.Repository.Db.Sql {
       };
 
     #endregion
+
   }
 }

@@ -53,7 +53,7 @@ namespace Apartments.DAL.Base.Repository.Db.Sql {
 
     #endregion
 
-    #region Abstract
+    #region Overridable
 
     public abstract String EntityName { get; }
 
