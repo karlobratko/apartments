@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.SqlClient;
 
 using Apartments.DAL.Base.Managers;
@@ -10,6 +9,7 @@ using Apartments.DAL.TableModels;
 
 namespace Apartments.DAL.Repository.Db.Sql {
   public class ApartmentSqlDbRepository : BaseSqlDbRepository<Int32, ApartmentTableModel>, IApartmentTableModelRepository {
+
     #region Constructors
 
     public ApartmentSqlDbRepository(IConnectionStringManager connectionStringManager, ISqlDbTypeManager sqlDbTypeManager)
@@ -65,5 +65,6 @@ namespace Apartments.DAL.Repository.Db.Sql {
       };
 
     #endregion
+
   }
 }

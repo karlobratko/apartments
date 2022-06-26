@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.SqlClient;
 
 using Apartments.DAL.Base.Managers;
@@ -10,6 +9,7 @@ using Apartments.DAL.TableModels;
 
 namespace Apartments.DAL.Repository.Db.Sql {
   public class StatusSqlDbRepository : BaseSqlDbRepository<Int32, StatusTableModel>, IStatusTableModelRepository {
+
     #region Constructors
 
     public StatusSqlDbRepository(IConnectionStringManager connectionStringManager, ISqlDbTypeManager sqlDbTypeManager)
@@ -47,5 +47,6 @@ namespace Apartments.DAL.Repository.Db.Sql {
       };
 
     #endregion
+
   }
 }
