@@ -5,6 +5,7 @@ using Apartments.DAL.TableModels;
 
 namespace Apartments.DAL.Base.Repository.TableModels {
   public interface IUserTableModelRepository : ITableModelRepository<Int32, UserTableModel> {
+
     #region Login
 
     UserTableModel Login(UserTableModel model, String password);
@@ -16,6 +17,7 @@ namespace Apartments.DAL.Base.Repository.TableModels {
 
     UserTableModel Register(UserTableModel model, String password, out RegisterStatus registerStatus);
     UserTableModel Register(String fName, String lName, String username, String email, String password, Boolean isAdmin, out RegisterStatus registerStatus);
+    UserTableModel Register(UserTableModel model, String password, Int32? createdBy, out RegisterStatus registerStatus);
     UserTableModel Register(String fName, String lName, String username, String email, String password, Boolean isAdmin, Int32? createdBy, out RegisterStatus registerStatus);
 
     RegistrationStatus CheckRegistrationStatus(UserTableModel model);
@@ -40,6 +42,7 @@ namespace Apartments.DAL.Base.Repository.TableModels {
     ResetPasswordStatus CheckResetPasswordStatus(Guid guid);
 
     UserTableModel ResetPassword(UserTableModel model, String password, out OperationStatus operationStatus);
+    UserTableModel ResetPassword(UserTableModel model, String password, Int32? updatedBy, out OperationStatus operationStatus);
     UserTableModel ResetPassword(Guid guid, String password, out OperationStatus operationStatus);
     UserTableModel ResetPassword(Guid guid, String password, Int32? updatedBy, out OperationStatus operationStatus);
 
@@ -48,9 +51,11 @@ namespace Apartments.DAL.Base.Repository.TableModels {
     #region Profile
 
     UserTableModel UpdateProfile(UserTableModel model, out OperationStatus operationStatus);
+    UserTableModel UpdateProfile(UserTableModel model, Int32? updatedBy, out OperationStatus operationStatus);
     UserTableModel UpdateProfile(Guid guid, String fName, String lName, String phoneNumber, String address, out OperationStatus operationStatus);
     UserTableModel UpdateProfile(Guid guid, String fName, String lName, String phoneNumber, String address, Int32? updatedBy, out OperationStatus operationStatus);
 
     #endregion
+
   }
 }
