@@ -4,10 +4,11 @@ using System.Data.SqlClient;
 
 using Apartments.DAL.Base.Managers;
 using Apartments.DAL.Base.Repository.Db.Sql;
+using Apartments.DAL.Base.Repository.TableModels;
 using Apartments.DAL.TableModels;
 
 namespace Apartments.DAL.Repository.Db.Sql {
-  public class ReservationSqlDbRepository : BaseSqlDbRepository<Int32, ReservationTableModel> {
+  public class ReservationSqlDbRepository : BaseSqlDbRepository<Int32, ReservationTableModel>, IReservationTableModelRepository {
 
     #region Constructors
 
