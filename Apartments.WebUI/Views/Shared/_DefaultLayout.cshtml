@@ -1,0 +1,28 @@
+﻿@{
+  IMessage message = TempData["message"] as IMessage;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width" />
+  <title>@Page.Title</title>
+  @RenderSection("head", required: false)
+
+  @Styles.Render("~/Content/bs")
+  @RenderSection("styles", required: false)
+</head>
+<body class="d-flex flex-column min-vh-100">
+  @Html.Partial(partialViewName: "_Navigation")
+
+  <div class="container mt-5 mb-5">
+    @RenderBody()
+  </div>
+
+  @Html.Partial(partialViewName: "_Footer")
+
+  @Scripts.Render("~/Scripts/jq")
+  @Scripts.Render("~/Scripts/bs")
+  @RenderSection("scripts", required: false)
+</body>
+</html>

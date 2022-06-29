@@ -1,0 +1,12 @@
+﻿@using Apartments.BLL.DomainModels
+@model IEnumerable<ApartmentDomainModel>
+
+@{
+  ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@foreach (ApartmentDomainModel apartment in Model) {
+  <p>@apartment.Name</p>
+}
