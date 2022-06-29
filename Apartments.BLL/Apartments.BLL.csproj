@@ -74,7 +74,7 @@
     <Compile Include="Managers\ReservationDomainModelManager.cs" />
     <Compile Include="Managers\ReviewDomainModelManager.cs" />
     <Compile Include="Managers\StatusDomainModelManager.cs" />
-    <Compile Include="Managers\TagApartmentDomainModelRepository.cs" />
+    <Compile Include="Managers\TagApartmentDomainModelManager.cs" />
     <Compile Include="Managers\TagDomainModelManager.cs" />
     <Compile Include="Managers\TagTypeDomainModelManager.cs" />
     <Compile Include="Managers\UserDomainModelManager.cs" />

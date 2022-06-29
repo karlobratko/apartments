@@ -7,12 +7,12 @@ using Apartments.DAL.Base.Repository.TableModels;
 using Apartments.DAL.TableModels;
 
 namespace Apartments.BLL.Managers {
-  public class TagApartmentDomainModelRepository : BaseDomainModelManager<Int32, TagApartmentTableModel, TagApartmentDomainModel>,
+  public class TagApartmentDomainModelManager : BaseDomainModelManager<Int32, TagApartmentTableModel, TagApartmentDomainModel>,
                                                    ITagApartmentDomainModelManager {
 
     #region Constructors
 
-    public TagApartmentDomainModelRepository(ITagApartmentTableModelRepository repository) : base(repository) {
+    public TagApartmentDomainModelManager(ITagApartmentTableModelRepository repository) : base(repository) {
     }
 
     #endregion
