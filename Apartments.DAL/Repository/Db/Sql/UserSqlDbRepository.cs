@@ -110,7 +110,7 @@ namespace Apartments.DAL.Repository.Db.Sql {
 
       using (var sqlConnection = new SqlConnection(ConnectionString)) {
         SqlCommand sqlCommand = sqlConnection.CreateCommand();
-        sqlCommand.CommandText = $"EXECUTE [dbo].[{EntityName}{nameof(UserSqlDbRepository.Login)}]";
+        sqlCommand.CommandText = $"[dbo].[{EntityName}{nameof(UserSqlDbRepository.Login)}]";
         sqlCommand.CommandType = CommandType.StoredProcedure;
         sqlCommand.Parameters.AddRange(values: parameters.ToArray());
 
@@ -187,7 +187,7 @@ namespace Apartments.DAL.Repository.Db.Sql {
 
       using (var sqlConnection = new SqlConnection(ConnectionString)) {
         SqlCommand sqlCommand = sqlConnection.CreateCommand();
-        sqlCommand.CommandText = $"EXECUTE [dbo].[{EntityName}{nameof(UserSqlDbRepository.Register)}]";
+        sqlCommand.CommandText = $"[dbo].[{EntityName}{nameof(UserSqlDbRepository.Register)}]";
         sqlCommand.CommandType = CommandType.StoredProcedure;
         sqlCommand.Parameters.AddRange(values: parameters.ToArray());
 
@@ -223,7 +223,7 @@ namespace Apartments.DAL.Repository.Db.Sql {
 
       using (var sqlConnection = new SqlConnection(ConnectionString)) {
         SqlCommand sqlCommand = sqlConnection.CreateCommand();
-        sqlCommand.CommandText = $"EXECUTE [dbo].[{EntityName}{nameof(UserSqlDbRepository.CheckRegistrationStatus)}]";
+        sqlCommand.CommandText = $"[dbo].[{EntityName}{nameof(UserSqlDbRepository.CheckRegistrationStatus)}]";
         sqlCommand.CommandType = CommandType.StoredProcedure;
         sqlCommand.Parameters.AddRange(values: parameters.ToArray());
 
@@ -263,7 +263,7 @@ namespace Apartments.DAL.Repository.Db.Sql {
 
       using (var sqlConnection = new SqlConnection(ConnectionString)) {
         SqlCommand sqlCommand = sqlConnection.CreateCommand();
-        sqlCommand.CommandText = $"EXECUTE [dbo].[{EntityName}{nameof(UserSqlDbRepository.ConfirmRegistration)}]";
+        sqlCommand.CommandText = $"[dbo].[{EntityName}{nameof(UserSqlDbRepository.ConfirmRegistration)}]";
         sqlCommand.CommandType = CommandType.StoredProcedure;
         sqlCommand.Parameters.AddRange(values: parameters.ToArray());
 
@@ -311,7 +311,7 @@ namespace Apartments.DAL.Repository.Db.Sql {
 
       using (var sqlConnection = new SqlConnection(ConnectionString)) {
         SqlCommand sqlCommand = sqlConnection.CreateCommand();
-        sqlCommand.CommandText = $"EXECUTE [dbo].[{EntityName}{nameof(UserSqlDbRepository.RequestResetPassword)}]";
+        sqlCommand.CommandText = $"[dbo].[{EntityName}{nameof(UserSqlDbRepository.RequestResetPassword)}]";
         sqlCommand.CommandType = CommandType.StoredProcedure;
         sqlCommand.Parameters.AddRange(values: parameters.ToArray());
 
@@ -343,7 +343,7 @@ namespace Apartments.DAL.Repository.Db.Sql {
 
       using (var sqlConnection = new SqlConnection(ConnectionString)) {
         SqlCommand sqlCommand = sqlConnection.CreateCommand();
-        sqlCommand.CommandText = $"EXECUTE [dbo].[{EntityName}{nameof(UserSqlDbRepository.ReadByEmail)}]";
+        sqlCommand.CommandText = $"[dbo].[{EntityName}{nameof(UserSqlDbRepository.ReadByEmail)}]";
         sqlCommand.CommandType = CommandType.StoredProcedure;
         sqlCommand.Parameters.AddRange(values: parameters.ToArray());
 
@@ -376,7 +376,7 @@ namespace Apartments.DAL.Repository.Db.Sql {
 
       using (var sqlConnection = new SqlConnection(ConnectionString)) {
         SqlCommand sqlCommand = sqlConnection.CreateCommand();
-        sqlCommand.CommandText = $"EXECUTE [dbo].[{EntityName}{nameof(UserSqlDbRepository.CheckResetPasswordStatus)}]";
+        sqlCommand.CommandText = $"[dbo].[{EntityName}{nameof(UserSqlDbRepository.CheckResetPasswordStatus)}]";
         sqlCommand.CommandType = CommandType.StoredProcedure;
         sqlCommand.Parameters.AddRange(values: parameters.ToArray());
 
@@ -424,7 +424,7 @@ namespace Apartments.DAL.Repository.Db.Sql {
 
       using (var sqlConnection = new SqlConnection(ConnectionString)) {
         SqlCommand sqlCommand = sqlConnection.CreateCommand();
-        sqlCommand.CommandText = $"EXECUTE [dbo].[{EntityName}{nameof(UserSqlDbRepository.ResetPassword)}]";
+        sqlCommand.CommandText = $"[dbo].[{EntityName}{nameof(UserSqlDbRepository.ResetPassword)}]";
         sqlCommand.CommandType = CommandType.StoredProcedure;
         sqlCommand.Parameters.AddRange(values: parameters.ToArray());
 
@@ -498,7 +498,7 @@ namespace Apartments.DAL.Repository.Db.Sql {
 
       using (var sqlConnection = new SqlConnection(ConnectionString)) {
         SqlCommand sqlCommand = sqlConnection.CreateCommand();
-        sqlCommand.CommandText = $"EXECUTE [dbo].[{EntityName}{nameof(UserSqlDbRepository.UpdateProfile)}]";
+        sqlCommand.CommandText = $"[dbo].[{EntityName}{nameof(UserSqlDbRepository.UpdateProfile)}]";
         sqlCommand.CommandType = CommandType.StoredProcedure;
         sqlCommand.Parameters.AddRange(values: parameters.ToArray());
 

@@ -104,13 +104,12 @@ namespace Apartments.DAL.Base.Repository.Db.Sql {
 
       using (var sqlConnection = new SqlConnection(ConnectionString)) {
         SqlCommand sqlCommand = sqlConnection.CreateCommand();
-        sqlCommand.CommandText = $"EXECUTE [dbo].[{EntityName}{CREATE_PROCEDURE_NAME}]";
+        sqlCommand.CommandText = $"[dbo].[{EntityName}{CREATE_PROCEDURE_NAME}]";
         sqlCommand.CommandType = CommandType.StoredProcedure;
         sqlCommand.Parameters.AddRange(values: parameters.ToArray());
 
         sqlConnection.Open();
         SqlDataReader reader = sqlCommand.ExecuteReader();
-        sqlConnection.Close();
 
         createStatus = (CreateStatus)Enum.Parse(enumType: typeof(CreateStatus),
                                                   value: returnValue.Value.ToString());
@@ -152,13 +151,12 @@ namespace Apartments.DAL.Base.Repository.Db.Sql {
 
       using (var sqlConnection = new SqlConnection(ConnectionString)) {
         SqlCommand sqlCommand = sqlConnection.CreateCommand();
-        sqlCommand.CommandText = $"EXECUTE [dbo].[{EntityName}{DELETE_PROCEDURE_NAME}]";
+        sqlCommand.CommandText = $"[dbo].[{EntityName}{DELETE_PROCEDURE_NAME}]";
         sqlCommand.CommandType = CommandType.StoredProcedure;
         sqlCommand.Parameters.AddRange(values: parameters.ToArray());
 
         sqlConnection.Open();
         SqlDataReader reader = sqlCommand.ExecuteReader();
-        sqlConnection.Close();
 
         return (DeleteStatus)Enum.Parse(enumType: typeof(DeleteStatus),
                                         value: returnValue.Value.ToString());
@@ -197,13 +195,12 @@ namespace Apartments.DAL.Base.Repository.Db.Sql {
 
       using (var sqlConnection = new SqlConnection(ConnectionString)) {
         SqlCommand sqlCommand = sqlConnection.CreateCommand();
-        sqlCommand.CommandText = $"EXECUTE [dbo].[{EntityName}{READ_PROCEDURE_NAME}]";
+        sqlCommand.CommandText = $"[dbo].[{EntityName}{READ_PROCEDURE_NAME}]";
         sqlCommand.CommandType = CommandType.StoredProcedure;
         sqlCommand.Parameters.AddRange(values: parameters.ToArray());
 
         sqlConnection.Open();
         SqlDataReader reader = sqlCommand.ExecuteReader();
-        sqlConnection.Close();
 
         while (reader.Read()) {
           yield return Model(reader: reader);
@@ -243,13 +240,12 @@ namespace Apartments.DAL.Base.Repository.Db.Sql {
 
       using (var sqlConnection = new SqlConnection(ConnectionString)) {
         SqlCommand sqlCommand = sqlConnection.CreateCommand();
-        sqlCommand.CommandText = $"EXECUTE [dbo].[{EntityName}{UPDATE_PROCEDURE_NAME}]";
+        sqlCommand.CommandText = $"[dbo].[{EntityName}{UPDATE_PROCEDURE_NAME}]";
         sqlCommand.CommandType = CommandType.StoredProcedure;
         sqlCommand.Parameters.AddRange(values: parameters.ToArray());
 
         sqlConnection.Open();
         SqlDataReader reader = sqlCommand.ExecuteReader();
-        sqlConnection.Close();
 
         return (Enums.UpdateStatus)Enum.Parse(enumType: typeof(Enums.UpdateStatus),
                                           value: returnValue.Value.ToString());
