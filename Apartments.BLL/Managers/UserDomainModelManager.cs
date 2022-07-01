@@ -1,8 +1,15 @@
 ﻿using System;
+using System.Configuration;
+using System.Globalization;
+using System.Net.Mail;
+using System.Web;
 
+using Apartments.BLL.Base.Helpers;
 using Apartments.BLL.Base.Managers;
 using Apartments.BLL.Base.Managers.DomainModels;
 using Apartments.BLL.DomainModels;
+using Apartments.BLL.Extensions;
+using Apartments.BLL.Helpers;
 using Apartments.DAL.Base.Repository.TableModels;
 using Apartments.DAL.Enums;
 using Apartments.DAL.TableModels;
@@ -14,6 +21,43 @@ namespace Apartments.BLL.Managers {
     #region Constructors
 
     public UserDomainModelManager(IUserTableModelRepository repository) : base(repository) {
+    }
+
+    #endregion
+
+    #region Private Methods
+
+    private void SendRegisterEmail(UserDomainModel model) {
+      String link = GenerateRedirectionLink(translatedUrlName: "confirm-registration", guid: model.Guid);
+
+      IEmailSender emailSender = new EmailSender(to: new MailAddress(model.Email, $"{model.FName} {model.LName}"));
+      emailSender.SendEmail(subject: Resources.Global.Apartments.ResourceManager.GetString(name: "register-email-subject"),
+                            body: String.Format(format: Resources.Global.Apartments.ResourceManager.GetString(name: "register-email-body"),
+                                                model.FName,
+                                                model.LName,
+                                                link,
+                                                link));
+    }
+
+    private void SendResetPasswordEmail(UserDomainModel model) {
+      String link = GenerateRedirectionLink(translatedUrlName: "reset-password", guid: model.Guid);
+
+      IEmailSender emailSender = new EmailSender(to: new MailAddress(model.Email, $"{model.FName} {model.LName}"));
+      emailSender.SendEmail(subject: Resources.Global.Apartments.ResourceManager.GetString(name: "reset-password-email-subject"),
+                            body: String.Format(format: Resources.Global.Apartments.ResourceManager.GetString(name: "reset-password-email-body"),
+                                                model.FName,
+                                                model.LName,
+                                                link,
+                                                link));
+    }
+
+    private static String GenerateRedirectionLink(String translatedUrlName, Guid guid) {
+      String culture = HttpContext.Current.Request.GetCulture();
+      String part = Resources.Global.TranslatedUrls.ResourceManager.GetString(name: translatedUrlName,
+                                                                              culture: new CultureInfo(culture));
+
+      String cultureUrl = culture == ConfigurationManager.AppSettings["DefaultCulture"] ? "" : $"/{culture}";
+      return HttpContext.Current.Request.Url.AbsoluteUri.Replace(HttpContext.Current.Request.Url.PathAndQuery, $"{cultureUrl}/{part}/{guid}");
     }
 
     #endregion
@@ -45,11 +89,14 @@ namespace Apartments.BLL.Managers {
         case RegisterStatus.AlreadyDeleted:
           return null;
         case RegisterStatus.Success:
-          return ToDomainModel(tableModel);
+          UserDomainModel registeredUserModel = ToDomainModel(tableModel);
+          SendRegisterEmail(registeredUserModel);
+          return registeredUserModel;
         default:
           throw new InvalidOperationException();
       }
     }
+
     public UserDomainModel BeginRegistration(UserDomainModel model, Int32 createdBy) {
       UserTableModel tableModel = (Repository as IUserTableModelRepository).Register(model: ToTableModel(model),
                                                                                      password: model.Password,
@@ -76,9 +123,9 @@ namespace Apartments.BLL.Managers {
                                                                                                 operationStatus: out OperationStatus operationStatus);
 
       switch (operationStatus) {
-        case OperationStatus.FAILURE:
+        case OperationStatus.Failure:
           return null;
-        case OperationStatus.SUCCESS:
+        case OperationStatus.Success:
           return ToDomainModel(model: tableModel);
         default:
           throw new InvalidOperationException();
@@ -91,9 +138,9 @@ namespace Apartments.BLL.Managers {
                                                                                                 operationStatus: out OperationStatus operationStatus);
 
       switch (operationStatus) {
-        case OperationStatus.FAILURE:
+        case OperationStatus.Failure:
           return null;
-        case OperationStatus.SUCCESS:
+        case OperationStatus.Success:
           return ToDomainModel(model: tableModel);
         default:
           throw new InvalidOperationException();
@@ -120,7 +167,9 @@ namespace Apartments.BLL.Managers {
         case RequestResetPasswordStatus.NotExists:
           return null;
         case RequestResetPasswordStatus.Success:
-          return ToDomainModel(tableModel);
+          UserDomainModel updatedModel = ToDomainModel(tableModel);
+          SendResetPasswordEmail(model: updatedModel);
+          return updatedModel;
         default:
           throw new InvalidOperationException();
       }
@@ -150,9 +199,9 @@ namespace Apartments.BLL.Managers {
                                                                                           operationStatus: out OperationStatus operationStatus);
 
       switch (operationStatus) {
-        case OperationStatus.FAILURE:
+        case OperationStatus.Failure:
           return null;
-        case OperationStatus.SUCCESS:
+        case OperationStatus.Success:
           return ToDomainModel(model: tableModel);
         default:
           throw new InvalidOperationException();
@@ -166,9 +215,9 @@ namespace Apartments.BLL.Managers {
                                                                                           operationStatus: out OperationStatus operationStatus);
 
       switch (operationStatus) {
-        case OperationStatus.FAILURE:
+        case OperationStatus.Failure:
           return null;
-        case OperationStatus.SUCCESS:
+        case OperationStatus.Success:
           return ToDomainModel(model: tableModel);
         default:
           throw new InvalidOperationException();
@@ -184,9 +233,9 @@ namespace Apartments.BLL.Managers {
                                                                                           operationStatus: out OperationStatus operationStatus);
 
       switch (operationStatus) {
-        case OperationStatus.FAILURE:
+        case OperationStatus.Failure:
           return null;
-        case OperationStatus.SUCCESS:
+        case OperationStatus.Success:
           return ToDomainModel(model: tableModel);
         default:
           throw new InvalidOperationException();
@@ -199,9 +248,9 @@ namespace Apartments.BLL.Managers {
                                                                                           operationStatus: out OperationStatus operationStatus);
 
       switch (operationStatus) {
-        case OperationStatus.FAILURE:
+        case OperationStatus.Failure:
           return null;
-        case OperationStatus.SUCCESS:
+        case OperationStatus.Success:
           return ToDomainModel(model: tableModel);
         default:
           throw new InvalidOperationException();
