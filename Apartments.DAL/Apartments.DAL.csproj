@@ -70,6 +70,7 @@
     <Compile Include="Base\Repository\TableModels\IApartmentTableModelRepository.cs" />
     <Compile Include="Base\Repository\ITableModelRepository.cs" />
     <Compile Include="Base\Repository\TableModels\ICityTableModelRepository.cs" />
+    <Compile Include="Base\Repository\TableModels\IMetadataTableModelRepository.cs" />
     <Compile Include="Base\Repository\TableModels\IOwnerTableModelRepository.cs" />
     <Compile Include="Base\Repository\TableModels\IPictureTableModelRepository.cs" />
     <Compile Include="Base\Repository\TableModels\IReservationTableModelRepository.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\Db\Sql\ApartmentSqlDbRepository.cs" />
     <Compile Include="Repository\Db\Sql\CitySqlDbRepository.cs" />
+    <Compile Include="Repository\Db\Sql\MetadataSqlDbRepository.cs" />
     <Compile Include="Repository\Db\Sql\OwnerSqlDbRepository.cs" />
     <Compile Include="Repository\Db\Sql\PictureSqlDbRepository.cs" />
     <Compile Include="Repository\Db\Sql\ReservationSqlDbRepository.cs" />
@@ -108,6 +110,7 @@
     <Compile Include="Repository\Db\Sql\UserSqlDbRepository.cs" />
     <Compile Include="TableModels\ApartmentTableModel.cs" />
     <Compile Include="TableModels\CityTableModel.cs" />
+    <Compile Include="TableModels\MetadataTableModel.cs" />
     <Compile Include="TableModels\OwnerTableModel.cs" />
     <Compile Include="TableModels\PictureTableModel.cs" />
     <Compile Include="TableModels\ReservationTableModel.cs" />
