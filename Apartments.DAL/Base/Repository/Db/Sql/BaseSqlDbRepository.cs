@@ -63,8 +63,10 @@ namespace Apartments.DAL.Base.Repository.Db.Sql {
                                   func: (obj, property) => {
                                     obj.GetType()
                                        .GetProperty(property.Name)
-                                       .SetValue(obj: obj, 
-                                                 value: reader.GetValue(reader.GetOrdinal(property.Name)));
+                                       .SetValue(obj: obj,
+                                                 value: !reader.IsDBNull(reader.GetOrdinal(property.Name))
+                                                 ? reader.GetValue(reader.GetOrdinal(property.Name))
+                                                 : default);
                                     return obj;
                                   });
 
@@ -90,14 +92,16 @@ namespace Apartments.DAL.Base.Repository.Db.Sql {
     public TModel Create(TModel model, TKey? createdBy, out CreateStatus createStatus) {
       IList<SqlParameter> parameters = Parameterize(model);
 
-      parameters.Add(item: new SqlParameter() {
-        ParameterName = "@CreatedBy",
-        Direction = ParameterDirection.Input,
-        SqlDbType = SqlDbTypeManager.GetSqlDbType<TKey>(),
-        Value = createdBy ?? (Object)DBNull.Value
-      });
+      if (!(createdBy is null)) {
+        parameters.Add(item: new SqlParameter {
+          ParameterName = "@CreatedBy",
+          Direction = ParameterDirection.Input,
+          SqlDbType = SqlDbTypeManager.GetSqlDbType<TKey>(),
+          Value = createdBy
+        });
+      }
 
-      var returnValue = new SqlParameter() {
+      var returnValue = new SqlParameter {
         Direction = ParameterDirection.ReturnValue
       };
       parameters.Add(item: returnValue);
@@ -111,12 +115,15 @@ namespace Apartments.DAL.Base.Repository.Db.Sql {
         sqlConnection.Open();
         SqlDataReader reader = sqlCommand.ExecuteReader();
 
-        createStatus = (CreateStatus)Enum.Parse(enumType: typeof(CreateStatus),
-                                                  value: returnValue.Value.ToString());
-
-        return reader.Read()
+        TModel createdModel = reader.Read()
           ? Model(reader: reader)
           : default;
+
+        sqlConnection.Close();
+
+        createStatus = (CreateStatus)Enum.Parse(enumType: typeof(CreateStatus),
+                                                  value: returnValue.Value.ToString());
+        return createdModel;
       }
     }
 
@@ -130,19 +137,22 @@ namespace Apartments.DAL.Base.Repository.Db.Sql {
       => Delete(guid: guid, deletedBy: null);
     public DeleteStatus Delete(Guid guid, TKey? deletedBy) {
       IList<SqlParameter> parameters = new List<SqlParameter> {
-        new SqlParameter() {
+        new SqlParameter {
           ParameterName = "@Guid",
           Direction = ParameterDirection.Input,
           SqlDbType = SqlDbType.UniqueIdentifier,
           Value = guid,
-        },
-        new SqlParameter() {
+        }
+      };
+
+      if (!(deletedBy is null)) {
+        parameters.Add(new SqlParameter() {
           ParameterName = "@DeletedBy",
           Direction = ParameterDirection.Input,
           SqlDbType = SqlDbTypeManager.GetSqlDbType<TKey>(),
-          Value = deletedBy ?? (Object)DBNull.Value,
-        }
-      };
+          Value = deletedBy
+        });
+      }
 
       var returnValue = new SqlParameter() {
         Direction = ParameterDirection.ReturnValue
@@ -156,7 +166,7 @@ namespace Apartments.DAL.Base.Repository.Db.Sql {
         sqlCommand.Parameters.AddRange(values: parameters.ToArray());
 
         sqlConnection.Open();
-        SqlDataReader reader = sqlCommand.ExecuteReader();
+        _ = sqlCommand.ExecuteNonQuery();
 
         return (DeleteStatus)Enum.Parse(enumType: typeof(DeleteStatus),
                                         value: returnValue.Value.ToString());
@@ -168,30 +178,31 @@ namespace Apartments.DAL.Base.Repository.Db.Sql {
     #region Read
 
     public IEnumerable<TModel> ReadAll()
-      => Read(readMethod: ReadMethod.All, guid: null);
+      => Read(readMethod: ReadMethod.All, id: null);
     public IEnumerable<TModel> ReadAllAvailable()
-      => Read(readMethod: ReadMethod.AllAvailable, guid: null);
-    public TModel ReadByGuid(Guid guid)
-      => Read(readMethod: ReadMethod.One, guid: guid).FirstOrDefault();
-    public TModel ReadByGuidAvailable(Guid guid)
-      => Read(readMethod: ReadMethod.OneAvailable, guid: guid).FirstOrDefault();
-    private IEnumerable<TModel> Read(ReadMethod readMethod, Guid? guid) {
+      => Read(readMethod: ReadMethod.AllAvailable, id: null);
+    public TModel ReadById(TKey id)
+      => Read(readMethod: ReadMethod.One, id: id).FirstOrDefault();
+    public TModel ReadByIdAvailable(TKey id)
+      => Read(readMethod: ReadMethod.OneAvailable, id: id).FirstOrDefault();
+    private IEnumerable<TModel> Read(ReadMethod readMethod, TKey? id) {
       IList<SqlParameter> parameters = new List<SqlParameter> {
-        new SqlParameter
-        {
+        new SqlParameter {
           ParameterName = "@Method",
           Direction = ParameterDirection.Input,
           SqlDbType = SqlDbType.Int,
           Value = Convert.ToInt32(readMethod),
-        },
-        new SqlParameter
-        {
-          ParameterName = "@Guid",
-          Direction = ParameterDirection.Input,
-          SqlDbType = SqlDbType.UniqueIdentifier,
-          Value = guid ?? (Object)DBNull.Value,
         }
       };
+
+      if (!(id is null)) {
+        parameters.Add(new SqlParameter {
+          ParameterName = "@Id",
+          Direction = ParameterDirection.Input,
+          SqlDbType = SqlDbTypeManager.GetSqlDbType(typeof(TKey)),
+          Value = id
+        });
+      }
 
       using (var sqlConnection = new SqlConnection(ConnectionString)) {
         SqlCommand sqlCommand = sqlConnection.CreateCommand();
@@ -219,21 +230,23 @@ namespace Apartments.DAL.Base.Repository.Db.Sql {
     public Enums.UpdateStatus Update(Guid guid, TModel model, TKey? updatedBy) {
       IList<SqlParameter> parameters = Parameterize(model);
 
-      parameters.Add(item: new SqlParameter() {
+      parameters.Add(item: new SqlParameter {
         ParameterName = "@Guid",
         Direction = ParameterDirection.Input,
         SqlDbType = SqlDbType.UniqueIdentifier,
         Value = guid,
       });
 
-      parameters.Add(item: new SqlParameter() {
-        ParameterName = "@UpdatedBy",
-        Direction = ParameterDirection.Input,
-        SqlDbType = SqlDbTypeManager.GetSqlDbType<TKey>(),
-        Value = updatedBy ?? (Object)DBNull.Value,
-      });
+      if (!(updatedBy is null)) {
+        parameters.Add(item: new SqlParameter {
+          ParameterName = "@UpdatedBy",
+          Direction = ParameterDirection.Input,
+          SqlDbType = SqlDbTypeManager.GetSqlDbType<TKey>(),
+          Value = updatedBy
+        });
+      }
 
-      var returnValue = new SqlParameter() {
+      var returnValue = new SqlParameter {
         Direction = ParameterDirection.ReturnValue
       };
       parameters.Add(item: returnValue);

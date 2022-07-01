@@ -10,7 +10,7 @@ namespace Apartments.DAL.Base.Repository {
     where TKey : struct {
     TModel Create(TModel model, TKey? createdBy, out CreateStatus createStatus);
     IEnumerable<TModel> ReadAllAvailable();
-    TModel ReadByGuidAvailable(Guid guid);
+    TModel ReadByIdAvailable(TKey id);
     UpdateStatus Update(Guid guid, TModel model, TKey? updatedBy);
     DeleteStatus Delete(Guid guid, TKey? deletedBy);
   }
