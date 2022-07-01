@@ -28,6 +28,7 @@ namespace Apartments.WebUI.Infrastructure {
 
       _ = _kernel.Bind<IApartmentTableModelRepository>().To<ApartmentSqlDbRepository>().InSingletonScope();
       _ = _kernel.Bind<ICityTableModelRepository>().To<CitySqlDbRepository>().InSingletonScope();
+      _ = _kernel.Bind<IMetadataTableModelRepository>().To<MetadataSqlDbRepository>().InSingletonScope();
       _ = _kernel.Bind<IOwnerTableModelRepository>().To<OwnerSqlDbRepository>().InSingletonScope();
       _ = _kernel.Bind<IPictureTableModelRepository>().To<PictureSqlDbRepository>().InSingletonScope();
       _ = _kernel.Bind<IReservationTableModelRepository>().To<ReservationSqlDbRepository>().InSingletonScope();
@@ -40,6 +41,7 @@ namespace Apartments.WebUI.Infrastructure {
 
       _ = _kernel.Bind<IApartmentDomainModelManager>().To<ApartmentDomainModelManager>();
       _ = _kernel.Bind<ICityDomainModelManager>().To<CityDomainModelManager>();
+      _ = _kernel.Bind<IMetadataDomainModelManager>().To<MetadataDomainModelManager>();
       _ = _kernel.Bind<IOwnerDomainModelManager>().To<OwnerDomainModelManager>();
       _ = _kernel.Bind<IPictureDomainModelManager>().To<PictureDomainModelManager>();
       _ = _kernel.Bind<IReservationDomainModelManager>().To<ReservationDomainModelManager>();

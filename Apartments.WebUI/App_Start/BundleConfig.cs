@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 
 namespace Apartments.WebUI.App_Start {
   public class BundleConfig {
     public static void RegisterBundles(BundleCollection bundles) {
       bundles.Add(new StyleBundle("~/Content/bs").Include("~/Content/bootstrap.css"));
+      bundles.Add(new StyleBundle("~/Content/es").Include("~/Content/ErrorStyles.css"));
       bundles.Add(new StyleBundle("~/Content/jqui").Include("~/Content/jquery-ui.css"));
 
       bundles.Add(new ScriptBundle("~/Scripts/bs").Include("~/Scripts/bootstrap.js"));

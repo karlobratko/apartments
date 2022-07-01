@@ -1,0 +1,95 @@
+﻿@using Apartments.BLL.DomainModels
+@model UserDomainModel
+
+@{
+  Page.Title = Apartments.ResourceManager.GetString(name: "profile");
+}
+
+<section class="h-100 gradient-custom-2">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-lg-9 col-xl-7">
+        <div class="card">
+          <div class="rounded-top text-white d-flex flex-row bg-dark">
+            <div class="mb-3 mt-5 w-100 mx-3">
+              <h3 class="h3 mb-5">@Model.FName @Model.LName</h3>
+              <div class="row mb-1">
+                <div class="col-3">
+                  @Html.DisplayNameFor(expression: model => model.Username)
+                </div>
+                <div class="col-9">
+                  @Html.ValueFor(expression: model => model.Username)
+                </div>
+              </div>
+              <div class="row mb-1">
+                <div class="col-3">
+                  @Html.DisplayNameFor(expression: model => model.Email)
+                </div>
+                <div class="col-9">
+                  @Html.ValueFor(expression: model => model.Email)
+                </div>
+              </div>
+              <div class="row mb-1">
+                <div class="col-3">
+                  @Html.DisplayNameFor(expression: model => model.PhoneNumber)
+                </div>
+                <div class="col-9">
+                  @Html.ValueFor(expression: model => model.PhoneNumber)
+                </div>
+              </div>
+              <div class="row mb-1">
+                <div class="col-3">
+                  @Html.DisplayNameFor(expression: model => model.Address)
+                </div>
+                <div class="col-9">
+                  @Html.ValueFor(expression: model => model.Address)
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="p-4 text-black d-flex justify-content-end" style="background-color: #f8f9fa;">
+            <div class="d-flex align-items-center">
+              @Html.ActionLink(linkText: Apartments.ResourceManager.GetString(name: "edit-profile"),
+                               actionName: "Edit",
+                               controllerName: "User",
+                               routeValues: null,
+                               htmlAttributes: new {
+                                 @class = "btn btn-outline-dark me-3",
+                                 style = "z-index: 1;"
+                               })
+              <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" href="#deleteUserModal">
+                @Apartments.ResourceManager.GetString(name: "delete-profile")
+              </button>
+            </div>
+            <div class="d-flex justify-content-end text-center py-1">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="modal modal-alert fade" tabindex="-1" role="dialog" id="deleteUserModal">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content rounded-3 shadow">
+      <div class="modal-body p-4 text-center">
+        <h5 class="mb-0">@Apartments.ResourceManager.GetString(name: "delete-profile-question")</h5>
+        <p class="mb-0 mt-3">@Apartments.ResourceManager.GetString(name: "delete-profile-explanation")</p>
+      </div>
+      <div class="modal-footer flex-nowrap p-0">
+        @Html.ActionLink(linkText: Apartments.ResourceManager.GetString(name: "submit"),
+                         actionName: "Delete",
+                         controllerName: "User",
+                         routeValues: null,
+                         htmlAttributes: new {
+                           @class = "btn btn-lg btn-link fs-6 text-decoration-none text-danger col-6 m-0 rounded-0 border-end",
+                           style = "z-index: 1;"
+                         })
+        <button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0" data-bs-dismiss="modal">
+          @Apartments.ResourceManager.GetString(name: "cancel")
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

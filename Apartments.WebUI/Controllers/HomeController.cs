@@ -1,22 +1,20 @@
-﻿using System.Collections.Generic;
-using System.Web.Mvc;
-
-using Apartments.BLL.Base.Managers.DomainModels;
-using Apartments.BLL.DomainModels;
+﻿using System.Web.Mvc;
 
 namespace Apartments.WebUI.Controllers {
-  public class HomeController : Controller {
-    private readonly IApartmentDomainModelManager _apartmentManager;
-
-    public HomeController(IApartmentDomainModelManager apartmentManager) => _apartmentManager = apartmentManager;
-
+  public class HomeController : BaseController {
     [HttpGet]
     [LocalizedRoute(template: "~/home")]
-    public ActionResult Index() {
+    public ActionResult Index()
+      => View(viewName: nameof(HomeController.Index));
 
-      IEnumerable<ApartmentDomainModel> enumerable = _apartmentManager.GetAllIfAvailable();
-      return View(viewName: nameof(HomeController.Index),
-                  model: enumerable);
-    }
+    [HttpGet]
+    [LocalizedRoute(template: "~/contact")]
+    public ActionResult Contact()
+      => View(viewName: nameof(HomeController.Contact));
+
+    [HttpGet]
+    [LocalizedRoute(template: "~/about")]
+    public ActionResult About()
+      => View(viewName: nameof(HomeController.About));
   }
 }

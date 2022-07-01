@@ -13,7 +13,7 @@ namespace Apartments.WebUI.Infrastructure.Routing.Entries {
       TranslateUrl = translateUrl;
     }
 
-    public String ExplicitCulture { get; }
-    public Boolean TranslateUrl { get; }
+    public String ExplicitCulture { get; } = "";
+    public Boolean TranslateUrl { get; } = true;
   }
 }

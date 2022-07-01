@@ -2,17 +2,16 @@
 @using System.Threading
 
 @{
-
 }
 
 <div class="dropdown">
   <a class="nav-link dropdown-toggle text-black" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    @Resources.Apartments.ResourceManager.GetString(name: "language")
+    @Apartments.ResourceManager.GetString(name: "language")
   </a>
   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
     @foreach (string lang in ConfigurationManager.AppSettings["SupportedCultures"].Split(',')) {
       <li>
-        @Html.ActionLink(linkText: Resources.Apartments.ResourceManager.GetString(name: lang),
+        @Html.ActionLink(linkText: Apartments.ResourceManager.GetString(name: lang),
                          actionName: null,
                          controllerName: null,
                          routeValues: new {

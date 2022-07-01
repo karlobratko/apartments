@@ -1,0 +1,12 @@
+﻿@using Apartments.BLL.Projections
+@model IEnumerable<ApartmentProjection>
+
+@{
+  Page.Title = Apartments.ResourceManager.GetString(name: "search"); ;
+}
+
+@foreach (ApartmentProjection item in Model) {
+  <span>@item.Name</span>
+}
+
+

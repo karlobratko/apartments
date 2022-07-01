@@ -66,6 +66,7 @@
     <Reference Include="Ninject.Web.Common.WebHost, Version=3.3.2.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <HintPath>..\packages\Ninject.Web.Common.WebHost.3.3.2\lib\net45\Ninject.Web.Common.WebHost.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -128,6 +129,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\ErrorStyles.css" />
     <Content Include="Content\images\ui-icons_444444_256x240.png" />
     <Content Include="Content\images\ui-icons_555555_256x240.png" />
     <Content Include="Content\images\ui-icons_777620_256x240.png" />
@@ -160,33 +162,21 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_GlobalResources\Apartments.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Apartments.resx</DependentUpon>
-    </Compile>
-    <Compile Include="App_GlobalResources\Apartments.hr.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Apartments.hr.resx</DependentUpon>
-    </Compile>
-    <Compile Include="App_GlobalResources\TranslatedUrls.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TranslatedUrls.resx</DependentUpon>
-    </Compile>
-    <Compile Include="App_GlobalResources\TranslatedUrls.hr.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TranslatedUrls.hr.resx</DependentUpon>
-    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ApartmentController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Extensions\Extensions.cs" />
+    <Compile Include="Infrastructure\Auth\Attributes\AuthenticatedAttribute.cs" />
+    <Compile Include="Infrastructure\Auth\Attributes\AuthorizedAttribute.cs" />
+    <Compile Include="Infrastructure\Binders\ApartmentSearchSettingsModelBinder.cs" />
+    <Compile Include="Infrastructure\Routing\Attributes\ForceCultureAttribute.cs" />
     <Compile Include="Infrastructure\Routing\Attributes\LocalizedRouteAttribute.cs" />
     <Compile Include="Infrastructure\Routing\Constraints\CultureConstraint.cs" />
     <Compile Include="Infrastructure\Routing\Entries\LocalizedRouteEntry.cs" />
@@ -197,13 +187,19 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
+    <Compile Include="Infrastructure\State\ApplicationStateExtensions.cs" />
     <Compile Include="Messages\Base\BaseMessage.cs" />
     <Compile Include="Messages\Base\IMessage.cs" />
     <Compile Include="Messages\DangerMessage.cs" />
     <Compile Include="Messages\Enums\MessageType.cs" />
     <Compile Include="Messages\InfoMessage.cs" />
     <Compile Include="Messages\WarningMessage.cs" />
+    <Compile Include="Models\ApartmentSearchSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\RegisterViewModel.cs" />
+    <Compile Include="ViewModels\ResetPasswordViewModel.cs" />
+    <Compile Include="ViewModels\UserEditViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -238,6 +234,15 @@
     <Content Include="Views\Shared\_CultureSwitcher.cshtml" />
     <Content Include="Views\Shared\_Navigation.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
+    <Content Include="Views\Error\Error.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\User\Details.cshtml" />
+    <Content Include="Views\User\Edit.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Apartment\Search.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -247,8 +252,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
-    <Folder Include="Views\Account\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Apartments.BLL\Apartments.BLL.csproj">
@@ -259,30 +262,10 @@
       <Project>{4BAEF97D-5C50-4599-89F9-1CD7E47CF3BE}</Project>
       <Name>Apartments.DAL</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="App_GlobalResources\TranslatedUrls.resx">
-      <Generator>GlobalResourceProxyGenerator</Generator>
-      <LastGenOutput>TranslatedUrls.Designer.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="App_GlobalResources\TranslatedUrls.hr.resx">
-      <Generator>GlobalResourceProxyGenerator</Generator>
-      <LastGenOutput>TranslatedUrls.hr.designer.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="App_GlobalResources\Apartments.resx">
-      <Generator>GlobalResourceProxyGenerator</Generator>
-      <LastGenOutput>Apartments.Designer.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="App_GlobalResources\Apartments.hr.resx">
-      <Generator>GlobalResourceProxyGenerator</Generator>
-      <LastGenOutput>Apartments.hr.designer.cs</LastGenOutput>
-    </Content>
+    <ProjectReference Include="..\Apartments.Resources\Apartments.Resources.csproj">
+      <Project>{ff6e4ff6-77cb-4ff2-a808-6f327a278d08}</Project>
+      <Name>Apartments.Resources</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

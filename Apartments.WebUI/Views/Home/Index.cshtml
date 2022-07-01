@@ -1,12 +1,21 @@
 ﻿@using Apartments.BLL.DomainModels
-@model IEnumerable<ApartmentDomainModel>
 
 @{
-  ViewBag.Title = "Index";
+  Page.Title = Apartments.ResourceManager.GetString(name: "home");
+  var metadata = HttpContext.Current.Application.GetApplicationState("metadata") as MetadataDomainModel;
 }
 
-<h2>Index</h2>
+<header class="header text-center mb-5">
+  <h1 class="display-1 mb-3">@metadata.Name</h1>
+  <p class="fs-5">@Apartments.ResourceManager.GetString(name: "brand-description")</p>
+</header>
 
-@foreach (ApartmentDomainModel apartment in Model) {
-  <p>@apartment.Name</p>
-}
+<div class="text-center">
+  @Html.ActionLink(linkText: Apartments.ResourceManager.GetString(name: "brand-cta"),
+                   actionName: "Search",
+                   controllerName: "Apartment",
+                   routeValues: null,
+                   htmlAttributes: new {
+                     @class = "btn btn-outline-dark"
+                   })
+</div>

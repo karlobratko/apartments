@@ -1,0 +1,11 @@
+﻿@using Apartments.BLL.DomainModels
+
+@{
+  Page.Title = Apartments.ResourceManager.GetString(name: "about");
+  var metadata = HttpContext.Current.Application.GetApplicationState("metadata") as MetadataDomainModel;
+}
+
+<header class="header text-center mb-5">
+  <h2 class="display-5 mb-4">@Apartments.ResourceManager.GetString(name: "about")</h2>
+  <p class="fs-5">@(String.Format(Apartments.ResourceManager.GetString(name: "about-description"), metadata.City.Name))</p>
+</header>

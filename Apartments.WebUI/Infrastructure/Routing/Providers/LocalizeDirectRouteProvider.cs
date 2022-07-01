@@ -9,8 +9,6 @@ using System.Web.Routing;
 using Apartments.WebUI.Infrastructure.Routing.Constraints;
 using Apartments.WebUI.Infrastructure.Routing.Entries;
 
-using Resources;
-
 namespace Apartments.WebUI.Infrastructure.Routing.Providers {
   public class LocalizeDirectRouteProvider : DefaultDirectRouteProvider {
     private readonly String _urlPrefix;
@@ -30,7 +28,7 @@ namespace Apartments.WebUI.Infrastructure.Routing.Providers {
       _constraints = new RouteValueDictionary {
         { "culture", new CultureConstraint(defaultCulture: defaultCulture) }
       };
-      _prefixDefaultCulture = Convert.ToBoolean(value: ConfigurationManager.AppSettings["PrefixDefaultCulture"]);
+      _prefixDefaultCulture = Boolean.Parse(value: ConfigurationManager.AppSettings["PrefixDefaultCulture"]);
     }
 
     protected override IReadOnlyList<RouteEntry> GetActionDirectRoutes(ActionDescriptor actionDescriptor,
@@ -43,7 +41,7 @@ namespace Apartments.WebUI.Infrastructure.Routing.Providers {
         String explicitCulture = "";
         Boolean translateUrl = false;
 
-        if (!!(originalEntry is LocalizedRouteEntry asLocalizedRouteEntry)) {
+        if (originalEntry is LocalizedRouteEntry asLocalizedRouteEntry) {
           explicitCulture = asLocalizedRouteEntry.ExplicitCulture;
           translateUrl = asLocalizedRouteEntry.TranslateUrl;
         }
@@ -132,8 +130,8 @@ namespace Apartments.WebUI.Infrastructure.Routing.Providers {
         if (part.StartsWith("{"))
           continue;
 
-        String translatedPart = TranslatedUrls.ResourceManager.GetString(name: part,
-                                                                         culture: new CultureInfo(culture));
+        String translatedPart = Resources.Global.TranslatedUrls.ResourceManager.GetString(name: part,
+                                                                                          culture: new CultureInfo(culture));
         if (String.IsNullOrEmpty(translatedPart))
           throw new Exception($"Could not find translation for url part {part} for culture {culture}");
         url = url.Replace(part, translatedPart);

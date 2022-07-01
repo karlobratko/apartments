@@ -5,29 +5,19 @@ using System.Web.Routing;
 
 namespace Apartments.WebUI.Infrastructure.Routing.Constraints {
   public class CultureConstraint : IRouteConstraint {
-    private const String DEFAULT_PATTERN = "[a-z]{2}";
+    private static readonly Regex CULTURE_REGEX = new Regex("^[a-z]{2}$");
 
     private readonly String _defaultCulture;
-    private readonly String _pattern;
 
-    public CultureConstraint(String defaultCulture)
-      : this(defaultCulture, DEFAULT_PATTERN) {
-    }
-
-    public CultureConstraint(String defaultCulture, String pattern) {
-      _defaultCulture = defaultCulture;
-      _pattern = pattern;
-    }
+    public CultureConstraint(String defaultCulture) => _defaultCulture = defaultCulture;
 
     public Boolean Match(HttpContextBase httpContext,
                          Route route,
                          String parameterName,
                          RouteValueDictionary values,
                          RouteDirection routeDirection)
-      => (
-           routeDirection != RouteDirection.UrlGeneration ||
-           !_defaultCulture.Equals(values[parameterName])
-         ) &&
-         Regex.IsMatch(values[parameterName].ToString(), $"^{_pattern}$");
+      => routeDirection == RouteDirection.UrlGeneration &&
+         _defaultCulture.Equals(values[parameterName])&&
+         CULTURE_REGEX.IsMatch(input: values[parameterName].ToString());
   }
 }
