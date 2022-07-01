@@ -1,10 +1,10 @@
-﻿CREATE PROCEDURE [dbo].[UserRegister] (@FName                  AS nvarchar(50),
-                                       @LName                  AS nvarchar(50),
-                                       @Username               AS nvarchar(50),
-                                       @Email                  AS nvarchar(256),
-                                       @Password               AS nvarchar(512),
-                                       @IsAdmin                AS bit,
-                                       @CreatedBy              AS int = 1)
+﻿CREATE PROCEDURE [dbo].[UserRegister] (@FName     AS nvarchar(50),
+                                       @LName     AS nvarchar(50),
+                                       @Username  AS nvarchar(50),
+                                       @Email     AS nvarchar(256),
+                                       @Password  AS nvarchar(512),
+                                       @IsAdmin   AS bit,
+                                       @CreatedBy AS int = 1)
 AS BEGIN
   DECLARE @Guid       AS uniqueidentifier
   DECLARE @DeleteDate AS datetime

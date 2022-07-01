@@ -18,7 +18,7 @@ AS BEGIN
       @CreateDate   = [CreateDate],
       @IsRegistered = [IsRegistered]
     FROM [dbo].[Users]
-    WHERE [GUID] = @GUID
+    WHERE [Guid] = @Guid
 
     DECLARE @PassedTime AS int = DATEDIFF(MINUTE, @CreateDate, GETDATE())
 
