@@ -117,7 +117,85 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="home" xml:space="preserve">
-    <value>naslovna</value>
+  <data name="address" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="address-required" xml:space="preserve">
+    <value>Address is required</value>
+  </data>
+  <data name="address-stringlength" xml:space="preserve">
+    <value>Address must be max 200 characters long</value>
+  </data>
+  <data name="confirm-password" xml:space="preserve">
+    <value>Confirm password</value>
+  </data>
+  <data name="confirm-password-compare" xml:space="preserve">
+    <value>Passwords are not matching</value>
+  </data>
+  <data name="confirm-password-required" xml:space="preserve">
+    <value>Please confirm password</value>
+  </data>
+  <data name="confirm-password-stringlength" xml:space="preserve">
+    <value>Passwords are not matching</value>
+  </data>
+  <data name="email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="email-required" xml:space="preserve">
+    <value>Email is required</value>
+  </data>
+  <data name="email-stringlength" xml:space="preserve">
+    <value>Email must be max 256 characters long</value>
+  </data>
+  <data name="fname" xml:space="preserve">
+    <value>First name</value>
+  </data>
+  <data name="fname-required" xml:space="preserve">
+    <value>First name is required</value>
+  </data>
+  <data name="fname-stringlength" xml:space="preserve">
+    <value>First name must be max 50 characters long</value>
+  </data>
+  <data name="lname" xml:space="preserve">
+    <value>Last name</value>
+  </data>
+  <data name="lname-required" xml:space="preserve">
+    <value>Last name is required</value>
+  </data>
+  <data name="lname-stringlength" xml:space="preserve">
+    <value>Last name must be max 50 characters long</value>
+  </data>
+  <data name="mobile" xml:space="preserve">
+    <value>Mobile</value>
+  </data>
+  <data name="password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="password-required" xml:space="preserve">
+    <value>Password is required</value>
+  </data>
+  <data name="password-stringlength" xml:space="preserve">
+    <value>Password must be at least 3 characters long</value>
+  </data>
+  <data name="phone-number" xml:space="preserve">
+    <value>Phone number</value>
+  </data>
+  <data name="phone-number-required" xml:space="preserve">
+    <value>Phone number is required</value>
+  </data>
+  <data name="phone-number-stringlength" xml:space="preserve">
+    <value>Phone number must be max 20 characters long</value>
+  </data>
+  <data name="telephone" xml:space="preserve">
+    <value>Telephone</value>
+  </data>
+  <data name="username" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="username-required" xml:space="preserve">
+    <value>Username is required</value>
+  </data>
+  <data name="username-stringlength" xml:space="preserve">
+    <value>Username must be max 50 characters long</value>
   </data>
 </root>

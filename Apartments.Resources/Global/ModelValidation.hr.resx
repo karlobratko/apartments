@@ -117,7 +117,73 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="home" xml:space="preserve">
-    <value>home</value>
+  <data name="address" xml:space="preserve">
+    <value>Adresa</value>
+  </data>
+  <data name="confirm-password" xml:space="preserve">
+    <value>Ponovite lozinku</value>
+  </data>
+  <data name="confirm-password-compare" xml:space="preserve">
+    <value>Lozinke se ne podudaraju</value>
+  </data>
+  <data name="confirm-password-required" xml:space="preserve">
+    <value>Ponovite unesenu lozinku</value>
+  </data>
+  <data name="confirm-password-stringlength" xml:space="preserve">
+    <value>Lozinke se ne podudaraju</value>
+  </data>
+  <data name="email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="email-required" xml:space="preserve">
+    <value>Email je obavezan</value>
+  </data>
+  <data name="email-stringlength" xml:space="preserve">
+    <value>Email mora biti duljine do 256 znakova</value>
+  </data>
+  <data name="fname" xml:space="preserve">
+    <value>Ime</value>
+  </data>
+  <data name="fname-required" xml:space="preserve">
+    <value>Ime je obavezno</value>
+  </data>
+  <data name="fname-stringlength" xml:space="preserve">
+    <value>Ime mora biti duljine do 50 znakova</value>
+  </data>
+  <data name="lname" xml:space="preserve">
+    <value>Prezime</value>
+  </data>
+  <data name="lname-required" xml:space="preserve">
+    <value>Prezime je obavezno</value>
+  </data>
+  <data name="lname-stringlength" xml:space="preserve">
+    <value>Prezime mora biti duljine do 50 znakova</value>
+  </data>
+  <data name="mobile" xml:space="preserve">
+    <value>Mobitel</value>
+  </data>
+  <data name="password" xml:space="preserve">
+    <value>Lozinka</value>
+  </data>
+  <data name="password-required" xml:space="preserve">
+    <value>Lozinka je obavezna</value>
+  </data>
+  <data name="password-stringlength" xml:space="preserve">
+    <value>Lozinka mora biti duljine minimalno 3 znaka</value>
+  </data>
+  <data name="phone-number" xml:space="preserve">
+    <value>Broj telefona</value>
+  </data>
+  <data name="telephone" xml:space="preserve">
+    <value>Telefon</value>
+  </data>
+  <data name="username" xml:space="preserve">
+    <value>Korisničko ime</value>
+  </data>
+  <data name="username-required" xml:space="preserve">
+    <value>Korisničko ime je obavezno</value>
+  </data>
+  <data name="username-stringlength" xml:space="preserve">
+    <value>Korisničko mora biti duljine do 50 znakova</value>
   </data>
 </root>
