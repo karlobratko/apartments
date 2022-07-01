@@ -1,5 +1,5 @@
 ﻿CREATE PROCEDURE [dbo].[TagApartmentRead] (@Method AS int,
-                                           @Guid   AS uniqueidentifier = NULL)
+                                           @Id     AS int = NULL)
 AS BEGIN
 IF @Method = 1 BEGIN
     SELECT ALL
@@ -43,7 +43,7 @@ IF @Method = 1 BEGIN
       [TagFK],
       [ApartmentFK]
     FROM [dbo].[TagsApartments]
-    WHERE [Guid] = @Guid
+    WHERE [Id] = @Id
   END
   ELSE IF @Method = 4 BEGIN
     SELECT ALL
@@ -59,7 +59,7 @@ IF @Method = 1 BEGIN
       [ApartmentFK]
     FROM [dbo].[TagsApartments]
     WHERE [DeleteDate] IS NULL AND
-          [Guid] = @Guid
+          [Id] = @Id
   END
 END
 GO

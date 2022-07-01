@@ -1,5 +1,5 @@
 CREATE PROCEDURE [dbo].[OwnerRead] (@Method AS int,
-                                    @Guid   AS uniqueidentifier = NULL)
+                                    @Id     AS int = NULL)
 AS BEGIN
   IF @Method = 1 BEGIN
     SELECT ALL
@@ -40,7 +40,7 @@ AS BEGIN
       [DeletedBy],
       [Name]
     FROM [dbo].[Owners]
-    WHERE [Guid] = @Guid
+    WHERE [Id] = @Id
   END
   ELSE IF @Method = 4 BEGIN
     SELECT ALL
@@ -55,7 +55,7 @@ AS BEGIN
       [Name]
     FROM [dbo].[Owners]
     WHERE [DeleteDate] IS NULL AND
-          [Guid] = @Guid
+          [Id] = @Id
   END
 END
 GO

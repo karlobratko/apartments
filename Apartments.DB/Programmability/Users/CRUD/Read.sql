@@ -1,5 +1,5 @@
 CREATE PROCEDURE [dbo].[UserRead] (@Method AS int,
-                                   @Guid   AS uniqueidentifier = NULL)
+                                   @Id     AS int = NULL)
 AS BEGIN
   IF @Method = 1 BEGIN
     SELECT ALL
@@ -73,7 +73,7 @@ AS BEGIN
       [CanResetPassword],
       [ResetPasswordStartDate]
     FROM [dbo].[Users]
-    WHERE [Guid] = @Guid
+    WHERE [Id] = @Id
   END
   ELSE IF @Method = 4 BEGIN
     SELECT ALL
@@ -99,7 +99,7 @@ AS BEGIN
       [ResetPasswordStartDate]
     FROM [dbo].[Users]
     WHERE [DeleteDate] IS NULL AND
-          [Guid] = @Guid
+          [Id] = @Id
   END
 END
 GO

@@ -1,7 +1,7 @@
 ﻿CREATE PROCEDURE [dbo].[ReviewRead] (@Method AS int,
-                                     @Guid   AS uniqueidentifier = NULL)
+                                     @Id     AS int = NULL)
 AS BEGIN
-IF @Method = 1 BEGIN
+  IF @Method = 1 BEGIN
     SELECT ALL
       [Id],
       [Guid],
@@ -49,7 +49,7 @@ IF @Method = 1 BEGIN
       [Details],
       [Stars]
     FROM [dbo].[Reviews]
-    WHERE [Guid] = @Guid
+    WHERE [Id] = @Id
   END
   ELSE IF @Method = 4 BEGIN
     SELECT ALL
@@ -67,7 +67,7 @@ IF @Method = 1 BEGIN
       [Stars]
     FROM [dbo].[Reviews]
     WHERE [DeleteDate] IS NULL AND
-          [Guid] = @Guid
+          [Id] = @Id
   END
 END
 GO

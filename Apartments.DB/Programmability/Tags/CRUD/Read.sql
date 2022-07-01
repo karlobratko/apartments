@@ -1,5 +1,5 @@
 CREATE PROCEDURE [dbo].[TagRead] (@Method AS int,
-                                  @Guid   AS uniqueidentifier = NULL)
+                                  @Id     AS int = NULL)
 AS BEGIN
   IF @Method = 1 BEGIN
     SELECT ALL
@@ -46,7 +46,7 @@ AS BEGIN
       [NameEng],
       [TagTypeFK]
     FROM [dbo].[Tags]
-    WHERE [Guid] = @Guid
+    WHERE [Id] = @Id
   END
   ELSE IF @Method = 4 BEGIN
     SELECT ALL
@@ -63,7 +63,7 @@ AS BEGIN
       [TagTypeFK]
     FROM [dbo].[Tags]
     WHERE [DeleteDate] IS NULL AND
-          [Guid] = @Guid
+          [Id] = @Id
   END
 END
 GO
