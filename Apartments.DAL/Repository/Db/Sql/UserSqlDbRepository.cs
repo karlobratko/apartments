@@ -44,9 +44,13 @@ namespace Apartments.DAL.Repository.Db.Sql {
         LName = reader.GetString(reader.GetOrdinal(nameof(UserTableModel.LName))),
         Username = reader.GetString(reader.GetOrdinal(nameof(UserTableModel.Username))),
         Email = reader.GetString(reader.GetOrdinal(nameof(UserTableModel.Email))),
-        PhoneNumber = reader.GetString(reader.GetOrdinal(nameof(UserTableModel.PhoneNumber))),
+        PhoneNumber = !reader.IsDBNull(reader.GetOrdinal(nameof(UserTableModel.PhoneNumber)))
+          ? reader.GetString(reader.GetOrdinal(nameof(UserTableModel.PhoneNumber)))
+          : null,
         PasswordHash = reader.GetString(reader.GetOrdinal(nameof(UserTableModel.PasswordHash))),
-        Address = reader.GetString(reader.GetOrdinal(nameof(UserTableModel.Address))),
+        Address = !reader.IsDBNull(reader.GetOrdinal(nameof(UserTableModel.Address)))
+          ? reader.GetString(reader.GetOrdinal(nameof(UserTableModel.Address)))
+          : null,
         IsAdmin = reader.GetBoolean(reader.GetOrdinal(nameof(UserTableModel.IsAdmin))),
         IsRegistered = reader.GetBoolean(reader.GetOrdinal(nameof(UserTableModel.IsRegistered))),
         RegistrationDate = !reader.IsDBNull(reader.GetOrdinal(nameof(UserTableModel.RegistrationDate)))
@@ -85,22 +89,19 @@ namespace Apartments.DAL.Repository.Db.Sql {
     public UserTableModel Login(String username, String email, String password) {
       IList<SqlParameter> parameters = new List<SqlParameter>
       {
-        new SqlParameter
-        {
+        new SqlParameter {
           ParameterName = "@Username",
           Direction = ParameterDirection.Input,
           SqlDbType = SqlDbTypeManager.GetSqlDbType(typeof(UserTableModel).GetProperty(nameof(UserTableModel.Username)).PropertyType),
-          Value = username,
+          Value = username ?? (Object)DBNull.Value,
         },
-        new SqlParameter
-        {
+        new SqlParameter {
           ParameterName = "@Email",
           Direction = ParameterDirection.Input,
           SqlDbType = SqlDbTypeManager.GetSqlDbType(typeof(UserTableModel).GetProperty(nameof(UserTableModel.Email)).PropertyType),
-          Value = email,
+          Value = email ?? (Object)DBNull.Value,
         },
-        new SqlParameter
-        {
+        new SqlParameter {
           ParameterName = "@Password",
           Direction = ParameterDirection.Input,
           SqlDbType = SqlDbType.NVarChar,
@@ -116,7 +117,6 @@ namespace Apartments.DAL.Repository.Db.Sql {
 
         sqlConnection.Open();
         SqlDataReader reader = sqlCommand.ExecuteReader();
-        sqlConnection.Close();
 
         return reader.Read()
           ? Model(reader: reader)
@@ -136,51 +136,54 @@ namespace Apartments.DAL.Repository.Db.Sql {
       => Register(fName: fName, lName: lName, username: username, email: email, password: password, isAdmin: isAdmin, createdBy: null, registerStatus: out registerStatus);
     public UserTableModel Register(String fName, String lName, String username, String email, String password, Boolean isAdmin, Int32? createdBy, out RegisterStatus registerStatus) {
       IList<SqlParameter> parameters = new List<SqlParameter> {
-        new SqlParameter() {
+        new SqlParameter {
           ParameterName = "@FName",
           Direction = ParameterDirection.Input,
           SqlDbType = SqlDbTypeManager.GetSqlDbType(typeof(UserTableModel).GetProperty(nameof(UserTableModel.FName)).PropertyType),
           Value = fName
         },
-        new SqlParameter() {
+        new SqlParameter {
           ParameterName = "@LName",
           Direction = ParameterDirection.Input,
           SqlDbType = SqlDbTypeManager.GetSqlDbType(typeof(UserTableModel).GetProperty(nameof(UserTableModel.LName)).PropertyType),
           Value = lName
         },
-        new SqlParameter() {
+        new SqlParameter {
           ParameterName = "@Username",
           Direction = ParameterDirection.Input,
           SqlDbType = SqlDbTypeManager.GetSqlDbType(typeof(UserTableModel).GetProperty(nameof(UserTableModel.Username)).PropertyType),
           Value = username
         },
-        new SqlParameter() {
+        new SqlParameter {
           ParameterName = "@Email",
           Direction = ParameterDirection.Input,
           SqlDbType = SqlDbTypeManager.GetSqlDbType(typeof(UserTableModel).GetProperty(nameof(UserTableModel.Email)).PropertyType),
           Value = email
         },
-        new SqlParameter() {
+        new SqlParameter {
           ParameterName = "@Password",
           Direction = ParameterDirection.Input,
           SqlDbType = SqlDbType.NVarChar,
           Value = password
         },
-        new SqlParameter() {
+        new SqlParameter {
           ParameterName = "@IsAdmin",
           Direction = ParameterDirection.Input,
           SqlDbType = SqlDbTypeManager.GetSqlDbType(typeof(UserTableModel).GetProperty(nameof(UserTableModel.IsAdmin)).PropertyType),
           Value = isAdmin
-        },
-        new SqlParameter() {
-          ParameterName = "@CreatedBy",
-          Direction = ParameterDirection.Input,
-          SqlDbType = SqlDbTypeManager.GetSqlDbType(typeof(UserTableModel).GetProperty(nameof(UserTableModel.CreatedBy)).PropertyType),
-          Value = createdBy ?? (Object)DBNull.Value
         }
       };
 
-      var returnValue = new SqlParameter() {
+      if (!(createdBy is null)) {
+        parameters.Add(new SqlParameter {
+          ParameterName = "@CreatedBy",
+          Direction = ParameterDirection.Input,
+          SqlDbType = SqlDbTypeManager.GetSqlDbType(typeof(UserTableModel).GetProperty(nameof(UserTableModel.CreatedBy)).PropertyType),
+          Value = createdBy,
+        });
+      }
+
+      var returnValue = new SqlParameter {
         Direction = ParameterDirection.ReturnValue
       };
       parameters.Add(item: returnValue);
@@ -193,14 +196,16 @@ namespace Apartments.DAL.Repository.Db.Sql {
 
         sqlConnection.Open();
         SqlDataReader reader = sqlCommand.ExecuteReader();
+
+        UserTableModel model = reader.Read()
+          ? Model(reader: reader)
+          : default;
+
         sqlConnection.Close();
 
         registerStatus = (RegisterStatus)Enum.Parse(enumType: typeof(RegisterStatus),
                                                     value: returnValue.Value.ToString());
-
-        return reader.Read()
-          ? Model(reader: reader)
-          : default;
+        return model;
       }
     }
 
@@ -208,7 +213,7 @@ namespace Apartments.DAL.Repository.Db.Sql {
       => CheckRegistrationStatus(guid: model.Guid);
     public RegistrationStatus CheckRegistrationStatus(Guid guid) {
       IList<SqlParameter> parameters = new List<SqlParameter> {
-        new SqlParameter() {
+        new SqlParameter {
           ParameterName = "@Guid",
           Direction = ParameterDirection.Input,
           SqlDbType = SqlDbTypeManager.GetSqlDbType(typeof(UserTableModel).GetProperty(nameof(UserTableModel.Guid)).PropertyType),
@@ -216,7 +221,7 @@ namespace Apartments.DAL.Repository.Db.Sql {
         }
       };
 
-      var returnValue = new SqlParameter() {
+      var returnValue = new SqlParameter {
         Direction = ParameterDirection.ReturnValue
       };
       parameters.Add(item: returnValue);
@@ -228,7 +233,7 @@ namespace Apartments.DAL.Repository.Db.Sql {
         sqlCommand.Parameters.AddRange(values: parameters.ToArray());
 
         sqlConnection.Open();
-        SqlDataReader reader = sqlCommand.ExecuteReader();
+        _ = sqlCommand.ExecuteNonQuery();
         sqlConnection.Close();
 
         return (RegistrationStatus)Enum.Parse(enumType: typeof(RegistrationStatus),
@@ -242,21 +247,24 @@ namespace Apartments.DAL.Repository.Db.Sql {
       => ConfirmRegistration(guid: guid, updatedBy: null, operationStatus: out operationStatus);
     public UserTableModel ConfirmRegistration(Guid guid, Int32? updatedBy, out OperationStatus operationStatus) {
       IList<SqlParameter> parameters = new List<SqlParameter> {
-        new SqlParameter() {
+        new SqlParameter {
           ParameterName = "@Guid",
           Direction = ParameterDirection.Input,
           SqlDbType = SqlDbTypeManager.GetSqlDbType(typeof(UserTableModel).GetProperty(nameof(UserTableModel.Guid)).PropertyType),
           Value = guid
-        },
-        new SqlParameter() {
-          ParameterName = "@UpdatedBy",
-          Direction = ParameterDirection.Input,
-          SqlDbType = SqlDbTypeManager.GetSqlDbType(typeof(UserTableModel).GetProperty(nameof(UserTableModel.UpdatedBy)).PropertyType),
-          Value = updatedBy ?? (Object)DBNull.Value
         }
       };
 
-      var returnValue = new SqlParameter() {
+      if (!(updatedBy is null)) {
+        parameters.Add(new SqlParameter {
+          ParameterName = "@UpdatedBy",
+          Direction = ParameterDirection.Input,
+          SqlDbType = SqlDbTypeManager.GetSqlDbType(typeof(UserTableModel).GetProperty(nameof(UserTableModel.UpdatedBy)).PropertyType),
+          Value = updatedBy
+        });
+      }
+
+      var returnValue = new SqlParameter {
         Direction = ParameterDirection.ReturnValue
       };
       parameters.Add(item: returnValue);
@@ -269,14 +277,16 @@ namespace Apartments.DAL.Repository.Db.Sql {
 
         sqlConnection.Open();
         SqlDataReader reader = sqlCommand.ExecuteReader();
+
+        UserTableModel model = reader.Read()
+          ? Model(reader: reader)
+          : default;
+
         sqlConnection.Close();
 
         operationStatus = (OperationStatus)Enum.Parse(enumType: typeof(OperationStatus),
                                                       value: returnValue.Value.ToString());
-
-        return reader.Read()
-          ? Model(reader: reader)
-          : default;
+        return model;
       }
     }
 
@@ -290,21 +300,24 @@ namespace Apartments.DAL.Repository.Db.Sql {
       => RequestResetPassword(email: email, updatedBy: null, requestResetPasswordStatus: out requestResetPasswordStatus);
     public UserTableModel RequestResetPassword(String email, Int32? updatedBy, out RequestResetPasswordStatus requestResetPasswordStatus) {
       IList<SqlParameter> parameters = new List<SqlParameter> {
-        new SqlParameter() {
+        new SqlParameter {
           ParameterName = "@Email",
           Direction = ParameterDirection.Input,
           SqlDbType = SqlDbTypeManager.GetSqlDbType(typeof(UserTableModel).GetProperty(nameof(UserTableModel.Email)).PropertyType),
           Value = email
-        },
-        new SqlParameter() {
-          ParameterName = "@UpdatedBy",
-          Direction = ParameterDirection.Input,
-          SqlDbType = SqlDbTypeManager.GetSqlDbType(typeof(UserTableModel).GetProperty(nameof(UserTableModel.UpdatedBy)).PropertyType),
-          Value = updatedBy ?? (Object)DBNull.Value
         }
       };
 
-      var returnValue = new SqlParameter() {
+      if (!(updatedBy is null)) {
+        parameters.Add(new SqlParameter {
+          ParameterName = "@UpdatedBy",
+          Direction = ParameterDirection.Input,
+          SqlDbType = SqlDbTypeManager.GetSqlDbType(typeof(UserTableModel).GetProperty(nameof(UserTableModel.UpdatedBy)).PropertyType),
+          Value = updatedBy
+        });
+      }
+
+      var returnValue = new SqlParameter {
         Direction = ParameterDirection.ReturnValue
       };
       parameters.Add(item: returnValue);
@@ -317,14 +330,16 @@ namespace Apartments.DAL.Repository.Db.Sql {
 
         sqlConnection.Open();
         SqlDataReader reader = sqlCommand.ExecuteReader();
+
+        UserTableModel model = reader.Read()
+          ? Model(reader: reader)
+          : default;
+
         sqlConnection.Close();
 
         requestResetPasswordStatus = (RequestResetPasswordStatus)Enum.Parse(enumType: typeof(RequestResetPasswordStatus),
                                                                             value: returnValue.Value.ToString());
-
-        return reader.Read()
-          ? Model(reader: reader)
-          : default;
+        return model;
       }
     }
 
@@ -332,8 +347,7 @@ namespace Apartments.DAL.Repository.Db.Sql {
       => ReadByEmail(email: model.Email);
     public UserTableModel ReadByEmail(String email) {
       IList<SqlParameter> parameters = new List<SqlParameter> {
-        new SqlParameter
-        {
+        new SqlParameter {
           ParameterName = "@Email",
           Direction = ParameterDirection.Input,
           SqlDbType = SqlDbTypeManager.GetSqlDbType(typeof(UserTableModel).GetProperty(nameof(UserTableModel.Email)).PropertyType),
@@ -349,7 +363,6 @@ namespace Apartments.DAL.Repository.Db.Sql {
 
         sqlConnection.Open();
         SqlDataReader reader = sqlCommand.ExecuteReader();
-        sqlConnection.Close();
 
         return reader.Read()
           ? Model(reader: reader)
@@ -361,7 +374,7 @@ namespace Apartments.DAL.Repository.Db.Sql {
       => CheckResetPasswordStatus(guid: model.Guid);
     public ResetPasswordStatus CheckResetPasswordStatus(Guid guid) {
       IList<SqlParameter> parameters = new List<SqlParameter> {
-        new SqlParameter() {
+        new SqlParameter {
           ParameterName = "@Guid",
           Direction = ParameterDirection.Input,
           SqlDbType = SqlDbTypeManager.GetSqlDbType(typeof(UserTableModel).GetProperty(nameof(UserTableModel.Guid)).PropertyType),
@@ -369,7 +382,7 @@ namespace Apartments.DAL.Repository.Db.Sql {
         }
       };
 
-      var returnValue = new SqlParameter() {
+      var returnValue = new SqlParameter {
         Direction = ParameterDirection.ReturnValue
       };
       parameters.Add(item: returnValue);
@@ -381,7 +394,7 @@ namespace Apartments.DAL.Repository.Db.Sql {
         sqlCommand.Parameters.AddRange(values: parameters.ToArray());
 
         sqlConnection.Open();
-        SqlDataReader reader = sqlCommand.ExecuteReader();
+        _ = sqlCommand.ExecuteNonQuery();
         sqlConnection.Close();
 
         return (ResetPasswordStatus)Enum.Parse(enumType: typeof(ResetPasswordStatus),
@@ -397,27 +410,30 @@ namespace Apartments.DAL.Repository.Db.Sql {
       => ResetPassword(guid: guid, password: password, updatedBy: null, operationStatus: out operationStatus);
     public UserTableModel ResetPassword(Guid guid, String password, Int32? updatedBy, out OperationStatus operationStatus) {
       IList<SqlParameter> parameters = new List<SqlParameter> {
-        new SqlParameter() {
+        new SqlParameter {
           ParameterName = "@Guid",
           Direction = ParameterDirection.Input,
           SqlDbType = SqlDbTypeManager.GetSqlDbType(typeof(UserTableModel).GetProperty(nameof(UserTableModel.Guid)).PropertyType),
           Value = guid
         },
-        new SqlParameter() {
+        new SqlParameter {
           ParameterName = "@Password",
           Direction = ParameterDirection.Input,
           SqlDbType = SqlDbType.NVarChar,
           Value = password
-        },
-        new SqlParameter() {
-          ParameterName = "@UpdatedBy",
-          Direction = ParameterDirection.Input,
-          SqlDbType = SqlDbTypeManager.GetSqlDbType(typeof(UserTableModel).GetProperty(nameof(UserTableModel.UpdatedBy)).PropertyType),
-          Value = updatedBy ?? (Object)DBNull.Value
         }
       };
 
-      var returnValue = new SqlParameter() {
+      if (!(updatedBy is null)) {
+        parameters.Add(new SqlParameter {
+          ParameterName = "@UpdatedBy",
+          Direction = ParameterDirection.Input,
+          SqlDbType = SqlDbTypeManager.GetSqlDbType(typeof(UserTableModel).GetProperty(nameof(UserTableModel.UpdatedBy)).PropertyType),
+          Value = updatedBy
+        });
+      }
+
+      var returnValue = new SqlParameter {
         Direction = ParameterDirection.ReturnValue
       };
       parameters.Add(item: returnValue);
@@ -430,14 +446,16 @@ namespace Apartments.DAL.Repository.Db.Sql {
 
         sqlConnection.Open();
         SqlDataReader reader = sqlCommand.ExecuteReader();
+
+        UserTableModel model = reader.Read()
+          ? Model(reader: reader)
+          : default;
+
         sqlConnection.Close();
 
         operationStatus = (OperationStatus)Enum.Parse(enumType: typeof(OperationStatus),
                                                       value: returnValue.Value.ToString());
-
-        return reader.Read()
-          ? Model(reader: reader)
-          : default;
+        return model;
       }
     }
 
@@ -453,45 +471,48 @@ namespace Apartments.DAL.Repository.Db.Sql {
       => UpdateProfile(guid: guid, fName: fName, lName: lName, phoneNumber: phoneNumber, address: address, updatedBy: null, operationStatus: out operationStatus);
     public UserTableModel UpdateProfile(Guid guid, String fName, String lName, String phoneNumber, String address, Int32? updatedBy, out OperationStatus operationStatus) {
       IList<SqlParameter> parameters = new List<SqlParameter> {
-        new SqlParameter() {
+        new SqlParameter {
           ParameterName = "@Guid",
           Direction = ParameterDirection.Input,
           SqlDbType = SqlDbTypeManager.GetSqlDbType(typeof(UserTableModel).GetProperty(nameof(UserTableModel.Guid)).PropertyType),
           Value = guid
         },
-        new SqlParameter() {
+        new SqlParameter {
           ParameterName = "@FName",
           Direction = ParameterDirection.Input,
           SqlDbType = SqlDbTypeManager.GetSqlDbType(typeof(UserTableModel).GetProperty(nameof(UserTableModel.FName)).PropertyType),
           Value = fName
         },
-        new SqlParameter() {
+        new SqlParameter {
           ParameterName = "@LName",
           Direction = ParameterDirection.Input,
           SqlDbType = SqlDbTypeManager.GetSqlDbType(typeof(UserTableModel).GetProperty(nameof(UserTableModel.LName)).PropertyType),
           Value = lName
         },
-        new SqlParameter() {
+        new SqlParameter {
           ParameterName = "@PhoneNumber",
           Direction = ParameterDirection.Input,
           SqlDbType = SqlDbTypeManager.GetSqlDbType(typeof(UserTableModel).GetProperty(nameof(UserTableModel.PhoneNumber)).PropertyType),
           Value = phoneNumber
         },
-        new SqlParameter() {
+        new SqlParameter {
           ParameterName = "@Address",
           Direction = ParameterDirection.Input,
           SqlDbType = SqlDbTypeManager.GetSqlDbType(typeof(UserTableModel).GetProperty(nameof(UserTableModel.Address)).PropertyType),
           Value = address
-        },
-        new SqlParameter() {
-          ParameterName = "@UpdatedBy",
-          Direction = ParameterDirection.Input,
-          SqlDbType = SqlDbTypeManager.GetSqlDbType(typeof(UserTableModel).GetProperty(nameof(UserTableModel.UpdatedBy)).PropertyType),
-          Value = updatedBy ?? (Object)DBNull.Value
         }
       };
 
-      var returnValue = new SqlParameter() {
+      if (!(updatedBy is null)) {
+        parameters.Add(new SqlParameter {
+          ParameterName = "@UpdatedBy",
+          Direction = ParameterDirection.Input,
+          SqlDbType = SqlDbTypeManager.GetSqlDbType(typeof(UserTableModel).GetProperty(nameof(UserTableModel.UpdatedBy)).PropertyType),
+          Value = updatedBy
+        });
+      }
+
+      var returnValue = new SqlParameter {
         Direction = ParameterDirection.ReturnValue
       };
       parameters.Add(item: returnValue);
@@ -504,14 +525,16 @@ namespace Apartments.DAL.Repository.Db.Sql {
 
         sqlConnection.Open();
         SqlDataReader reader = sqlCommand.ExecuteReader();
+
+        UserTableModel model = reader.Read()
+          ? Model(reader: reader)
+          : default;
+
         sqlConnection.Close();
 
         operationStatus = (OperationStatus)Enum.Parse(enumType: typeof(OperationStatus),
                                                       value: returnValue.Value.ToString());
-
-        return reader.Read()
-          ? Model(reader: reader)
-          : default;
+        return model;
       }
     }
 
