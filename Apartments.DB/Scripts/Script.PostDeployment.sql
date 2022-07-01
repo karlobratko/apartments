@@ -42,20 +42,36 @@ IF NOT EXISTS (SELECT ALL * FROM [dbo].[Users] WHERE [Email] = N'admin' AND [Use
 END
 GO
 
--- OWNERS
-
-IF NOT EXISTS (SELECT ALL * FROM [dbo].[Owners] WHERE [Name] = 'Filip Trn') BEGIN
-  INSERT INTO [dbo].[Owners]
+-- USERS
+IF NOT EXISTS (SELECT ALL * FROM [dbo].[Users] WHERE [Email] = N'kbratko@gmail.com' AND [Username] = N'kbratko') BEGIN
+DECLARE @Password AS nvarchar(512) = N'pass'
+  INSERT INTO [dbo].[Users] 
   (
-    [CreatedBy],
-    [UpdatedBy],
-    [Name]
+    [CreatedBy], 
+    [UpdatedBy], 
+    [FName], 
+    [LName], 
+    [Username],
+    [Email], 
+    [PhoneNumber],
+    [PasswordHash], 
+    [IsAdmin],
+    [IsRegistered],
+    [RegistrationDate]
   )
-  VALUES
+  VALUES 
   (
+    1, 
+    1, 
+    N'Karlo', 
+    N'Bratko', 
+    N'kbratko', 
+    N'kbratko@gmail.com', 
+    N'0915584572',
+    CONVERT(nvarchar(512), HASHBYTES('SHA2_512', @Password), 2), 
     1,
     1,
-    'Filip Trn'
+    GETDATE()
   )
 END
 
@@ -73,6 +89,52 @@ IF NOT EXISTS (SELECT ALL * FROM [dbo].[Cities] WHERE [Name] = 'Zagreb') BEGIN
     1,
     1,
     'Zagreb'
+  )
+END
+
+-- METADATA
+
+IF NOT EXISTS (SELECT ALL * FROM [dbo].[Metadata]) BEGIN
+  INSERT INTO [dbo].[Metadata]
+  (
+    [CreatedBy],
+    [UpdatedBy],
+    [Name],
+    [OIB],
+    [CityFK],
+    [Address],
+    [Telephone],
+    [Mobile],
+    [Email]
+  )
+  VALUES
+  (
+    1,
+    1,
+    'Apartments',
+    '43091233291',
+    1,
+    'Ilica, 127',
+    '040856064',
+    '0915584572',
+    'karlobratko@gmail.com'
+  )
+END
+
+-- OWNERS
+
+IF NOT EXISTS (SELECT ALL * FROM [dbo].[Owners] WHERE [Name] = 'Filip Trn') BEGIN
+  INSERT INTO [dbo].[Owners]
+  (
+    [CreatedBy],
+    [UpdatedBy],
+    [Name]
+  )
+  VALUES
+  (
+    1,
+    1,
+    'Filip Trn'
   )
 END
 
