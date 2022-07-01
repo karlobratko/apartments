@@ -140,15 +140,15 @@ namespace Apartments.BLL.Base.Managers {
     public IEnumerable<TDomainModel> GetAllIfAvailable()
       => Repository.ReadAllAvailable().Select(ToDomainModel);
 
-    public TDomainModel GetByGuid(Guid guid) {
-      TTableModel model = Repository.ReadByGuid(guid: guid);
+    public TDomainModel GetById(TKey id) {
+      TTableModel model = Repository.ReadById(id: id);
       return !(model is null)
         ? ToDomainModel(model)
         : null;
     }
 
-    public TDomainModel GetByGuidIfAvailable(Guid guid) {
-      TTableModel model = Repository.ReadByGuidAvailable(guid: guid);
+    public TDomainModel GetByIdIfAvailable(TKey id) {
+      TTableModel model = Repository.ReadByIdAvailable(id: id);
       return !(model is null)
         ? ToDomainModel(model)
         : null;

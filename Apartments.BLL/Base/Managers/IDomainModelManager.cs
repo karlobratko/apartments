@@ -28,8 +28,8 @@ namespace Apartments.BLL.Base.Managers {
     Int32 Remove(TDomainModel model, TKey deletedBy);
     Int32 Remove(Guid guid, TKey deletedBy);
 
-    TDomainModel GetByGuid(Guid guid);
-    TDomainModel GetByGuidIfAvailable(Guid guid);
+    TDomainModel GetById(TKey id);
+    TDomainModel GetByIdIfAvailable(TKey id);
 
     IEnumerable<TDomainModel> GetAll();
     IEnumerable<TDomainModel> GetAllIfAvailable();
