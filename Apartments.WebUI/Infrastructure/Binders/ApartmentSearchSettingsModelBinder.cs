@@ -20,13 +20,6 @@ namespace Apartments.WebUI.Infrastructure.Binders {
         }
       }
 
-      String[] keys = controllerContext.HttpContext.Request.QueryString.AllKeys;
-      foreach (String key in keys) {
-        apartmentSearchSettings.GetType()
-                               .GetProperty(name: key)
-                               .SetValue(apartmentSearchSettings, bindingContext.ValueProvider.GetValue(key) ?? default);
-      }
-
       return apartmentSearchSettings;
     }
   }

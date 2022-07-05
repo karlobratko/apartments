@@ -17,5 +17,16 @@ namespace Apartments.BLL.Managers {
 
     #endregion
 
+    #region Public Methods
+
+    public PictureDomainModel GetRepresentative(ApartmentDomainModel model) {
+      PictureTableModel tableModel = (Repository as IPictureTableModelRepository).ReadRepresentative(apartmentFK: model.Id);
+      return !(tableModel is null)
+        ? ToDomainModel(tableModel)
+        : null;
+    }
+
+    #endregion
+
   }
 }

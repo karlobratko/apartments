@@ -16,8 +16,10 @@ namespace Apartments.WebUI.Infrastructure.Routing.Constraints {
                          String parameterName,
                          RouteValueDictionary values,
                          RouteDirection routeDirection)
-      => routeDirection == RouteDirection.UrlGeneration &&
-         _defaultCulture.Equals(values[parameterName])&&
+      => (
+           routeDirection != RouteDirection.UrlGeneration ||
+           !_defaultCulture.Equals(values[parameterName])
+         ) &&
          CULTURE_REGEX.IsMatch(input: values[parameterName].ToString());
   }
 }

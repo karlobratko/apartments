@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 
 using Apartments.DAL.Base.Managers;
 using Apartments.DAL.Base.Repository.Db.Sql;
@@ -49,6 +51,35 @@ namespace Apartments.DAL.Repository.Db.Sql {
         new SqlParameter { ParameterName = $"@{nameof(PictureTableModel.Path)}", SqlDbType = SqlDbTypeManager.GetSqlDbType(typeof(PictureTableModel).GetProperty(nameof(PictureTableModel.Path)).PropertyType), Value = model.Path },
         new SqlParameter { ParameterName = $"@{nameof(PictureTableModel.IsRepresentative)}", SqlDbType = SqlDbTypeManager.GetSqlDbType(typeof(PictureTableModel).GetProperty(nameof(PictureTableModel.IsRepresentative)).PropertyType), Value = model.IsRepresentative },
       };
+
+    #endregion
+
+    #region Public Methods
+
+    public PictureTableModel ReadRepresentative(Int32 apartmentFK) {
+      IList<SqlParameter> parameters = new List<SqlParameter> {
+        new SqlParameter {
+          ParameterName = "@ApartmentFK",
+          Direction = ParameterDirection.Input,
+          SqlDbType = SqlDbTypeManager.GetSqlDbType(typeof(PictureTableModel).GetProperty(nameof(PictureTableModel.ApartmentFK)).PropertyType),
+          Value = apartmentFK
+        }
+      };
+
+      using (var sqlConnection = new SqlConnection(ConnectionString)) {
+        SqlCommand sqlCommand = sqlConnection.CreateCommand();
+        sqlCommand.CommandText = $"[dbo].[{EntityName}{nameof(PictureSqlDbRepository.ReadRepresentative)}]";
+        sqlCommand.CommandType = CommandType.StoredProcedure;
+        sqlCommand.Parameters.AddRange(values: parameters.ToArray());
+
+        sqlConnection.Open();
+        SqlDataReader reader = sqlCommand.ExecuteReader();
+
+        return reader.Read()
+          ? Model(reader: reader)
+          : default;
+      }
+    }
 
     #endregion
 

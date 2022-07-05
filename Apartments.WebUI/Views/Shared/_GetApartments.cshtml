@@ -1,0 +1,29 @@
+﻿@using Apartments.WebUI.ViewModels
+@model IEnumerable<ApartmentCardViewModel>
+
+@foreach (ApartmentCardViewModel apartment in Model) {
+
+  <div class="col">
+    <div class="card">
+      <img src="@Url.Content(!String.IsNullOrEmpty(apartment.ImagePath) ? apartment.ImagePath : "~/Content/DefaultItem.jpg")"
+           alt="@apartment.Name"
+           class="card-img-top align-self-center"
+           style="width: 150px; z-index: 1">
+      <div class="card-body">
+        <h5 class="card-title" style="height: 3rem">@apartment.Name</h5>
+        <hr />
+
+        <p>
+          @apartment.City
+        </p>
+
+        <p>
+          @apartment.Status
+        </p>
+
+        <a href="@Url.Action(actionName: "Details", controllerName: "Apartment", routeValues: new { id = apartment.Id })" class="stretched-link"></a>
+      </div>
+    </div>
+  </div>
+
+}

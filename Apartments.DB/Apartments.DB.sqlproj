@@ -162,6 +162,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="DB.publish.xml" />
+    <None Include="Programmability\Pictures\BL\ReadRepresentative.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Script.PostDeployment.sql" />

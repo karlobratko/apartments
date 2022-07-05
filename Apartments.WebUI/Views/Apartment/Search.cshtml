@@ -1,12 +1,84 @@
-﻿@using Apartments.BLL.Projections
-@model IEnumerable<ApartmentProjection>
+﻿@using Apartments.WebUI.Models
+@using Apartments.WebUI.ViewModels
 
 @{
-  Page.Title = Apartments.ResourceManager.GetString(name: "search"); ;
+  Page.Title = Apartments.ResourceManager.GetString(name: "search");
+
+  String updateTargetId = "apartmentsContainer";
 }
 
-@foreach (ApartmentProjection item in Model) {
-  <span>@item.Name</span>
+@using (Ajax.BeginForm(actionName: "GetFilteredJson",
+                       controllerName: "Apartment",
+                       ajaxOptions: new AjaxOptions {
+                         HttpMethod = "Get",
+                         OnComplete = "insertApartments",
+                         UpdateTargetId = updateTargetId,
+                         InsertionMode = InsertionMode.Replace,
+                       })) {
+  <div class="row">
+    <div class="col-4 offset-2">
+
+      <div class="mb-3">
+        @Html.Label(expression: "totalRooms", labelText: "Total rooms", htmlAttributes: new { @class = "form-label" })
+        @Html.TextBox(name: "totalRooms", value: null, htmlAttributes: new { @class = "form-control", type = "number" })
+      </div>
+
+      <div class="mb-3">
+        @Html.Label(expression: "maxAdults", labelText: "Max adults", htmlAttributes: new { @class = "form-label" })
+        @Html.TextBox(name: "maxAdults", value: null, htmlAttributes: new { @class = "form-control", type = "number" })
+      </div>
+
+      <div class="mb-3">
+        @Html.Label(expression: "maxChildren", labelText: "Max children", htmlAttributes: new { @class = "form-label" })
+        @Html.TextBox(name: "maxChildren", value: null, htmlAttributes: new { @class = "form-control", type = "number" })
+      </div>
+    </div>
+
+    <div class="col-4">
+      <div class="mb-3">
+        @Html.Label(expression: "cityName", labelText: "City", htmlAttributes: new { @class = "form-label" })
+        @Html.TextBox(name: "cityName", value: null, htmlAttributes: new { @class = "form-control", type = "number" })
+      </div>
+
+      <div class="mb-3">
+        @Html.Label(expression: "sortBy", labelText: "Sort by", htmlAttributes: new { @class = "form-label" })
+        @Html.DropDownList(name: "sortBy",
+                           selectList: new SelectList(typeof(ApartmentCardViewModel).GetProperties()
+                                                                                     .Select(selector: prop => prop.Name)),
+                           htmlAttributes: new { @class = "form-select" })
+      </div>
+
+      <div class="mb-3">
+        @Html.Label(expression: "sortDirection", labelText: "Sort direction", htmlAttributes: new { @class = "form-label" })
+        @Html.DropDownList(name: "sortDirection",
+                           selectList: new SelectList(Enum.GetNames(typeof(SortDirection))),
+                           htmlAttributes: new { @class = "form-select" })
+      </div>
+
+      <div class="d-flex justify-content-end">
+        <button type="submit" class="btn btn-primary px-5">Search</button>
+      </div>
+    </div>
+
+  </div>
 }
 
+<div class="album py-5">
+  <div class="container">
+    <div id="@updateTargetId" class="row row-cols-2 row-cols-sm-3 row-cols-md-4 g-3">
+      @Html.Action(actionName: "GetFiltered",
+                   controllerName: "Apartment")
+    </div>
+  </div>
+</div>
+
+@section scripts{
+  @Scripts.Render("~/Scripts/jqval")
+
+  <script>
+    function insertApartments(data) {
+      console.log(data);
+    }
+  </script>
+}
 
