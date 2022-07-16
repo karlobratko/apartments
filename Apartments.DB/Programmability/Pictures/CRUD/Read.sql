@@ -13,7 +13,8 @@ AS BEGIN
       [DeletedBy],
       [ApartmentFK],
       [Title],
-      [Path],
+      [Data],
+      [MimeType],
       [IsRepresentative]
     FROM [dbo].[Pictures]
   END
@@ -29,7 +30,8 @@ AS BEGIN
       [DeletedBy],
       [ApartmentFK],
       [Title],
-      [Path],
+      [Data],
+      [MimeType],
       [IsRepresentative]
     FROM [dbo].[Pictures]
     WHERE [DeleteDate] IS NULL
@@ -46,7 +48,8 @@ AS BEGIN
       [DeletedBy],
       [ApartmentFK],
       [Title],
-      [Path],
+      [Data],
+      [MimeType],
       [IsRepresentative]
     FROM [dbo].[Pictures]
     WHERE [Id] = @Id
@@ -63,7 +66,8 @@ AS BEGIN
       [DeletedBy],
       [ApartmentFK],
       [Title],
-      [Path],
+      [Data],
+      [MimeType],
       [IsRepresentative]
     FROM [dbo].[Pictures]
     WHERE [DeleteDate] IS NULL AND

@@ -3,6 +3,7 @@
 using Apartments.BLL.Base.DomainModels;
 
 namespace Apartments.BLL.DomainModels {
+  [Serializable]
   public class ApartmentDomainModel : BaseDomainModel<Int32> {
     public Int32 OwnerFK { get; set; }
     public Int32 StatusFK { get; set; }

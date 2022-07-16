@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 
 using Apartments.DAL.Base.Managers;
 using Apartments.DAL.Base.Repository.Db.Sql;
@@ -50,6 +52,35 @@ namespace Apartments.DAL.Repository.Db.Sql {
         new SqlParameter { ParameterName = $"@{nameof(ReviewTableModel.Details)}", SqlDbType = SqlDbTypeManager.GetSqlDbType(typeof(ReviewTableModel).GetProperty(nameof(ReviewTableModel.Details)).PropertyType), Value = model.Details },
         new SqlParameter { ParameterName = $"@{nameof(ReviewTableModel.Stars)}", SqlDbType = SqlDbTypeManager.GetSqlDbType(typeof(ReviewTableModel).GetProperty(nameof(ReviewTableModel.Stars)).PropertyType), Value = model.Stars },
       };
+
+    #endregion
+
+    #region Public Methods
+
+    public IEnumerable<ReviewTableModel> ReadByApartmentFK(Int32 apartmentFK) {
+      IList<SqlParameter> parameters = new List<SqlParameter> {
+        new SqlParameter {
+          ParameterName = "@ApartmentFK",
+          Direction = ParameterDirection.Input,
+          SqlDbType = SqlDbTypeManager.GetSqlDbType(typeof(ReviewTableModel).GetProperty(nameof(ReviewTableModel.ApartmentFK)).PropertyType),
+          Value = apartmentFK
+        }
+      };
+
+      using (var sqlConnection = new SqlConnection(ConnectionString)) {
+        SqlCommand sqlCommand = sqlConnection.CreateCommand();
+        sqlCommand.CommandText = $"[dbo].[{EntityName}{nameof(ReviewSqlDbRepository.ReadByApartmentFK)}]";
+        sqlCommand.CommandType = CommandType.StoredProcedure;
+        sqlCommand.Parameters.AddRange(values: parameters.ToArray());
+
+        sqlConnection.Open();
+        SqlDataReader reader = sqlCommand.ExecuteReader();
+
+        while (reader.Read()) {
+          yield return Model(reader: reader);
+        }
+      }
+    }
 
     #endregion
 

@@ -1,0 +1,149 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.Desktop.master.cs" Inherits="Apartments.AdminUI.Site_Desktop" %>
+
+<!DOCTYPE html>
+
+<html class="h-100">
+<head runat="server">
+  <title></title>
+
+  <!-- BOOTSTRAP STYLE -->
+  <link href="Content/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- INLINE STYLE -->
+  <style>
+    .bi {
+      vertical-align: -.125em;
+      fill: currentColor;
+    }
+
+    .text-small {
+      font-size: 85%;
+    }
+
+    a:hover {
+      color: currentColor;
+    }
+  </style>
+
+  <asp:ContentPlaceHolder ID="cphSiteDesktopMasterHead" runat="server"></asp:ContentPlaceHolder>
+</head>
+<body class="d-flex flex-column h-100">
+  <form id="mainForm" runat="server" class="d-flex flex-column h-100">
+    <!-- NAVIGATION BEGIN -->
+    <nav class="px-3 py-2 bg-dark text-white mb-5">
+      <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+          <a href="Apartments.aspx" class="navbar-brand d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+            <img src="Assets/logo_white.png" alt="" width="45" height="24" class="d-inline-block align-text-top me-2">
+            <span runat="server" meta:resourcekey="lblApplicationName"></span>
+          </a>
+
+          <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+            <li>
+              <a href="Apartments.aspx" class="nav-link text-white">
+                <svg class="bi d-block mx-auto mb-1" width="24" height="24">
+                  <use xlink:href="#home" />
+                </svg>
+                <span runat="server" meta:resourcekey="liApartments"></span>
+              </a>
+            </li>
+            <li>
+              <a href="Tags.aspx" class="nav-link text-white">
+                <svg class="bi d-block mx-auto mb-1" width="24" height="24">
+                  <use xlink:href="#grid" />
+                </svg>
+                <span runat="server" meta:resourcekey="liTags"></span>
+              </a>
+            </li>
+            <li>
+              <a href="Users.aspx" class="nav-link text-white">
+                <svg class="bi d-block mx-auto mb-1" width="24" height="24">
+                  <use xlink:href="#people-circle" />
+                </svg>
+                <span runat="server" meta:resourcekey="liUsers"></span>
+              </a>
+            </li>
+            <li>
+              <a href="Settings.aspx" class="nav-link text-white">
+                <svg class="bi d-block mx-auto mb-1" width="24" height="24">
+                  <use xlink:href="#gear" />
+                </svg>
+                <span runat="server" meta:resourcekey="liSettings"></span>
+              </a>
+            </li>
+          </ul>
+
+          <div class="text-end ms-lg-5">
+            <asp:Button runat="server" ID="btnLogout" meta:resourcekey="btnLogout" CssClass="btn btn-outline-warning" OnClick="btnLogout_Click" />
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!-- NAVIGATION END -->
+
+    <!-- <div class="container mt-3">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Library</li>
+        </ol>
+      </nav>
+    </div> -->
+
+    <!-- CONTENT BEGIN -->
+    <div class="flex-shrink-0">
+      <asp:ContentPlaceHolder ID="cphSiteDesktopMasterBody" runat="server"></asp:ContentPlaceHolder>
+    </div>
+    <!-- CONTENT END -->
+
+    <!-- FOOTER BEGIN -->
+    <footer class="footer container mt-auto">
+      <div class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+        <p class="col-md-4 mb-0 text-muted">&copy; <%: DateTime.Now.Year %> Apartments, Inc</p>
+
+        <a href="Apartments.aspx" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+          <img src="Assets/logo_yellow.png" alt="" width="45" height="24" class="d-inline-block align-text-top me-2">
+        </a>
+
+        <ul class="nav col-md-4 justify-content-end">
+          <li class="nav-item"><a href="Apartments.aspx" class="nav-link px-2 text-muted" runat="server" meta:resourcekey="liApartments"></a></li>
+          <li class="nav-item"><a href="Tags.aspx" class="nav-link px-2 text-muted" runat="server" meta:resourcekey="liTags"></a></li>
+          <li class="nav-item"><a href="Users.aspx" class="nav-link px-2 text-muted" runat="server" meta:resourcekey="liUsers"></a></li>
+          <li class="nav-item"><a href="Settings.aspx" class="nav-link px-2 text-muted" runat="server" meta:resourcekey="liSettings"></a></li>
+        </ul>
+      </div>
+    </footer>
+    <!-- FOOTER END -->
+  </form>
+
+  <!-- SVG BEGIN -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol id="home" viewBox="0 0 16 16">
+      <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z" />
+    </symbol>
+    <symbol id="people-circle" viewBox="0 0 16 16">
+      <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+      <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+    </symbol>
+    <symbol id="grid" viewBox="0 0 16 16">
+      <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z" />
+    </symbol>
+    <symbol id="gear" viewBox="0 0 16 16">
+      <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
+      <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/>
+    </symbol>
+  </svg>
+  <!-- SVG END -->
+
+  <!-- JQUERY SCRIPT -->
+  <script src="Scripts/jquery-3.6.0.min.js"></script>
+  <!-- BOOTSTRAP SCRIPT -->
+  <script src="Scripts/bootstrap.min.js"></script>
+  <!-- INLINE SCRIPT -->
+  <script>
+    window.addEventListener("load", () => {
+      [...document.getElementsByClassName("nav-link")].find(el => el.getAttribute("href").includes(location.pathname.slice(1))).classList.replace("text-white", "text-warning");
+    });
+  </script>
+</body>
+</html>

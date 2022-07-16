@@ -18,8 +18,8 @@ AS BEGIN
           SELECT DISTINCT
             [TagFK]
           FROM [dbo].[TagsApartments]
-          WHERE [ApartmentFK] = @ApartmentFK
+          WHERE [ApartmentFK] = @ApartmentFK AND
+                [DeleteDate] IS NULL
         )
-  ORDER BY [Name] ASC
 END
 GO

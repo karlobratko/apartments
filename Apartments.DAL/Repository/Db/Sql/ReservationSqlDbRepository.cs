@@ -44,7 +44,9 @@ namespace Apartments.DAL.Repository.Db.Sql {
         UserFName = reader.GetString(reader.GetOrdinal(nameof(ReservationTableModel.UserFName))),
         UserLName = reader.GetString(reader.GetOrdinal(nameof(ReservationTableModel.UserLName))),
         UserEmail = reader.GetString(reader.GetOrdinal(nameof(ReservationTableModel.UserEmail))),
-        UserPhoneNumber = reader.GetString(reader.GetOrdinal(nameof(ReservationTableModel.UserPhoneNumber))),
+        UserPhoneNumber = !reader.IsDBNull(reader.GetOrdinal(nameof(ReservationTableModel.UserPhoneNumber)))
+          ? reader.GetString(reader.GetOrdinal(nameof(ReservationTableModel.UserPhoneNumber)))
+          : null,
         UserAddress = reader.GetString(reader.GetOrdinal(nameof(ReservationTableModel.UserAddress))),
       };
 
@@ -56,7 +58,7 @@ namespace Apartments.DAL.Repository.Db.Sql {
         new SqlParameter { ParameterName = $"@{nameof(ReservationTableModel.UserFName)}", SqlDbType = SqlDbTypeManager.GetSqlDbType(typeof(ReservationTableModel).GetProperty(nameof(ReservationTableModel.UserFName)).PropertyType), Value = model.UserFName },
         new SqlParameter { ParameterName = $"@{nameof(ReservationTableModel.UserLName)}", SqlDbType = SqlDbTypeManager.GetSqlDbType(typeof(ReservationTableModel).GetProperty(nameof(ReservationTableModel.UserLName)).PropertyType), Value = model.UserLName },
         new SqlParameter { ParameterName = $"@{nameof(ReservationTableModel.UserEmail)}", SqlDbType = SqlDbTypeManager.GetSqlDbType(typeof(ReservationTableModel).GetProperty(nameof(ReservationTableModel.UserEmail)).PropertyType), Value = model.UserEmail },
-        new SqlParameter { ParameterName = $"@{nameof(ReservationTableModel.UserPhoneNumber)}", SqlDbType = SqlDbTypeManager.GetSqlDbType(typeof(ReservationTableModel).GetProperty(nameof(ReservationTableModel.UserPhoneNumber)).PropertyType), Value = model.UserPhoneNumber },
+        new SqlParameter { ParameterName = $"@{nameof(ReservationTableModel.UserPhoneNumber)}", SqlDbType = SqlDbTypeManager.GetSqlDbType(typeof(ReservationTableModel).GetProperty(nameof(ReservationTableModel.UserPhoneNumber)).PropertyType), Value = model.UserPhoneNumber ?? null },
         new SqlParameter { ParameterName = $"@{nameof(ReservationTableModel.UserAddress)}", SqlDbType = SqlDbTypeManager.GetSqlDbType(typeof(ReservationTableModel).GetProperty(nameof(ReservationTableModel.UserAddress)).PropertyType), Value = model.UserAddress },
       };
 

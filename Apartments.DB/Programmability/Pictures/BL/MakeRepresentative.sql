@@ -5,15 +5,20 @@ AS BEGIN
     SELECT ALL TOP 1
       [ApartmentFK]
     FROM [dbo].[Pictures]
-    where [Guid] = @Guid
+    WHERE [Guid] = @Guid
   )
+
+  IF @ApartmentFK IS NULL BEGIN
+    RETURN -1
+  END
 
   UPDATE [dbo].[Pictures]
   SET 
     [UpdatedBy]         = @UpdatedBy,
     [UpdateDate]        = GETDATE(),
     [IsRepresentative]  = 0
-  WHERE [ApartmentFK] = @ApartmentFK AND [DeleteDate] IS NULL
+  WHERE [ApartmentFK] = @ApartmentFK AND
+        [DeleteDate] IS NULL
 
   UPDATE [dbo].[Pictures]
   SET
@@ -23,6 +28,11 @@ AS BEGIN
   WHERE [DeleteDate] IS NULL AND
         [Guid] = @Guid
 
-  RETURN @@ROWCOUNT
+  IF @@ROWCOUNT = 1 BEGIN
+    RETURN 1
+  END
+  ELSE BEGIN
+    RETURN -1
+  END
 END
 GO

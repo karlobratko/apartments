@@ -11,7 +11,7 @@ AS BEGIN
     @DeleteDate = [DeleteDate]
   FROM [dbo].[Reviews]
   WHERE [ApartmentFK] = @ApartmentFK AND
-        [UserFK]     = @UserFK
+        [UserFK]      = @UserFK
 
   IF @Guid IS NULL BEGIN
     INSERT INTO [dbo].[Reviews]
@@ -60,7 +60,7 @@ AS BEGIN
       [DeletedBy]   = NULL,
       [UpdateDate]  = GETDATE(),
       [UpdatedBy]   = @CreatedBy,
-      [Details]     = @DeleteDate,
+      [Details]     = @Details,
       [Stars]       = @Stars
     WHERE [Guid] = @Guid
 
@@ -88,8 +88,8 @@ AS BEGIN
     SET
       [UpdateDate] = GETDATE(),
       [UpdatedBy]  = @CreatedBy,
-      [Details]     = @DeleteDate,
-      [Stars]       = @Stars
+      [Details]    = @Details,
+      [Stars]      = @Stars
     WHERE [Guid] = @Guid
 
     SELECT ALL

@@ -87,9 +87,9 @@ namespace Apartments.DAL.Base.Repository.Db.Sql {
 
     #region Create
 
-    public TModel Create(TModel model, out CreateStatus createStatus)
+    public virtual TModel Create(TModel model, out CreateStatus createStatus)
       => Create(model: model, createdBy: null, createStatus: out createStatus);
-    public TModel Create(TModel model, TKey? createdBy, out CreateStatus createStatus) {
+    public virtual TModel Create(TModel model, TKey? createdBy, out CreateStatus createStatus) {
       IList<SqlParameter> parameters = Parameterize(model);
 
       if (!(createdBy is null)) {
@@ -131,11 +131,11 @@ namespace Apartments.DAL.Base.Repository.Db.Sql {
 
     #region Delete
 
-    public DeleteStatus Delete(TModel model)
+    public virtual DeleteStatus Delete(TModel model)
       => Delete(guid: model.Guid);
-    public DeleteStatus Delete(Guid guid)
+    public virtual DeleteStatus Delete(Guid guid)
       => Delete(guid: guid, deletedBy: null);
-    public DeleteStatus Delete(Guid guid, TKey? deletedBy) {
+    public virtual DeleteStatus Delete(Guid guid, TKey? deletedBy) {
       IList<SqlParameter> parameters = new List<SqlParameter> {
         new SqlParameter {
           ParameterName = "@Guid",
@@ -177,13 +177,13 @@ namespace Apartments.DAL.Base.Repository.Db.Sql {
 
     #region Read
 
-    public IEnumerable<TModel> ReadAll()
+    public virtual IEnumerable<TModel> ReadAll()
       => Read(readMethod: ReadMethod.All, id: null);
-    public IEnumerable<TModel> ReadAllAvailable()
+    public virtual IEnumerable<TModel> ReadAllAvailable()
       => Read(readMethod: ReadMethod.AllAvailable, id: null);
-    public TModel ReadById(TKey id)
+    public virtual TModel ReadById(TKey id)
       => Read(readMethod: ReadMethod.One, id: id).FirstOrDefault();
-    public TModel ReadByIdAvailable(TKey id)
+    public virtual TModel ReadByIdAvailable(TKey id)
       => Read(readMethod: ReadMethod.OneAvailable, id: id).FirstOrDefault();
     private IEnumerable<TModel> Read(ReadMethod readMethod, TKey? id) {
       IList<SqlParameter> parameters = new List<SqlParameter> {
@@ -223,11 +223,11 @@ namespace Apartments.DAL.Base.Repository.Db.Sql {
 
     #region Update
 
-    public Enums.UpdateStatus Update(TModel model)
+    public virtual Enums.UpdateStatus Update(TModel model)
       => Update(guid: model.Guid, model);
-    public Enums.UpdateStatus Update(Guid guid, TModel model)
+    public virtual Enums.UpdateStatus Update(Guid guid, TModel model)
       => Update(guid: model.Guid, model, updatedBy: null);
-    public Enums.UpdateStatus Update(Guid guid, TModel model, TKey? updatedBy) {
+    public virtual Enums.UpdateStatus Update(Guid guid, TModel model, TKey? updatedBy) {
       IList<SqlParameter> parameters = Parameterize(model);
 
       parameters.Add(item: new SqlParameter {
