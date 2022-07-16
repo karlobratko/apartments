@@ -124,6 +124,24 @@ namespace Apartments.Resources.Global {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Apartment, no image.
+        /// </summary>
+        public static string apartment_img_default_alt {
+            get {
+                return ResourceManager.GetString("apartment-img-default-alt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ascending.
+        /// </summary>
+        public static string ascending {
+            get {
+                return ResourceManager.GetString("ascending", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Go to homepage.
         /// </summary>
         public static string back_to_home {
@@ -160,11 +178,38 @@ namespace Apartments.Resources.Global {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Make reservation.
+        /// </summary>
+        public static string btn_reservation {
+            get {
+                return ResourceManager.GetString("btn-reservation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Review apartment.
+        /// </summary>
+        public static string btn_review {
+            get {
+                return ResourceManager.GetString("btn-review", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         public static string cancel {
             get {
                 return ResourceManager.GetString("cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Close.
+        /// </summary>
+        public static string close {
+            get {
+                return ResourceManager.GetString("close", resourceCulture);
             }
         }
         
@@ -268,6 +313,15 @@ namespace Apartments.Resources.Global {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Descending.
+        /// </summary>
+        public static string descending {
+            get {
+                return ResourceManager.GetString("descending", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit profile.
         /// </summary>
         public static string edit_profile {
@@ -331,6 +385,159 @@ namespace Apartments.Resources.Global {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Address.
+        /// </summary>
+        public static string label_address {
+            get {
+                return ResourceManager.GetString("label-address", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Adults.
+        /// </summary>
+        public static string label_adults {
+            get {
+                return ResourceManager.GetString("label-adults", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Children.
+        /// </summary>
+        public static string label_children {
+            get {
+                return ResourceManager.GetString("label-children", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to City.
+        /// </summary>
+        public static string label_city {
+            get {
+                return ResourceManager.GetString("label-city", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to From.
+        /// </summary>
+        public static string label_date_from {
+            get {
+                return ResourceManager.GetString("label-date-from", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To.
+        /// </summary>
+        public static string label_date_to {
+            get {
+                return ResourceManager.GetString("label-date-to", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Comment.
+        /// </summary>
+        public static string label_details {
+            get {
+                return ResourceManager.GetString("label-details", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        public static string label_email {
+            get {
+                return ResourceManager.GetString("label-email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to First name.
+        /// </summary>
+        public static string label_fname {
+            get {
+                return ResourceManager.GetString("label-fname", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last name.
+        /// </summary>
+        public static string label_lname {
+            get {
+                return ResourceManager.GetString("label-lname", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Max adults.
+        /// </summary>
+        public static string label_max_adults {
+            get {
+                return ResourceManager.GetString("label-max-adults", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Max children.
+        /// </summary>
+        public static string label_max_children {
+            get {
+                return ResourceManager.GetString("label-max-children", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Phone number.
+        /// </summary>
+        public static string label_phone {
+            get {
+                return ResourceManager.GetString("label-phone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sort by.
+        /// </summary>
+        public static string label_sort_by {
+            get {
+                return ResourceManager.GetString("label-sort-by", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sort direction.
+        /// </summary>
+        public static string label_sort_direction {
+            get {
+                return ResourceManager.GetString("label-sort-direction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rating.
+        /// </summary>
+        public static string label_stars {
+            get {
+                return ResourceManager.GetString("label-stars", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total rooms.
+        /// </summary>
+        public static string label_total_rooms {
+            get {
+                return ResourceManager.GetString("label-total-rooms", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Language.
         /// </summary>
         public static string language {
@@ -390,6 +597,24 @@ namespace Apartments.Resources.Global {
         public static string logout_success {
             get {
                 return ResourceManager.GetString("logout-success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select city.
+        /// </summary>
+        public static string option_label_city {
+            get {
+                return ResourceManager.GetString("option-label-city", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select sort criteria.
+        /// </summary>
+        public static string option_label_sort_by {
+            get {
+                return ResourceManager.GetString("option-label-sort-by", resourceCulture);
             }
         }
         
@@ -511,6 +736,24 @@ namespace Apartments.Resources.Global {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reservation failed, you have inserted invalid data.
+        /// </summary>
+        public static string reservation_failed {
+            get {
+                return ResourceManager.GetString("reservation-failed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reservation was successfull.
+        /// </summary>
+        public static string reservation_success {
+            get {
+                return ResourceManager.GetString("reservation-success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reset password.
         /// </summary>
         public static string reset_password {
@@ -552,6 +795,42 @@ namespace Apartments.Resources.Global {
         public static string reset_password_success {
             get {
                 return ResourceManager.GetString("reset-password-success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Apartment review failed, you have inserted invalid data.
+        /// </summary>
+        public static string review_failed {
+            get {
+                return ResourceManager.GetString("review-failed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Load more reviews.
+        /// </summary>
+        public static string review_load_more {
+            get {
+                return ResourceManager.GetString("review-load-more", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Login to give review.
+        /// </summary>
+        public static string review_login_first {
+            get {
+                return ResourceManager.GetString("review-login-first", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Apartment review was successfull.
+        /// </summary>
+        public static string review_success {
+            get {
+                return ResourceManager.GetString("review-success", resourceCulture);
             }
         }
         

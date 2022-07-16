@@ -1,0 +1,730 @@
+﻿@using Apartments.WebUI.ViewModels
+@using Apartments.BLL.DomainModels
+@model ApartmentDetailsViewModel
+
+@{
+  Page.Title = Model.Name;
+}
+
+@section styles {
+  @Styles.Render("~/Content/jqui")
+}
+
+<h2 class="display-5 mb-5 text-center">@Model.Name</h2>
+
+<div class="row mb-5">
+  <div class="col-6">
+    <img src="@(!(Model.RepresentativePicture is null)
+                    ? $"data:{Model.RepresentativePicture.MimeType};base64,{Convert.ToBase64String(Model.RepresentativePicture.Data)}"
+                    : Url.Content("~/Content/DefaultItem.jpg"))"
+         alt="@(Model.RepresentativePicture?.Title ?? Apartments.ResourceManager.GetString(name: "apartment-img-default-alt"))"
+         class="img-fluid rounded-2 mx-auto d-block" />
+  </div>
+  <div class="col-6 d-flex flex-column justify-content-between">
+    <div class="row mb-1">
+      <div class="col-5 text-secondary">
+        @Html.DisplayNameFor(expression: model => model.City)
+      </div>
+      <div class="col-7">
+        @Html.ValueFor(expression: model => model.City)
+      </div>
+    </div>
+    <div class="row mb-1">
+      <div class="col-5 text-secondary">
+        @Html.DisplayNameFor(expression: model => model.Address)
+      </div>
+      <div class="col-7">
+        @Html.ValueFor(expression: model => model.Address)
+      </div>
+    </div>
+    <div class="row mb-1">
+      <div class="col-5 text-secondary">
+        @Html.DisplayNameFor(expression: model => model.Owner)
+      </div>
+      <div class="col-7">
+        @Html.ValueFor(expression: model => model.Owner)
+      </div>
+    </div>
+    <div class="row mb-1">
+      <div class="col-5 text-secondary">
+        @Html.DisplayNameFor(expression: model => model.MaxAdults)
+      </div>
+      <div class="col-7">
+        @Html.ValueFor(expression: model => model.MaxAdults)
+      </div>
+    </div>
+    <div class="row mb-1">
+      <div class="col-5 text-secondary">
+        @Html.DisplayNameFor(expression: model => model.MaxChildren)
+      </div>
+      <div class="col-7">
+        @Html.ValueFor(expression: model => model.MaxChildren)
+      </div>
+    </div>
+    <div class="row mb-1">
+      <div class="col-5 text-secondary">
+        @Html.DisplayNameFor(expression: model => model.TotalRooms)
+      </div>
+      <div class="col-7">
+        @Html.ValueFor(expression: model => model.TotalRooms)
+      </div>
+    </div>
+    <div class="row mb-1">
+      <div class="col-5 text-secondary">
+        @Html.DisplayNameFor(expression: model => model.BeachDistance)
+      </div>
+      <div class="col-7">
+        @Html.ValueFor(expression: model => model.BeachDistance, format: "{0} m")
+      </div>
+    </div>
+    <div class="row mb-1">
+      <div class="col-5 text-secondary">
+        @Html.DisplayNameFor(expression: model => model.Status)
+      </div>
+      <div class="col-7">
+        @Html.ValueFor(expression: model => model.Status)
+      </div>
+    </div>
+    <div class="row mb-1">
+      <div class="col-5 text-secondary">
+        @Html.DisplayNameFor(expression: model => model.Price)
+      </div>
+      <div class="col-7">
+        @Html.ValueFor(expression: model => model.Price, format: "{0:F2} kn")
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row mb-5">
+  <div class="col d-flex justify-content-center">
+    @foreach (TagDomainModel tag in Model.Tags) {
+      <span class="btn btn-outline-dark rounded-pill mx-2">@(UICulture == "en" ? tag.NameEng : tag.Name)</span>
+    }
+  </div>
+</div>
+
+@{
+  String modalPictureDisplayButton = "pictureModalDisplayButton";
+  String modalPicture = "pictureModal";
+  String modalPictureTitle = "pictureTitle";
+  String modalPictureData = "pictureData";
+}
+
+<div id="carouselPictureGallery" class="carousel slide @(Model.Pictures.Count() > 0 ? "mb-5" : "")" data-bs-ride="false">
+  <div class="carousel-indicators">
+    @for (int i = 0; i < Model.Pictures.Count(); i++) {
+      <button type="button" data-bs-target="#carouselPictureGallery" data-bs-slide-to="@i" class="@(Model.Pictures.ElementAt(i).IsRepresentative ? "active" : "")" aria-current="true" aria-label="Slide @(i + 1) "></button>
+    }
+  </div>
+  <div class="carousel-inner">
+    @foreach (PictureDomainModel picture in Model.Pictures) {
+      <div class="carousel-item @(picture.IsRepresentative ? "active" : "")">
+        <img src="data:@picture.MimeType;base64,@Convert.ToBase64String(picture.Data)"
+             alt="@picture.Title"
+             class="d-block w-100" />
+        <div class="carousel-caption d-none d-md-block">
+          <p class="@(picture.IsRepresentative ? "fw-bold" : "")">@picture.Title</p>
+        </div>
+        @Ajax.ActionLink(linkText: " ",
+                         actionName: "GetPictureJson",
+                         controllerName: "Apartment",
+                         ajaxOptions: new AjaxOptions {
+                           HttpMethod = "Get",
+                           OnComplete = "showPicture",
+                           UpdateTargetId = modalPictureData,
+                         },
+                         routeValues: new {
+                           id = picture.Id
+                         },
+                         htmlAttributes: new {
+                           @class = "stretched-link"
+                         })
+      </div>
+    }
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselPictureGallery" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselPictureGallery" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+@{
+  String modalReservationDisplayButton = "reservationModalDisplayButton";
+  String modalReservationHideButton = "reservationModalHideButton";
+  String modalReservation = "reservationModal";
+  String reservationForm = "reservationForm";
+  UserDomainModel user = Session["user"] as UserDomainModel;
+
+  String reCaptchaSiteKey = "6Lfuvs0gAAAAAPgK7mgcx3ezkUlnvO5X30_WYQ7r";
+  //String reCaptchaSecretKey = "
+  //";
+}
+
+<div class="d-flex justify-content-center">
+  <button id="@modalReservationDisplayButton" type="button" class="btn btn-outline-dark btn-lg text-center" data-bs-toggle="modal" data-bs-target="#@modalReservation">
+    @Apartments.ResourceManager.GetString(name: "btn-reservation")
+  </button>
+</div>
+<div id="@modalReservation" class="modal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">@Apartments.ResourceManager.GetString(name: "btn-reservation")</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        @using (Ajax.BeginForm(actionName: "Reservation",
+                               controllerName: "Apartment",
+                               ajaxOptions: new AjaxOptions {
+                                 HttpMethod = "Post",
+                                 OnComplete = "reservationComplete"
+                               },
+                               routeValues: null,
+                               htmlAttributes: new {
+                                 id = reservationForm
+                               })) {
+          <div class="row">
+            @Html.Hidden(name: "ApartmentFK", value: Model.Id)
+
+            <div class="mb-3">
+              @Html.Label(expression: "FName",
+                          labelText: Apartments.ResourceManager.GetString(name: "label-fname"),
+                          htmlAttributes: new { @class = "form-label" })
+              @Html.TextBox(name: "FName",
+                            value: user?.FName,
+                            htmlAttributes: new { @class = "form-control user-related" })
+            </div>
+
+            <div class="mb-3">
+              @Html.Label(expression: "LName",
+                          labelText: Apartments.ResourceManager.GetString(name: "label-lname"),
+                          htmlAttributes: new { @class = "form-label" })
+              @Html.TextBox(name: "LName",
+                            value: user?.LName,
+                            htmlAttributes: new { @class = "form-control user-related" })
+            </div>
+
+            <div class="mb-3">
+              @Html.Label(expression: "Email",
+                          labelText: Apartments.ResourceManager.GetString(name: "label-email"),
+                          htmlAttributes: new { @class = "form-label" })
+              @Html.TextBox(name: "Email",
+                            value: user?.Email,
+                            htmlAttributes: new { @class = "form-control user-related" })
+            </div>
+
+            <div class="mb-3">
+              @Html.Label(expression: "PhoneNumber",
+                          labelText: Apartments.ResourceManager.GetString(name: "label-phone"),
+                          htmlAttributes: new { @class = "form-label" })
+              @Html.TextBox(name: "PhoneNumber",
+                            value: user?.PhoneNumber,
+                            htmlAttributes: new { @class = "form-control user-related" })
+            </div>
+
+            <div class="mb-3">
+              @Html.Label(expression: "Address",
+                          labelText: Apartments.ResourceManager.GetString(name: "label-address"),
+                          htmlAttributes: new { @class = "form-label" })
+              @Html.TextBox(name: "Address",
+                            value: user is null ? null : user.Address,
+                            htmlAttributes: new { @class = "form-control user-related" })
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <div class="mb-3">
+                @Html.Label(expression: "Adults",
+                            labelText: Apartments.ResourceManager.GetString(name: "label-adults"),
+                            htmlAttributes: new { @class = "form-label" })
+                @Html.TextBox(name: "Adults",
+                              value: null,
+                              htmlAttributes: new { @class = "form-control", type = "number", min = 1, max = Model.MaxAdults })
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="mb-3">
+                @Html.Label(expression: "Children",
+                            labelText: Apartments.ResourceManager.GetString(name: "label-children"),
+                            htmlAttributes: new { @class = "form-label" })
+                @Html.TextBox(name: "Children",
+                              value: null,
+                              htmlAttributes: new { @class = "form-control", type = "number", min = 0, max = Model.MaxChildren })
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <div class="mb-3">
+                @Html.Label(expression: "DateFrom",
+                            labelText: Apartments.ResourceManager.GetString(name: "label-date-from"),
+                            htmlAttributes: new { @class = "form-label" })
+                @Html.TextBox(name: "DateFrom",
+                              value: null,
+                              htmlAttributes: new { @class = "form-control datepicker-from" })
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="mb-3">
+                @Html.Label(expression: "DateTo",
+                            labelText: Apartments.ResourceManager.GetString(name: "label-date-to"),
+                            htmlAttributes: new { @class = "form-label" })
+                @Html.TextBox(name: "DateTo",
+                              value: null,
+                              htmlAttributes: new { @class = "form-control datepicker-to" })
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex align-items-end flex-column mb-3">
+            <div>
+              <div id="reCaptchaCheckbox"></div>
+              <input type="hidden" id="reCaptcha" name="reCaptcha" class="reCaptcha required" />
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-end">
+            <button id="@modalReservationHideButton" type="button" class="btn btn-outline-secondary me-3" data-bs-dismiss="modal">
+              @Apartments.ResourceManager.GetString(name: "close")
+            </button>
+            <button type="submit" class="btn btn-dark">@Apartments.ResourceManager.GetString(name: "submit")</button>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>
+
+@{
+  String reviewCardCollection = "reviewCardCollection";
+  String reviewLoadMoreButton = "reviewLoadMore";
+  String modalReviewDisplayButton = "modalReviewDisplayButton";
+  String modalReviewHideButton = "modalReviewHideButton";
+  String modalReview = "modalReview";
+  String reviewForm = "reviewForm";
+}
+
+@if (!(user is null)) {
+  <div class="d-flex justify-content-center mt-5 mb-3">
+    <button id="@modalReviewDisplayButton" type="button" class="btn btn-outline-dark text-center" data-bs-toggle="modal" data-bs-target="#@modalReview">
+      @Apartments.ResourceManager.GetString(name: "btn-review")
+    </button>
+  </div>
+  <div id="@modalReview" class="modal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">@Apartments.ResourceManager.GetString(name: "btn-review")</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          @using (Ajax.BeginForm(actionName: "Review",
+                                 controllerName: "Apartment",
+                                 ajaxOptions: new AjaxOptions {
+                                   HttpMethod = "Post",
+                                   OnComplete = "reviewComplete",
+                                 },
+                                 routeValues: null,
+                                 htmlAttributes: new {
+                                   id = reviewForm
+                                 })) {
+            <div class="row">
+              @Html.Hidden(name: "ApartmentFK", value: Model.Id)
+              @Html.Hidden(name: "UserFK", value: user.Id)
+
+              <div class="mb-3">
+                @Html.Label(expression: "Stars",
+                            labelText: Apartments.ResourceManager.GetString(name: "label-stars"),
+                            htmlAttributes: new { @class = "form-label" })
+                @Html.TextBox(name: "Stars",
+                              value: null,
+                              htmlAttributes: new { @class = "form-control", type = "number", min = 1, max = 5 })
+              </div>
+
+              <div class="mb-3">
+                @Html.Label(expression: "Details",
+                            labelText: Apartments.ResourceManager.GetString(name: "label-details"),
+                            htmlAttributes: new { @class = "form-label" })
+                @Html.TextArea(name: "Details",
+                               value: null,
+                               htmlAttributes: new { @class = "form-control" })
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-end">
+              <button id="@modalReviewHideButton" type="button" class="btn btn-outline-secondary me-3" data-bs-dismiss="modal">
+                @Apartments.ResourceManager.GetString(name: "close")
+              </button>
+              <button type="submit" class="btn btn-dark">@Apartments.ResourceManager.GetString(name: "submit")</button>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+
+}
+else {
+  <div class="d-flex justify-content-center mt-5">
+    @Html.ActionLink(linkText: Apartments.ResourceManager.GetString(name: "review-login-first"),
+                     actionName: "Login",
+                     controllerName: "Account",
+                     routeValues: null,
+                     htmlAttributes: new {
+                       @class = "btn btn-outline-dark"
+                     })
+  </div>
+}
+
+<div class="row d-flex justify-content-center mt-3 col-8 offset-2">
+  <div id="@reviewCardCollection" class="col-md-12">
+
+    @Html.Action(actionName: "GetReviews",
+                 controllerName: "Apartment",
+                 routeValues: new {
+                   apartmentFK = Model.Id
+                 })
+
+  </div>
+
+  <div class="d-flex justify-content-center">
+    @Ajax.ActionLink(linkText: Apartments.ResourceManager.GetString(name: "review-load-more"),
+                     actionName: "GetReviewsJson",
+                     controllerName: "Apartment",
+                     ajaxOptions: new AjaxOptions {
+                       HttpMethod = "Get",
+                       OnComplete = "showReviews",
+                       UpdateTargetId = reviewCardCollection
+                     },
+                     routeValues: new {
+                       apartmentFK = Model.Id
+                     },
+                     htmlAttributes: new {
+                       id = reviewLoadMoreButton,
+                       @class = "btn btn-outline-dark "
+                     })
+  </div>
+</div>
+
+<button id="@modalPictureDisplayButton" type="button" class="visually-hidden" data-bs-toggle="modal" data-bs-target="#@modalPicture"></button>
+<div id="@modalPicture" class="modal" tabindex="-1">
+  <div class="modal-dialog modal-fullscreen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 id="@modalPictureTitle" class="modal-title"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div id="@modalPictureData" class="modal-body d-flex align-items-center justify-content-center">
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+          @Apartments.ResourceManager.GetString(name: "close")
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+@section scripts{
+  @Scripts.Render("~/Scripts/jqui")
+  @Scripts.Render("~/Scripts/jqval")
+
+
+  <script>
+    function reCaptchaLoadCallback() {
+      grecaptcha.render("reCaptchaCheckbox", {
+        "sitekey": "@reCaptchaSiteKey"
+      })
+    };
+
+    (function (factory) {
+      "use strict";
+
+      if (typeof define === "function" && define.amd) {
+        define(["../widgets/datepicker"], factory);
+      } else {
+        factory(jQuery.datepicker);
+      }
+    })(function (datepicker) {
+      "use strict";
+
+      datepicker.regional.hr = {
+        closeText: "Zatvori",
+        prevText: "&#x3C;",
+        nextText: "&#x3E;",
+        currentText: "Danas",
+        monthNames: ["Siječanj", "Veljača", "Ožujak", "Travanj", "Svibanj", "Lipanj",
+          "Srpanj", "Kolovoz", "Rujan", "Listopad", "Studeni", "Prosinac"],
+        monthNamesShort: ["Sij", "Velj", "Ožu", "Tra", "Svi", "Lip",
+          "Srp", "Kol", "Ruj", "Lis", "Stu", "Pro"],
+        dayNames: ["Nedjelja", "Ponedjeljak", "Utorak", "Srijeda", "Četvrtak", "Petak", "Subota"],
+        dayNamesShort: ["Ned", "Pon", "Uto", "Sri", "Čet", "Pet", "Sub"],
+        dayNamesMin: ["Ne", "Po", "Ut", "Sr", "Če", "Pe", "Su"],
+        weekHeader: "Tje",
+        dateFormat: "dd.mm.yy.",
+        firstDay: 1,
+        isRTL: false,
+        showMonthAfterYear: false,
+        yearSuffix: ""
+      };
+      datepicker.setDefaults(datepicker.regional.hr);
+
+      return datepicker.regional.hr;
+
+    });
+
+    function toHexString(byteArray) {
+      return Array.from(byteArray, function (byte) {
+        return ('0' + (byte & 0xFF).toString(16)).slice(-2);
+      }).join('')
+    }
+
+    function hexToBase64(str) {
+      return btoa(String.fromCharCode.apply(null, str.replace(/\r|\n/g, "").replace(/([\da-fA-F]{2}) ?/g, "0x$1 ").replace(/ +$/, "").split(" ")));
+    }
+
+    function showPicture(data) {
+      const picture = data.responseJSON;
+      $("#@modalPictureDisplayButton").click();
+      $("#@modalPictureTitle").empty().append(picture.Title);
+      console.log(data);
+      $("#@modalPictureData").empty().append(`<img src="data:${picture.MimeType};base64,${hexToBase64(toHexString(picture.Data))}"
+                                                   alt="${picture.Title}"
+                                                   class="img-fluid" />`);
+    }
+
+    function showReviews(data) {
+      const reviews = data.responseJSON;
+      $("#@reviewLoadMoreButton").hide();
+      $("#@reviewCardCollection").empty()
+                                 .append(reviews.map(review => `<div class="card mb-3">
+                                                                  <div class="card-body m-3">
+                                                                    <div class="row">
+                                                                      <div class="">
+                                                                        <p class="fw-bold lead mb-2"><strong>${review.UserFName} ${review.UserLName}</strong></p>
+                                                                        <p class="fw-bold text-muted mb-3">
+                                                                          <ul class="list-unstyled d-flex justify-content-start">
+                                                                            ${Array(5).fill(null)
+                                                                                      .map((_, idx) => review.Stars >= idx + 1
+                                                                                                            ? `<li>
+                                                                                                                 <svg class="bi me-2" width="24" height="24">
+                                                                                                                   <use xlink:href="/Content/bootstrap-icons.svg#star-fill" />
+                                                                                                                 </svg>
+                                                                                                               </li>`
+                                                                                                            : `<li>
+                                                                                                                 <svg class="bi me-2" width="24" height="24">
+                                                                                                                   <use xlink:href="/Content/bootstrap-icons.svg#star" />
+                                                                                                                 </svg>
+                                                                                                               </li>`)
+                                                                                       .join("")}
+                                                                          </ul>
+                                                                        </p>
+                                                                        <p class="text-muted fw-light mb-4">
+                                                                          ${review.Details}
+                                                                        </p>
+                                                                      </div>
+                                                                    </div>
+                                                                  </div>
+                                                                </div>`)
+                                                .join(""));
+    }
+
+    function reservationComplete(data) {
+      const response = data.responseJSON;
+      if (response.Success) {
+        $("#@modalReservationHideButton").click();
+      }
+
+      $("body").append(`<div class="row justify-content-center fixed-top mt-3">
+                          <div class="col-4 alert alert-${response.Success ? "primary" : "warning"} alert-dismissible fade show align-items-center" role="alert">
+                            <svg class="bi me-3" width="24" height="24" fill="currentColor">
+                              <use xlink:href="/Content/bootstrap-icons.svg#${response.Success ? "info-circle" : "exclamation-triangle"}" />
+                            </svg>
+                            <span>${response.Message}</span>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                          </div>
+                        </div>`);
+    }
+
+    function reviewComplete(data) {
+      const response = data.responseJSON;
+      if (response.Success) {
+        $("#@modalReviewHideButton").click();
+
+        $("#@reviewLoadMoreButton").click();
+      }
+
+      $("body").append(`<div class="row justify-content-center fixed-top mt-3">
+                          <div class="col-4 alert alert-${response.Success ? "primary" : "warning"} alert-dismissible fade show align-items-center" role="alert">
+                            <svg class="bi me-3" width="24" height="24" fill="currentColor">
+                              <use xlink:href="/Content/bootstrap-icons.svg#${response.Success ? "info-circle" : "exclamation-triangle"}" />
+                            </svg>
+                            <span>${response.Message}</span>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                          </div>
+                        </div>`);
+    }
+
+    $(() => {
+      $.datepicker.setDefaults($.datepicker.regional["@UICulture"]);
+      $(".datepicker-from").datepicker({
+        onSelect: function (selected) {
+          $(".datepicker-to").datepicker("option", "minDate", selected)
+        }
+      });
+      $(".datepicker-to").datepicker({
+        onSelect: function (selected) {
+          $(".datepicker-from").datepicker("option", "maxDate", selected)
+        }
+      });
+
+      const reservationForm = $("#@reservationForm").validate({
+        ignore: ".ignore",
+        rules: {
+          FName: {
+            required: true,
+            maxlength: 50
+          },
+          LName: {
+            required: true,
+            maxlength: 50
+          },
+          Email: {
+            required: true,
+            email: true
+          },
+          PhoneNumber: {
+            required: true,
+            maxlength: 20
+          },
+          Address: {
+            required: true,
+            maxlength: 200
+          },
+          Adults: {
+            required: true,
+            max: parseInt("@Model.MaxAdults"),
+            min: 1
+          },
+          Children: {
+            required: true,
+            max: parseInt("@Model.MaxChildren"),
+            min: 0
+          },
+          DateFrom: {
+            required: true,
+          },
+          DateTo: {
+            required: true,
+          },
+          reCaptcha: {
+            required: function () {
+              return grecaptcha.getResponse() == "";
+            }
+          }
+        },
+        messages: {
+          FName: {
+            required: "@ModelValidation.ResourceManager.GetString(name: "fname-required")",
+            maxlength: "@ModelValidation.ResourceManager.GetString(name: "fname-stringlength")"
+          },
+          LName: {
+            required: "@ModelValidation.ResourceManager.GetString(name: "lname-required")",
+            maxlength: "@ModelValidation.ResourceManager.GetString(name: "lname-stringlength")"
+          },
+          Email: {
+            required: "@ModelValidation.ResourceManager.GetString(name: "email-required")",
+            email: "@ModelValidation.ResourceManager.GetString(name: "email-required")"
+          },
+          PhoneNumber: {
+            required: "@ModelValidation.ResourceManager.GetString(name: "phone-number-required")",
+            maxlength: "@ModelValidation.ResourceManager.GetString(name: "phone-number-stringlength")"
+          },
+          Address: {
+            required: "@ModelValidation.ResourceManager.GetString(name: "address-required")",
+            maxlength: "@ModelValidation.ResourceManager.GetString(name: "address-stringlength")"
+          },
+          Adults: {
+            required: "@ModelValidation.ResourceManager.GetString(name: "adults-required")",
+            max: "@ModelValidation.ResourceManager.GetString(name: "adults-max")"
+          },
+          Children: {
+            required: "@ModelValidation.ResourceManager.GetString(name: "children-required")",
+            max: "@ModelValidation.ResourceManager.GetString(name: "children-max")"
+          },
+          DateFrom: {
+            required: "@ModelValidation.ResourceManager.GetString(name: "from-required")",
+          },
+          DateTo: {
+            required: "@ModelValidation.ResourceManager.GetString(name: "to-required")",
+          },
+          reCaptcha: {
+            required: "@ModelValidation.ResourceManager.GetString(name: "recaptcha-required")"
+          }
+        },
+        highlight: element => {
+          $(element).addClass('input-validation-error');
+        }, unhighlight: element => {
+          $(element).removeClass('input-validation-error');
+        }
+      });
+
+      const reviewForm = $("#@reviewForm").validate({
+        rules: {
+          Stars: {
+            required: true,
+            max: 5,
+            min: 1
+          },
+          Details: {
+            required: true,
+            maxlength: 200
+          },
+        },
+        messages: {
+          Stars: {
+            required: "@ModelValidation.ResourceManager.GetString(name: "stars-required")",
+            max: "@ModelValidation.ResourceManager.GetString(name: "stars-max")",
+            min: "@ModelValidation.ResourceManager.GetString(name: "stars-min")"
+          },
+          Details: {
+            required: "@ModelValidation.ResourceManager.GetString(name: "details-required")",
+            maxlength: "@ModelValidation.ResourceManager.GetString(name: "details-stringlength")"
+          },
+        },
+        highlight: element => {
+          $(element).addClass('input-validation-error');
+        }, unhighlight: element => {
+          $(element).removeClass('input-validation-error');
+        }
+      });
+
+      $("#@modalReservation").on("hide.bs.modal", () => {
+        $(":input", "#@reservationForm")
+          .not(":button, :submit, :reset, :hidden@(!(user is null) ? ", .user-related" : "")")
+          .val("")
+          .prop("checked", false)
+          .prop("selected", false);
+        reservationForm.resetForm();
+      });
+
+      $("#@modalReview").on("hide.bs.modal", () => {
+        $(":input", "#@reviewForm")
+          .not(":button, :submit, :reset, :hidden")
+          .val("")
+          .prop("checked", false)
+          .prop("selected", false);
+        reviewForm.resetForm();
+      });
+    });
+  </script>
+
+  <script src="https://www.google.com/recaptcha/api.js?onload=reCaptchaLoadCallback&render=explicit" async defer></script>
+
+}

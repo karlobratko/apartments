@@ -120,6 +120,9 @@
   <data name="about" xml:space="preserve">
     <value>o-nama</value>
   </data>
+  <data name="apartment" xml:space="preserve">
+    <value>apartman</value>
+  </data>
   <data name="bad-request" xml:space="preserve">
     <value>los-zahtjev</value>
   </data>

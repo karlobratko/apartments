@@ -138,6 +138,12 @@
   <data name="about-description" xml:space="preserve">
     <value>We are a small company located in {0}. We provide apartment booking services.</value>
   </data>
+  <data name="apartment-img-default-alt" xml:space="preserve">
+    <value>Apartment, no image</value>
+  </data>
+  <data name="ascending" xml:space="preserve">
+    <value>Ascending</value>
+  </data>
   <data name="back-to-home" xml:space="preserve">
     <value>Go to homepage</value>
   </data>
@@ -150,8 +156,17 @@
   <data name="brand-description" xml:space="preserve">
     <value>Fast and easy to best service</value>
   </data>
+  <data name="btn-reservation" xml:space="preserve">
+    <value>Make reservation</value>
+  </data>
+  <data name="btn-review" xml:space="preserve">
+    <value>Review apartment</value>
+  </data>
   <data name="cancel" xml:space="preserve">
     <value>Cancel</value>
+  </data>
+  <data name="close" xml:space="preserve">
+    <value>Close</value>
   </data>
   <data name="confirm-registration-alreadyregistered" xml:space="preserve">
     <value>User is already registered</value>
@@ -186,6 +201,9 @@
   <data name="delete-profile-success" xml:space="preserve">
     <value>You successfully deleted profile</value>
   </data>
+  <data name="descending" xml:space="preserve">
+    <value>Descending</value>
+  </data>
   <data name="edit-profile" xml:space="preserve">
     <value>Edit profile</value>
   </data>
@@ -207,6 +225,57 @@
   <data name="hr" xml:space="preserve">
     <value>Croatian</value>
   </data>
+  <data name="label-address" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="label-adults" xml:space="preserve">
+    <value>Adults</value>
+  </data>
+  <data name="label-children" xml:space="preserve">
+    <value>Children</value>
+  </data>
+  <data name="label-city" xml:space="preserve">
+    <value>City</value>
+  </data>
+  <data name="label-date-from" xml:space="preserve">
+    <value>From</value>
+  </data>
+  <data name="label-date-to" xml:space="preserve">
+    <value>To</value>
+  </data>
+  <data name="label-details" xml:space="preserve">
+    <value>Comment</value>
+  </data>
+  <data name="label-email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="label-fname" xml:space="preserve">
+    <value>First name</value>
+  </data>
+  <data name="label-lname" xml:space="preserve">
+    <value>Last name</value>
+  </data>
+  <data name="label-max-adults" xml:space="preserve">
+    <value>Max adults</value>
+  </data>
+  <data name="label-max-children" xml:space="preserve">
+    <value>Max children</value>
+  </data>
+  <data name="label-phone" xml:space="preserve">
+    <value>Phone number</value>
+  </data>
+  <data name="label-sort-by" xml:space="preserve">
+    <value>Sort by</value>
+  </data>
+  <data name="label-sort-direction" xml:space="preserve">
+    <value>Sort direction</value>
+  </data>
+  <data name="label-stars" xml:space="preserve">
+    <value>Rating</value>
+  </data>
+  <data name="label-total-rooms" xml:space="preserve">
+    <value>Total rooms</value>
+  </data>
   <data name="language" xml:space="preserve">
     <value>Language</value>
   </data>
@@ -227,6 +296,12 @@
   </data>
   <data name="logout-success" xml:space="preserve">
     <value>You logged out successfully</value>
+  </data>
+  <data name="option-label-city" xml:space="preserve">
+    <value>Select city</value>
+  </data>
+  <data name="option-label-sort-by" xml:space="preserve">
+    <value>Select sort criteria</value>
   </data>
   <data name="profile" xml:space="preserve">
     <value>Profile</value>
@@ -267,6 +342,12 @@
   <data name="request-reset-password-success" xml:space="preserve">
     <value>Email message with instructions for resetting password was sent to inserted Email account</value>
   </data>
+  <data name="reservation-failed" xml:space="preserve">
+    <value>Reservation failed, you have inserted invalid data</value>
+  </data>
+  <data name="reservation-success" xml:space="preserve">
+    <value>Reservation was successfull</value>
+  </data>
   <data name="reset-password" xml:space="preserve">
     <value>Reset password</value>
   </data>
@@ -281,6 +362,18 @@
   </data>
   <data name="reset-password-success" xml:space="preserve">
     <value>You successfully reseted your password</value>
+  </data>
+  <data name="review-failed" xml:space="preserve">
+    <value>Apartment review failed, you have inserted invalid data</value>
+  </data>
+  <data name="review-load-more" xml:space="preserve">
+    <value>Load more reviews</value>
+  </data>
+  <data name="review-login-first" xml:space="preserve">
+    <value>Login to give review</value>
+  </data>
+  <data name="review-success" xml:space="preserve">
+    <value>Apartment review was successfull</value>
   </data>
   <data name="search" xml:space="preserve">
     <value>Search</value>

@@ -24,12 +24,14 @@ namespace Apartments.WebUI {
       BundleConfig.RegisterBundles(bundles: BundleTable.Bundles);
 
       ModelBinders.Binders.Add(key: typeof(ApartmentSearchSettings), value: new ApartmentSearchSettingsModelBinder());
+      ModelBinders.Binders.Add(key: typeof(ApartmentReservationModel), value: new ApartmentReservationModelBinder());
+      ModelBinders.Binders.Add(key: typeof(ApartmentReviewModel), value: new ApartmentReviewModelBinder());
 
       Application.SetApplicationState(objectName: "metadata", 
                                       objectValue: DependencyResolver.Current.GetService<IMetadataDomainModelManager>().GetMetadata());
     }
 
-    protected void Application_Error(Object sender, EventArgs e) {
-    }
+    //protected void Application_Error(Object sender, EventArgs e) {
+    //}
   }
 }

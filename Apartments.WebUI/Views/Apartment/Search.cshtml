@@ -1,5 +1,6 @@
 ﻿@using Apartments.WebUI.Models
 @using Apartments.WebUI.ViewModels
+@model ApartmentSearchViewModel
 
 @{
   Page.Title = Apartments.ResourceManager.GetString(name: "search");
@@ -16,47 +17,85 @@
                          InsertionMode = InsertionMode.Replace,
                        })) {
   <div class="row">
-    <div class="col-4 offset-2">
-
+    <div class="col-4">
       <div class="mb-3">
-        @Html.Label(expression: "totalRooms", labelText: "Total rooms", htmlAttributes: new { @class = "form-label" })
-        @Html.TextBox(name: "totalRooms", value: null, htmlAttributes: new { @class = "form-control", type = "number" })
+        @Html.Label(expression: "maxAdults",
+                    labelText: Apartments.ResourceManager.GetString(name: "label-max-adults"),
+                    htmlAttributes: new { @class = "form-label" })
+        @Html.TextBox(name: "maxAdults",
+                      value: Model.SearchSettings.MaxAdults,
+                      htmlAttributes: new { @class = "form-control", type = "number" })
       </div>
 
       <div class="mb-3">
-        @Html.Label(expression: "maxAdults", labelText: "Max adults", htmlAttributes: new { @class = "form-label" })
-        @Html.TextBox(name: "maxAdults", value: null, htmlAttributes: new { @class = "form-control", type = "number" })
-      </div>
-
-      <div class="mb-3">
-        @Html.Label(expression: "maxChildren", labelText: "Max children", htmlAttributes: new { @class = "form-label" })
-        @Html.TextBox(name: "maxChildren", value: null, htmlAttributes: new { @class = "form-control", type = "number" })
+        @Html.Label(expression: "maxChildren",
+                    labelText: Apartments.ResourceManager.GetString(name: "label-max-children"),
+                    htmlAttributes: new { @class = "form-label" })
+        @Html.TextBox(name: "maxChildren",
+                      value: Model.SearchSettings.MaxChildren,
+                      htmlAttributes: new { @class = "form-control", type = "number" })
       </div>
     </div>
 
     <div class="col-4">
       <div class="mb-3">
-        @Html.Label(expression: "cityName", labelText: "City", htmlAttributes: new { @class = "form-label" })
-        @Html.TextBox(name: "cityName", value: null, htmlAttributes: new { @class = "form-control", type = "number" })
+        @Html.Label(expression: "totalRooms",
+                    labelText: Apartments.ResourceManager.GetString(name: "label-total-rooms"),
+                    htmlAttributes: new { @class = "form-label" })
+        @Html.TextBox(name: "totalRooms",
+                      value: Model.SearchSettings.TotalRooms,
+                      htmlAttributes: new { @class = "form-control", type = "number" })
       </div>
 
       <div class="mb-3">
-        @Html.Label(expression: "sortBy", labelText: "Sort by", htmlAttributes: new { @class = "form-label" })
+        @Html.Label(expression: "cityName",
+                    labelText: Apartments.ResourceManager.GetString(name: "label-city"),
+                    htmlAttributes: new { @class = "form-label" })
+        @Html.DropDownList(name: "cityName",
+                           selectList: Model.Cities
+                                            .Select(selector: city => new SelectListItem {
+                                              Text = city.Name,
+                                              Value = city.Name,
+                                              Selected = city.Name == Model.SearchSettings.CityName
+                                            }),
+                           optionLabel: Apartments.ResourceManager.GetString(name: "option-label-city"),
+                           htmlAttributes: new { @class = "form-select" })
+      </div>
+    </div>
+
+    <div class="col-4">
+      <div class="mb-3">
+        @Html.Label(expression: "sortBy",
+                    labelText: Apartments.ResourceManager.GetString(name: "label-sort-by"),
+                    htmlAttributes: new { @class = "form-label" })
         @Html.DropDownList(name: "sortBy",
-                           selectList: new SelectList(typeof(ApartmentCardViewModel).GetProperties()
-                                                                                     .Select(selector: prop => prop.Name)),
+                           selectList: typeof(ApartmentCardViewModel).GetProperties()
+                                                                     .Where(predicate: prop => new String[] { "Name", "Address", "City", "Owner", }.Contains(prop.Name))
+                                                                     .Select(selector: prop => new SelectListItem {
+                                                                       Text = prop.Name,
+                                                                       Value = prop.Name,
+                                                                       Selected = prop.Name == Model.SearchSettings.SortBy
+                                                                     }),
+                           optionLabel: Apartments.ResourceManager.GetString(name: "option-label-sort-by"),
                            htmlAttributes: new { @class = "form-select" })
       </div>
 
       <div class="mb-3">
-        @Html.Label(expression: "sortDirection", labelText: "Sort direction", htmlAttributes: new { @class = "form-label" })
+        @Html.Label(expression: "sortDirection",
+                    labelText: Apartments.ResourceManager.GetString(name: "label-sort-direction"),
+                    htmlAttributes: new { @class = "form-label" })
         @Html.DropDownList(name: "sortDirection",
-                           selectList: new SelectList(Enum.GetNames(typeof(SortDirection))),
+                           selectList: Enum.GetNames(typeof(SortDirection))
+                                           .Select(selector: name => new SelectListItem {
+                                             Text = Apartments.ResourceManager.GetString(name: name.ToLower()),
+                                             Value = name,
+                                             Selected = name == Model.SearchSettings.SortDirection.ToString()
+                                           }),
                            htmlAttributes: new { @class = "form-select" })
       </div>
 
       <div class="d-flex justify-content-end">
-        <button type="submit" class="btn btn-primary px-5">Search</button>
+        <button type="submit" class="btn btn-dark px-3">@Apartments.ResourceManager.GetString(name: "search")</button>
       </div>
     </div>
 
@@ -76,8 +115,41 @@
   @Scripts.Render("~/Scripts/jqval")
 
   <script>
+    function toHexString(byteArray) {
+      return Array.from(byteArray, function (byte) {
+        return ('0' + (byte & 0xFF).toString(16)).slice(-2);
+      }).join('')
+    }
+
+    function hexToBase64(str) {
+      return btoa(String.fromCharCode.apply(null, str.replace(/\r|\n/g, "").replace(/([\da-fA-F]{2}) ?/g, "0x$1 ").replace(/ +$/, "").split(" ")));
+    }
+
     function insertApartments(data) {
       console.log(data);
+      $("#@updateTargetId").empty()
+                           .append(data.responseJSON.map(apartment => `<div class="col">
+                                                                         <div class="card">
+                                                                           <img src="${!(apartment.ImageData === null)
+                                                                                         ? `data:${apartment.MimeType};base64,${hexToBase64(toHexString(apartment.ImageData))}`
+                                                                                         : "/Content/DefaultItem.jpg"}"
+                                                                                alt="${apartment.Name}"
+                                                                                class="card-img-top align-self-center"
+                                                                                style="width: 150px; z-index: 1">
+                                                                           <div class="card-body">
+                                                                             <h5 class="card-title" style="height: 3rem">${apartment.Name}</h5>
+                                                                             <hr />
+                                                                             <p>
+                                                                               ${apartment.City}
+                                                                             </p>
+                                                                             <p>
+                                                                               ${apartment.Status}
+                                                                             </p>
+                                                                             <a href="${apartment.DetailsUrl}" class="stretched-link"></a>
+                                                                           </div>
+                                                                         </div>
+                                                                       </div>`)
+                                                    .join(""));
     }
   </script>
 }

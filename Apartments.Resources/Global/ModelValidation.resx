@@ -126,6 +126,24 @@
   <data name="address-stringlength" xml:space="preserve">
     <value>Address must be max 200 characters long</value>
   </data>
+  <data name="adults-max" xml:space="preserve">
+    <value>Number of adults is to high</value>
+  </data>
+  <data name="adults-required" xml:space="preserve">
+    <value>Number of adults is required</value>
+  </data>
+  <data name="beach-distance" xml:space="preserve">
+    <value>Beach distance</value>
+  </data>
+  <data name="children-max" xml:space="preserve">
+    <value>Number of children is to high</value>
+  </data>
+  <data name="children-required" xml:space="preserve">
+    <value>Number of children is required</value>
+  </data>
+  <data name="city" xml:space="preserve">
+    <value>City</value>
+  </data>
   <data name="confirm-password" xml:space="preserve">
     <value>Confirm password</value>
   </data>
@@ -137,6 +155,12 @@
   </data>
   <data name="confirm-password-stringlength" xml:space="preserve">
     <value>Passwords are not matching</value>
+  </data>
+  <data name="details-required" xml:space="preserve">
+    <value>Comment is required</value>
+  </data>
+  <data name="details-stringlength" xml:space="preserve">
+    <value>Comment length must be max 200 characters long</value>
   </data>
   <data name="email" xml:space="preserve">
     <value>Email</value>
@@ -156,6 +180,9 @@
   <data name="fname-stringlength" xml:space="preserve">
     <value>First name must be max 50 characters long</value>
   </data>
+  <data name="from-required" xml:space="preserve">
+    <value>Start date is required</value>
+  </data>
   <data name="lname" xml:space="preserve">
     <value>Last name</value>
   </data>
@@ -165,8 +192,17 @@
   <data name="lname-stringlength" xml:space="preserve">
     <value>Last name must be max 50 characters long</value>
   </data>
+  <data name="max-adults" xml:space="preserve">
+    <value>Max adults</value>
+  </data>
+  <data name="max-children" xml:space="preserve">
+    <value>Max children</value>
+  </data>
   <data name="mobile" xml:space="preserve">
     <value>Mobile</value>
+  </data>
+  <data name="owner" xml:space="preserve">
+    <value>Owner</value>
   </data>
   <data name="password" xml:space="preserve">
     <value>Password</value>
@@ -186,8 +222,32 @@
   <data name="phone-number-stringlength" xml:space="preserve">
     <value>Phone number must be max 20 characters long</value>
   </data>
+  <data name="price" xml:space="preserve">
+    <value>Price</value>
+  </data>
+  <data name="recaptcha-required" xml:space="preserve">
+    <value>Prove that you are not a robot</value>
+  </data>
+  <data name="stars-max" xml:space="preserve">
+    <value>Rating is too high</value>
+  </data>
+  <data name="stars-min" xml:space="preserve">
+    <value>Rating is too low</value>
+  </data>
+  <data name="stars-required" xml:space="preserve">
+    <value>Rating is required</value>
+  </data>
+  <data name="status" xml:space="preserve">
+    <value>Status</value>
+  </data>
   <data name="telephone" xml:space="preserve">
     <value>Telephone</value>
+  </data>
+  <data name="to-required" xml:space="preserve">
+    <value>End date is required</value>
+  </data>
+  <data name="total-rooms" xml:space="preserve">
+    <value>Total rooms</value>
   </data>
   <data name="username" xml:space="preserve">
     <value>Username</value>

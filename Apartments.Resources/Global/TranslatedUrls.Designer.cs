@@ -70,6 +70,15 @@ namespace Apartments.Resources.Global {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to apartment.
+        /// </summary>
+        public static string apartment {
+            get {
+                return ResourceManager.GetString("apartment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to bad-request.
         /// </summary>
         public static string bad_request {

@@ -15,7 +15,8 @@
                          actionName: null,
                          controllerName: null,
                          routeValues: new {
-                           culture = lang
+                           culture = lang,
+                           id = Request.RequestContext.RouteData.Values["id"]
                          },
                          htmlAttributes: new {
                            @class = $"dropdown-item {(Thread.CurrentThread.CurrentUICulture.Name == lang ? "fw-bold" : "")}"

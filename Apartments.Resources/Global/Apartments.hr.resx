@@ -138,6 +138,12 @@
   <data name="about-description" xml:space="preserve">
     <value>Mala smo firma locirana u {0}. Pružimo usluge rezervacije apartmana.</value>
   </data>
+  <data name="apartment-img-default-alt" xml:space="preserve">
+    <value>Apartman, nema slike</value>
+  </data>
+  <data name="ascending" xml:space="preserve">
+    <value>Rastuće</value>
+  </data>
   <data name="back-to-home" xml:space="preserve">
     <value>Natrag na naslovnu</value>
   </data>
@@ -150,8 +156,17 @@
   <data name="brand-description" xml:space="preserve">
     <value>Brzo i lako do najbolje usluge</value>
   </data>
+  <data name="btn-reservation" xml:space="preserve">
+    <value>Napravi rezervaciju</value>
+  </data>
+  <data name="btn-review" xml:space="preserve">
+    <value>Ocijeni apartman</value>
+  </data>
   <data name="cancel" xml:space="preserve">
     <value>Odustani</value>
+  </data>
+  <data name="close" xml:space="preserve">
+    <value>Zatvori</value>
   </data>
   <data name="confirm-registration-alreadyregistered" xml:space="preserve">
     <value>Korisnik je već registriran</value>
@@ -186,6 +201,9 @@
   <data name="delete-profile-success" xml:space="preserve">
     <value>Uspješno ste obrisali profil</value>
   </data>
+  <data name="descending" xml:space="preserve">
+    <value>Padajuće</value>
+  </data>
   <data name="edit-profile" xml:space="preserve">
     <value>Uredi profil</value>
   </data>
@@ -207,6 +225,57 @@
   <data name="hr" xml:space="preserve">
     <value>Hrvatski</value>
   </data>
+  <data name="label-address" xml:space="preserve">
+    <value>Adresa</value>
+  </data>
+  <data name="label-adults" xml:space="preserve">
+    <value>Broj odraslih</value>
+  </data>
+  <data name="label-children" xml:space="preserve">
+    <value>Broj djece</value>
+  </data>
+  <data name="label-city" xml:space="preserve">
+    <value>Grad</value>
+  </data>
+  <data name="label-date-from" xml:space="preserve">
+    <value>Od</value>
+  </data>
+  <data name="label-date-to" xml:space="preserve">
+    <value>Do</value>
+  </data>
+  <data name="label-details" xml:space="preserve">
+    <value>Komentar</value>
+  </data>
+  <data name="label-email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="label-fname" xml:space="preserve">
+    <value>Ime</value>
+  </data>
+  <data name="label-lname" xml:space="preserve">
+    <value>Prezime</value>
+  </data>
+  <data name="label-max-adults" xml:space="preserve">
+    <value>Broj odraslih</value>
+  </data>
+  <data name="label-max-children" xml:space="preserve">
+    <value>Broj djece</value>
+  </data>
+  <data name="label-phone" xml:space="preserve">
+    <value>Broj telefona</value>
+  </data>
+  <data name="label-sort-by" xml:space="preserve">
+    <value>Sortiraj po</value>
+  </data>
+  <data name="label-sort-direction" xml:space="preserve">
+    <value>Smjer sortiranja</value>
+  </data>
+  <data name="label-stars" xml:space="preserve">
+    <value>Ocjena</value>
+  </data>
+  <data name="label-total-rooms" xml:space="preserve">
+    <value>Broj soba</value>
+  </data>
   <data name="language" xml:space="preserve">
     <value>Jezik</value>
   </data>
@@ -227,6 +296,12 @@
   </data>
   <data name="logout-success" xml:space="preserve">
     <value>Uspješno ste se odjavili</value>
+  </data>
+  <data name="option-label-city" xml:space="preserve">
+    <value>Odaberite grad</value>
+  </data>
+  <data name="option-label-sort-by" xml:space="preserve">
+    <value>Odaberite kriterij sortiranja</value>
   </data>
   <data name="profile" xml:space="preserve">
     <value>Profil</value>
@@ -267,6 +342,12 @@
   <data name="request-reset-password-success" xml:space="preserve">
     <value>Email poruka sa uputama za obnovu zaporke poslana je na upisani Email račun</value>
   </data>
+  <data name="reservation-failed" xml:space="preserve">
+    <value>Rezervacija nije uspješna, unesli ste pogrešne podatke</value>
+  </data>
+  <data name="reservation-success" xml:space="preserve">
+    <value>Rezervacija je uspješna</value>
+  </data>
   <data name="reset-password" xml:space="preserve">
     <value>Obnova zaporke</value>
   </data>
@@ -281,6 +362,18 @@
   </data>
   <data name="reset-password-success" xml:space="preserve">
     <value>Uspješno ste obnovili zaporku</value>
+  </data>
+  <data name="review-failed" xml:space="preserve">
+    <value>Ocijenjivanje apartmana nije uspješno, unesli ste pogrešne podatke</value>
+  </data>
+  <data name="review-load-more" xml:space="preserve">
+    <value>Učitaj još ocijena</value>
+  </data>
+  <data name="review-login-first" xml:space="preserve">
+    <value>Prijavite se da biste dali ocijenu</value>
+  </data>
+  <data name="review-success" xml:space="preserve">
+    <value>Ocijenjivanje apartmana je uspješno</value>
   </data>
   <data name="search" xml:space="preserve">
     <value>Pretraživanje</value>

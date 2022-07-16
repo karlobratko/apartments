@@ -120,6 +120,30 @@
   <data name="address" xml:space="preserve">
     <value>Adresa</value>
   </data>
+  <data name="address-required" xml:space="preserve">
+    <value>Adresa je obavezna</value>
+  </data>
+  <data name="address-stringlength" xml:space="preserve">
+    <value>Adresa mora biti duljine do 200 znakova</value>
+  </data>
+  <data name="adults-max" xml:space="preserve">
+    <value>Broj odraslih je previsok</value>
+  </data>
+  <data name="adults-required" xml:space="preserve">
+    <value>Broj odraslih je obavezan</value>
+  </data>
+  <data name="beach-distance" xml:space="preserve">
+    <value>Udaljenost od plaže</value>
+  </data>
+  <data name="children-max" xml:space="preserve">
+    <value>Broj djece je previsok</value>
+  </data>
+  <data name="children-required" xml:space="preserve">
+    <value>Broj djece je obavezan</value>
+  </data>
+  <data name="city" xml:space="preserve">
+    <value>Grad</value>
+  </data>
   <data name="confirm-password" xml:space="preserve">
     <value>Ponovite lozinku</value>
   </data>
@@ -131,6 +155,12 @@
   </data>
   <data name="confirm-password-stringlength" xml:space="preserve">
     <value>Lozinke se ne podudaraju</value>
+  </data>
+  <data name="details-required" xml:space="preserve">
+    <value>Komentar je obavezan</value>
+  </data>
+  <data name="details-stringlength" xml:space="preserve">
+    <value>Komentar mora biti duljine do 200 znakova</value>
   </data>
   <data name="email" xml:space="preserve">
     <value>Email</value>
@@ -150,6 +180,9 @@
   <data name="fname-stringlength" xml:space="preserve">
     <value>Ime mora biti duljine do 50 znakova</value>
   </data>
+  <data name="from-required" xml:space="preserve">
+    <value>Datum početka je obavezan</value>
+  </data>
   <data name="lname" xml:space="preserve">
     <value>Prezime</value>
   </data>
@@ -159,8 +192,17 @@
   <data name="lname-stringlength" xml:space="preserve">
     <value>Prezime mora biti duljine do 50 znakova</value>
   </data>
+  <data name="max-adults" xml:space="preserve">
+    <value>Broj odraslih</value>
+  </data>
+  <data name="max-children" xml:space="preserve">
+    <value>Broj djece</value>
+  </data>
   <data name="mobile" xml:space="preserve">
     <value>Mobitel</value>
+  </data>
+  <data name="owner" xml:space="preserve">
+    <value>Vlasnik</value>
   </data>
   <data name="password" xml:space="preserve">
     <value>Lozinka</value>
@@ -174,8 +216,38 @@
   <data name="phone-number" xml:space="preserve">
     <value>Broj telefona</value>
   </data>
+  <data name="phone-number-required" xml:space="preserve">
+    <value>Broj telefona je obavezan</value>
+  </data>
+  <data name="phone-number-stringlength" xml:space="preserve">
+    <value>Broj telefona mora biti duljine do 20 znakova</value>
+  </data>
+  <data name="price" xml:space="preserve">
+    <value>Cijena</value>
+  </data>
+  <data name="recaptcha-required" xml:space="preserve">
+    <value>Potvrdite da niste robot</value>
+  </data>
+  <data name="stars-max" xml:space="preserve">
+    <value>Ocjena je previsoka</value>
+  </data>
+  <data name="stars-min" xml:space="preserve">
+    <value>Ocjena je preniska</value>
+  </data>
+  <data name="stars-required" xml:space="preserve">
+    <value>Ocjena je obavezna</value>
+  </data>
+  <data name="status" xml:space="preserve">
+    <value>Status</value>
+  </data>
   <data name="telephone" xml:space="preserve">
     <value>Telefon</value>
+  </data>
+  <data name="to-required" xml:space="preserve">
+    <value>Datum završetka je obavezan</value>
+  </data>
+  <data name="total-rooms" xml:space="preserve">
+    <value>Broj soba</value>
   </data>
   <data name="username" xml:space="preserve">
     <value>Korisničko ime</value>

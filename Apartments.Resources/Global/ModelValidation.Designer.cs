@@ -88,6 +88,60 @@ namespace Apartments.Resources.Global {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Number of adults is to high.
+        /// </summary>
+        public static string adults_max {
+            get {
+                return ResourceManager.GetString("adults-max", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Number of adults is required.
+        /// </summary>
+        public static string adults_required {
+            get {
+                return ResourceManager.GetString("adults-required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Beach distance.
+        /// </summary>
+        public static string beach_distance {
+            get {
+                return ResourceManager.GetString("beach-distance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Number of children is to high.
+        /// </summary>
+        public static string children_max {
+            get {
+                return ResourceManager.GetString("children-max", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Number of children is required.
+        /// </summary>
+        public static string children_required {
+            get {
+                return ResourceManager.GetString("children-required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to City.
+        /// </summary>
+        public static string city {
+            get {
+                return ResourceManager.GetString("city", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Confirm password.
         /// </summary>
         public static string confirm_password {
@@ -120,6 +174,24 @@ namespace Apartments.Resources.Global {
         public static string confirm_password_stringlength {
             get {
                 return ResourceManager.GetString("confirm-password-stringlength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Comment is required.
+        /// </summary>
+        public static string details_required {
+            get {
+                return ResourceManager.GetString("details-required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Comment length must be max 200 characters long.
+        /// </summary>
+        public static string details_stringlength {
+            get {
+                return ResourceManager.GetString("details-stringlength", resourceCulture);
             }
         }
         
@@ -178,6 +250,15 @@ namespace Apartments.Resources.Global {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Start date is required.
+        /// </summary>
+        public static string from_required {
+            get {
+                return ResourceManager.GetString("from-required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Last name.
         /// </summary>
         public static string lname {
@@ -205,11 +286,38 @@ namespace Apartments.Resources.Global {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Max adults.
+        /// </summary>
+        public static string max_adults {
+            get {
+                return ResourceManager.GetString("max-adults", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Max children.
+        /// </summary>
+        public static string max_children {
+            get {
+                return ResourceManager.GetString("max-children", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Mobile.
         /// </summary>
         public static string mobile {
             get {
                 return ResourceManager.GetString("mobile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Owner.
+        /// </summary>
+        public static string owner {
+            get {
+                return ResourceManager.GetString("owner", resourceCulture);
             }
         }
         
@@ -268,11 +376,83 @@ namespace Apartments.Resources.Global {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Price.
+        /// </summary>
+        public static string price {
+            get {
+                return ResourceManager.GetString("price", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prove that you are not a robot.
+        /// </summary>
+        public static string recaptcha_required {
+            get {
+                return ResourceManager.GetString("recaptcha-required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rating is too high.
+        /// </summary>
+        public static string stars_max {
+            get {
+                return ResourceManager.GetString("stars-max", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rating is too low.
+        /// </summary>
+        public static string stars_min {
+            get {
+                return ResourceManager.GetString("stars-min", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rating is required.
+        /// </summary>
+        public static string stars_required {
+            get {
+                return ResourceManager.GetString("stars-required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status.
+        /// </summary>
+        public static string status {
+            get {
+                return ResourceManager.GetString("status", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Telephone.
         /// </summary>
         public static string telephone {
             get {
                 return ResourceManager.GetString("telephone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End date is required.
+        /// </summary>
+        public static string to_required {
+            get {
+                return ResourceManager.GetString("to-required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total rooms.
+        /// </summary>
+        public static string total_rooms {
+            get {
+                return ResourceManager.GetString("total-rooms", resourceCulture);
             }
         }
         

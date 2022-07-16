@@ -5,7 +5,9 @@
 
   <div class="col">
     <div class="card">
-      <img src="@Url.Content(!String.IsNullOrEmpty(apartment.ImagePath) ? apartment.ImagePath : "~/Content/DefaultItem.jpg")"
+      <img src="@(!(apartment.ImageData is null) 
+                    ? $"data:{apartment.MimeType};base64,{Convert.ToBase64String(apartment.ImageData)}" 
+                    : Url.Content("~/Content/DefaultItem.jpg"))"
            alt="@apartment.Name"
            class="card-img-top align-self-center"
            style="width: 150px; z-index: 1">
@@ -21,7 +23,7 @@
           @apartment.Status
         </p>
 
-        <a href="@Url.Action(actionName: "Details", controllerName: "Apartment", routeValues: new { id = apartment.Id })" class="stretched-link"></a>
+        <a href="@apartment.DetailsUrl" class="stretched-link"></a>
       </div>
     </div>
   </div>
