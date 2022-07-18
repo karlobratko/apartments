@@ -1,0 +1,61 @@
+﻿CREATE PROCEDURE [dbo].[ReviewUpdate] (@Guid        AS uniqueidentifier,
+                                       @ApartmentFK AS int,
+                                       @UserFK      AS int,
+                                       @Details     AS nvarchar(500),
+                                       @Stars       AS int,
+                                       @UpdatedBy   AS int = 1)
+AS BEGIN
+  DECLARE @Id         AS int
+  DECLARE @DeleteDate AS datetime
+  SELECT ALL TOP 1
+    @Id         = [Id],
+    @DeleteDate = [DeleteDate]
+  FROM [dbo].[Reviews]
+  WHERE [Guid] = @Guid
+
+  IF @Id IS NULL BEGIN
+    RETURN 2
+  END
+  ELSE IF @Id IS NOT NULL AND
+          @DeleteDate IS NOT NULL BEGIN
+    RETURN 3
+  END
+
+  SET @Id         = NULL
+  SET @DeleteDate = NULL
+
+  SELECT ALL TOP 1
+    @Id         = [Id],
+    @DeleteDate = [DeleteDate]
+  FROM [dbo].[Reviews]
+  WHERE [ApartmentFK] = @ApartmentFK AND
+        [UserFK] = @UserFK AND
+        [Guid] <> @Guid
+
+  IF @Id IS NOT NULL AND
+     @DeleteDate IS NULL BEGIN
+    RETURN 4
+  END
+  ELSE IF @Id IS NOT NULL AND
+          @DeleteDate IS NOT NULL BEGIN
+    RETURN 3
+  END
+
+  UPDATE [dbo].[Reviews]
+  SET
+    [UpdatedBy]   = @UpdatedBy,
+    [UpdateDate]  = GETDATE(),
+    [ApartmentFK] = @ApartmentFK,
+    [UserFK]      = @UserFK,
+    [Details]     = @Details,
+    [Stars]       = @Stars
+  WHERE [Guid] = @Guid
+
+  IF @@ROWCOUNT = 1 BEGIN
+    RETURN 1
+  END
+  ELSE BEGIN
+    RETURN -1
+  END
+END
+GO

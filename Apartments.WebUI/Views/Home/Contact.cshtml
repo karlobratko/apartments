@@ -1,0 +1,23 @@
+﻿@using Apartments.BLL.DomainModels
+
+@{
+  Page.Title = Apartments.ResourceManager.GetString(name: "contact");
+  var metadata = HttpContext.Current.Application.GetApplicationState("metadata") as MetadataDomainModel;
+}
+
+<header class="header text-center mb-5">
+  <h2 class="display-5">@Apartments.ResourceManager.GetString(name: "contact")</h2>
+</header>
+
+<div class="d-flex flex-row justify-content-around">
+  <div>
+    <p class="display-6 mb-3">@metadata.City.Name</p>
+    <p class="fs-5 mb-1">@metadata.Address</p>
+  </div>
+  <div>
+    <p class="display-6 mb-3">@Apartments.ResourceManager.GetString(name: "contact-contact-info")</p>
+    <p class="fs-5 mb-1">T: @metadata.Telephone</p>
+    <p class="fs-5 mb-1">M: @metadata.Mobile</p>
+    <p class="fs-5 mb-1">E: @metadata.Email</p>
+  </div>
+</div>

@@ -3,7 +3,51 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32526.322
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Apartments.DB", "Apartments.DB\Apartments.DB.sqlproj", "{5D55A4E4-2F55-4F27-9E1B-4C6FC514AA02}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Apartments.DAL", "Apartments.DAL\Apartments.DAL.csproj", "{4BAEF97D-5C50-4599-89F9-1CD7E47CF3BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Apartments.BLL", "Apartments.BLL\Apartments.BLL.csproj", "{D6D6DE8D-5C3B-47E3-B958-8EED193722D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Apartments.WebUI", "Apartments.WebUI\Apartments.WebUI.csproj", "{A4EE37EB-E3D6-4E36-A85C-475A479BBCDB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Apartments.Resources", "Apartments.Resources\Apartments.Resources.csproj", "{FF6E4FF6-77CB-4FF2-A808-6F327A278D08}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Apartments.AdminUI", "Apartments.AdminUI\Apartments.AdminUI.csproj", "{601D776C-FC36-11EC-B939-0242AC120002}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5D55A4E4-2F55-4F27-9E1B-4C6FC514AA02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D55A4E4-2F55-4F27-9E1B-4C6FC514AA02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D55A4E4-2F55-4F27-9E1B-4C6FC514AA02}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{5D55A4E4-2F55-4F27-9E1B-4C6FC514AA02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D55A4E4-2F55-4F27-9E1B-4C6FC514AA02}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D55A4E4-2F55-4F27-9E1B-4C6FC514AA02}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{4BAEF97D-5C50-4599-89F9-1CD7E47CF3BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BAEF97D-5C50-4599-89F9-1CD7E47CF3BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BAEF97D-5C50-4599-89F9-1CD7E47CF3BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BAEF97D-5C50-4599-89F9-1CD7E47CF3BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6D6DE8D-5C3B-47E3-B958-8EED193722D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6D6DE8D-5C3B-47E3-B958-8EED193722D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6D6DE8D-5C3B-47E3-B958-8EED193722D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6D6DE8D-5C3B-47E3-B958-8EED193722D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4EE37EB-E3D6-4E36-A85C-475A479BBCDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4EE37EB-E3D6-4E36-A85C-475A479BBCDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4EE37EB-E3D6-4E36-A85C-475A479BBCDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4EE37EB-E3D6-4E36-A85C-475A479BBCDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF6E4FF6-77CB-4FF2-A808-6F327A278D08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF6E4FF6-77CB-4FF2-A808-6F327A278D08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF6E4FF6-77CB-4FF2-A808-6F327A278D08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF6E4FF6-77CB-4FF2-A808-6F327A278D08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{601D776C-FC36-11EC-B939-0242AC120002}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{601D776C-FC36-11EC-B939-0242AC120002}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{601D776C-FC36-11EC-B939-0242AC120002}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{601D776C-FC36-11EC-B939-0242AC120002}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection

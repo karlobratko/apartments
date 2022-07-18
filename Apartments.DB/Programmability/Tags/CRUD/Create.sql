@@ -1,0 +1,124 @@
+CREATE PROCEDURE [dbo].[TagCreate] (@Name      AS nvarchar(100),
+                                    @NameEng   AS nvarchar(100),
+                                    @TagTypeFK AS int,
+                                    @CreatedBy AS int = 1)
+AS BEGIN
+  DECLARE @Guid       AS uniqueidentifier
+  DECLARE @DeleteDate AS datetime
+  SELECT ALL TOP 1
+    @Guid       = [Guid],
+    @DeleteDate = [DeleteDate]
+  FROM [dbo].[Tags]
+  WHERE [Name]    = @Name OR
+        [NameEng] = @NameEng
+
+  IF @Guid IS NULL BEGIN
+    INSERT INTO [dbo].[Tags]
+    (
+      [CreatedBy],
+      [UpdatedBy],
+      [Name],
+      [NameEng],
+      [TagTypeFK]
+    )
+    VALUES
+    (
+      @CreatedBy,
+      @CreatedBy,
+      @Name,
+      @NameEng,
+      @TagTypeFK
+    )
+
+    DECLARE @Id AS int = SCOPE_IDENTITY()
+    SELECT ALL
+      [Id],
+      [Guid],
+      [CreateDate],
+      [CreatedBy],
+      [UpdateDate],
+      [UpdatedBy],
+      [DeleteDate],
+      [DeletedBy],
+      [Name],
+      [NameEng],
+      [TagTypeFK]
+    FROM [dbo].[Tags]
+    WHERE [Id] = @Id
+
+    RETURN 1
+  END
+  ELSE IF @Guid       IS NOT NULL AND 
+          @DeleteDate IS NOT NULL BEGIN
+    SET @Guid = NULL
+    SET @Guid = (
+      SELECT ALL TOP 1
+        [Guid]
+      FROM [dbo].[Tags]
+      WHERE [Name]    = @Name AND
+            [NameEng] = @NameEng
+    )
+    IF @Guid IS NOT NULL BEGIN
+      UPDATE [dbo].[Tags]
+      SET
+        [DeleteDate] = NULL,
+        [DeletedBy]  = NULL,
+        [UpdateDate] = GETDATE(),
+        [UpdatedBy]  = @CreatedBy,
+        [Name]       = @Name,
+        [NameEng]    = @NameEng,
+        [TagTypeFK]  = @TagTypeFK
+      WHERE [Guid] = @Guid
+
+      SELECT ALL
+        [Id],
+        [Guid],
+        [CreateDate],
+        [CreatedBy],
+        [UpdateDate],
+        [UpdatedBy],
+        [DeleteDate],
+        [DeletedBy],
+        [Name],
+        [NameEng],
+        [TagTypeFK]
+      FROM [dbo].[Tags]
+      WHERE [Guid] = @Guid
+
+      RETURN 3
+    END
+    ELSE BEGIN
+      RETURN 2
+    END
+  END
+  ELSE IF @Guid       IS NOT NULL AND 
+          @DeleteDate IS NULL BEGIN
+    UPDATE [dbo].[Tags]
+    SET
+      [UpdateDate] = GETDATE(),
+      [UpdatedBy]  = @CreatedBy,
+      [TagTypeFK]  = @TagTypeFK
+    WHERE [Guid] = @Guid
+
+    SELECT ALL
+      [Id],
+      [Guid],
+      [CreateDate],
+      [CreatedBy],
+      [UpdateDate],
+      [UpdatedBy],
+      [DeleteDate],
+      [DeletedBy],
+      [Name],
+      [NameEng],
+      [TagTypeFK]
+    FROM [dbo].[Tags]
+    WHERE [Guid] = @Guid
+
+    RETURN 2
+  END
+  ELSE BEGIN
+    RETURN -1
+  END
+END
+GO

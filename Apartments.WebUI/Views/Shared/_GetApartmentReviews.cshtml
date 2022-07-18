@@ -1,0 +1,43 @@
+﻿@using Apartments.WebUI.ViewModels
+@model IEnumerable<ReviewCardViewModel>
+
+@foreach (ReviewCardViewModel review in Model) {
+
+  <div class="card mb-3">
+    <div class="card-body m-3">
+      <div class="row">
+        <div class="">
+          <p class="fw-bold lead mb-2"><strong>@review.UserFName @review.UserLName</strong></p>
+          <p class="fw-bold text-muted mb-3">
+            <ul class="list-unstyled d-flex justify-content-start">
+
+              @for (int i = 1; i <= 5; i++) {
+
+                if (review.Stars >= i) {
+                  <li>
+                    <svg class="bi me-2" width="24" height="24">
+                      <use xlink:href="~/Content/bootstrap-icons.svg#star-fill" />
+                    </svg>
+                  </li>
+                }
+                else {
+                  <li>
+                    <svg class="bi me-2" width="24" height="24">
+                      <use xlink:href="~/Content/bootstrap-icons.svg#star" />
+                    </svg>
+                  </li>
+                }
+
+              }
+
+            </ul>
+          </p>
+          <p class="text-muted fw-light mb-4">
+            @review.Details
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+}

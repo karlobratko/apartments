@@ -1,0 +1,54 @@
+﻿@using Apartments.WebUI.ViewModels
+@model UserEditViewModel
+
+@{
+  Page.Title = Apartments.ResourceManager.GetString(name: "edit-profile");
+}
+
+<div class="row d-flex justify-content-center align-items-center">
+  <div class="col-4 px-5 py-3">
+    <h2 class="mb-4 h2 text-center">@Apartments.ResourceManager.GetString(name: "edit-profile")</h2>
+
+    @using (Html.BeginForm(actionName: "Edit",
+                           controllerName: "User",
+                           method: FormMethod.Post)) {
+      @Html.AntiForgeryToken()
+
+      <div class="mb-3">
+        @Html.LabelFor(expression: model => model.FName, htmlAttributes: new { @class = "form-label" })
+        @Html.TextBoxFor(expression: model => model.FName, htmlAttributes: new { @class = "form-control" })
+        @Html.ValidationMessageFor(expression: model => model.FName)
+      </div>
+      <div class="mb-3">
+        @Html.LabelFor(expression: model => model.LName, htmlAttributes: new { @class = "form-label" })
+        @Html.TextBoxFor(expression: model => model.LName, htmlAttributes: new { @class = "form-control" })
+        @Html.ValidationMessageFor(expression: model => model.LName)
+      </div>
+      <div class="mb-3">
+        @Html.LabelFor(expression: model => model.PhoneNumber, htmlAttributes: new { @class = "form-label" })
+        @Html.TextBoxFor(expression: model => model.PhoneNumber, htmlAttributes: new { @class = "form-control" })
+        @Html.ValidationMessageFor(expression: model => model.PhoneNumber)
+      </div>
+      <div class="mb-3">
+        @Html.LabelFor(expression: model => model.Address, htmlAttributes: new { @class = "form-label" })
+        @Html.TextBoxFor(expression: model => model.Address, htmlAttributes: new { @class = "form-control" })
+        @Html.ValidationMessageFor(expression: model => model.Address)
+      </div>
+
+      <div class="d-flex justify-content-end">
+        @Html.ActionLink(linkText: Apartments.ResourceManager.GetString(name: "cancel"),
+                         actionName: "Details",
+                         controllerName: "User",
+                         routeValues: null,
+                         htmlAttributes: new {
+                           @class = "btn btn-outline-secondary me-3"
+                         })
+        <button type="submit" class="btn btn-dark">@Apartments.ResourceManager.GetString(name: "submit")</button>
+      </div>
+    }
+  </div>
+</div>
+
+@section scripts{
+  @Scripts.Render("~/Scripts/jqval")
+}

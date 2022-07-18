@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4BAEF97D-5C50-4599-89F9-1CD7E47CF3BE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Apartments.DAL</RootNamespace>
+    <AssemblyName>Apartments.DAL</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.ConfigurationManager, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Configuration.ConfigurationManager.6.0.0\lib\net461\System.Configuration.ConfigurationManager.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Security.AccessControl, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.AccessControl.6.0.0\lib\net461\System.Security.AccessControl.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Permissions, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Permissions.6.0.0\lib\net461\System.Security.Permissions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Principal.Windows, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Principal.Windows.5.0.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Base\Managers\IConnectionStringManager.cs" />
+    <Compile Include="Base\Managers\ISqlDbTypeManager.cs" />
+    <Compile Include="Base\Repository\Db\Sql\BaseSqlDbRepository.cs" />
+    <Compile Include="Base\Repository\IReadWriteRepository.cs" />
+    <Compile Include="Base\Repository\Db\IDbRepository.cs" />
+    <Compile Include="Base\Repository\IReadOnlyRepository.cs" />
+    <Compile Include="Base\Repository\IIdentifiableRepository.cs" />
+    <Compile Include="Base\Repository\TableModels\IApartmentTableModelRepository.cs" />
+    <Compile Include="Base\Repository\ITableModelRepository.cs" />
+    <Compile Include="Base\Repository\TableModels\ICityTableModelRepository.cs" />
+    <Compile Include="Base\Repository\TableModels\IMetadataTableModelRepository.cs" />
+    <Compile Include="Base\Repository\TableModels\IOwnerTableModelRepository.cs" />
+    <Compile Include="Base\Repository\TableModels\IPictureTableModelRepository.cs" />
+    <Compile Include="Base\Repository\TableModels\IReservationTableModelRepository.cs" />
+    <Compile Include="Base\Repository\TableModels\IReviewTableModelRepository.cs" />
+    <Compile Include="Base\Repository\TableModels\IStatusTableModelRepository.cs" />
+    <Compile Include="Base\Repository\TableModels\ITagApartmentTableModelRepository.cs" />
+    <Compile Include="Base\Repository\TableModels\ITagTableModelRepository.cs" />
+    <Compile Include="Base\Repository\TableModels\ITagTypeTableModelRepository.cs" />
+    <Compile Include="Base\Repository\TableModels\IUserTableModelRepository.cs" />
+    <Compile Include="Base\TableModels\BaseTableModel.cs" />
+    <Compile Include="Base\TableModels\IIdentifiable.cs" />
+    <Compile Include="Base\TableModels\IManageable.cs" />
+    <Compile Include="Base\TableModels\ITableModel.cs" />
+    <Compile Include="Enums\CreateStatus.cs" />
+    <Compile Include="Enums\DeleteStatus.cs" />
+    <Compile Include="Enums\OperationStatus.cs" />
+    <Compile Include="Enums\ReadMethod.cs" />
+    <Compile Include="Enums\RegisterStatus.cs" />
+    <Compile Include="Enums\RegistrationStatus.cs" />
+    <Compile Include="Enums\RequestResetPasswordStatus.cs" />
+    <Compile Include="Enums\ResetPasswordStatus.cs" />
+    <Compile Include="Enums\UpdateStatus.cs" />
+    <Compile Include="Managers\ConnectionStringManager.cs" />
+    <Compile Include="Managers\SqlDbTypeManager.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\Db\Sql\ApartmentSqlDbRepository.cs" />
+    <Compile Include="Repository\Db\Sql\CitySqlDbRepository.cs" />
+    <Compile Include="Repository\Db\Sql\MetadataSqlDbRepository.cs" />
+    <Compile Include="Repository\Db\Sql\OwnerSqlDbRepository.cs" />
+    <Compile Include="Repository\Db\Sql\PictureSqlDbRepository.cs" />
+    <Compile Include="Repository\Db\Sql\ReservationSqlDbRepository.cs" />
+    <Compile Include="Repository\Db\Sql\ReviewSqlDbRepository.cs" />
+    <Compile Include="Repository\Db\Sql\StatusSqlDbRepository.cs" />
+    <Compile Include="Repository\Db\Sql\TagApartmentSqlDbRepository.cs" />
+    <Compile Include="Repository\Db\Sql\TagSqlDbRepository.cs" />
+    <Compile Include="Repository\Db\Sql\TagTypeSqlDbRepository.cs" />
+    <Compile Include="Repository\Db\Sql\UserSqlDbRepository.cs" />
+    <Compile Include="TableModels\ApartmentTableModel.cs" />
+    <Compile Include="TableModels\CityTableModel.cs" />
+    <Compile Include="TableModels\MetadataTableModel.cs" />
+    <Compile Include="TableModels\OwnerTableModel.cs" />
+    <Compile Include="TableModels\PictureTableModel.cs" />
+    <Compile Include="TableModels\ReservationTableModel.cs" />
+    <Compile Include="TableModels\ReviewTableModel.cs" />
+    <Compile Include="TableModels\StatusTableModel.cs" />
+    <Compile Include="TableModels\TagApartmentTableModel.cs" />
+    <Compile Include="TableModels\TagTableModel.cs" />
+    <Compile Include="TableModels\TagTypeTableModel.cs" />
+    <Compile Include="TableModels\UserTableModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

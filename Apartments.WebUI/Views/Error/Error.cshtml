@@ -1,0 +1,30 @@
+﻿@{ 
+  Layout = null;
+}
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width" />
+  <title>@Apartments.ResourceManager.GetString(name: Response.StatusCode.ToString())</title>
+  @Styles.Render("~/Content/bs")
+</head>
+<body class="d-flex flex-column vh-100 text-center text-black justify-content-center">
+
+  <div class="container">
+    <h1 class="display-1">@Response.StatusCode</h1>
+    <p class="fs-4">@Apartments.ResourceManager.GetString(name: Response.StatusCode.ToString())</p>
+    @Html.ActionLink(linkText: Apartments.ResourceManager.GetString(name: "back-to-home"),
+                   actionName: "Index",
+                   controllerName: "Home",
+                   routeValues: new {
+                     culture = ViewBag.Culture
+                   },
+                   htmlAttributes: new {
+                     @class = "btn btn-outline-dark mt-3"
+                   })
+  </div>
+
+  @Scripts.Render("~/Scripts/jq")
+  @Scripts.Render("~/Scripts/bs")
+</body>
+</html>
