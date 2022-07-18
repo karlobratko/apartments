@@ -1,6 +1,7 @@
 CREATE PROCEDURE [dbo].[PictureCreate] (@ApartmentFK      AS int,
                                         @Title            AS nvarchar(100),
-                                        @Path             AS nvarchar(500),
+                                        @Data             AS varbinary(MAX),
+                                        @MimeType         AS nvarchar(50),
                                         @IsRepresentative AS bit,
                                         @CreatedBy        AS int = 1)
 AS BEGIN
@@ -11,7 +12,8 @@ AS BEGIN
     @Guid       = [Guid],
     @DeleteDate = [DeleteDate]
   FROM [dbo].[Pictures]
-  WHERE [Title] = @Title
+  WHERE [Title] = @Title AND
+        [ApartmentFK] = @ApartmentFK
 
   IF @Guid IS NULL BEGIN
     SET @PicturesCount = (
@@ -42,7 +44,8 @@ AS BEGIN
       [UpdatedBy],
       [ApartmentFK],
       [Title],
-      [Path],
+      [Data],
+      [MimeType],
       [IsRepresentative]
     )
     VALUES
@@ -51,7 +54,8 @@ AS BEGIN
       @CreatedBy,
       @ApartmentFK,
       @Title,
-      @Path,
+      @Data,
+      @MimeType,
       @IsRepresentative
     )
 
@@ -67,7 +71,8 @@ AS BEGIN
       [DeletedBy],
       [ApartmentFK],
       [Title],
-      [Path],
+      [Data],
+      [MimeType],
       [IsRepresentative]
     FROM [dbo].[Pictures]
     WHERE [Id] = @Id
@@ -104,8 +109,8 @@ AS BEGIN
       [DeletedBy]        = NULL,
       [UpdateDate]       = GETDATE(),
       [UpdatedBy]        = @CreatedBy,
-      [ApartmentFK]      = @ApartmentFK,
-      [Path]             = @Path,
+      [Data]             = @Data,
+      [MimeType]         = @MimeType,
       [IsRepresentative] = @IsRepresentative
     WHERE [Guid] = @Guid
 
@@ -120,7 +125,8 @@ AS BEGIN
       [DeletedBy],
       [ApartmentFK],
       [Title],
-      [Path],
+      [Data],
+      [MimeType],
       [IsRepresentative]
     FROM [dbo].[Pictures]
     WHERE [Guid] = @Guid
@@ -155,8 +161,8 @@ AS BEGIN
     SET
       [UpdateDate]       = GETDATE(),
       [UpdatedBy]        = @CreatedBy,
-      [ApartmentFK]      = @ApartmentFK,
-      [Path]             = @Path,
+      [Data]             = @Data,
+      [MimeType]         = @MimeType,
       [IsRepresentative] = @IsRepresentative
     WHERE [Guid] = @Guid
 
@@ -171,7 +177,8 @@ AS BEGIN
       [DeletedBy],
       [ApartmentFK],
       [Title],
-      [Path],
+      [Data],
+      [MimeType],
       [IsRepresentative]
     FROM [dbo].[Pictures]
     WHERE [Guid] = @Guid

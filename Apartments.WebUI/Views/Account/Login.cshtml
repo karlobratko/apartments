@@ -1,0 +1,126 @@
+﻿@using Apartments.WebUI.ViewModels
+@model LoginViewModel
+
+@{
+  Page.Title = Apartments.ResourceManager.GetString(name: "login");
+}
+
+<div class="row d-flex justify-content-center align-items-center">
+  <div class="col-4 px-5 py-3">
+    <h2 class="mb-4 h2 text-center">@Apartments.ResourceManager.GetString(name: "login")</h2>
+
+    @using (Html.BeginForm(actionName: "Login",
+                           controllerName: "Account",
+                           method: FormMethod.Post)) {
+      @Html.AntiForgeryToken()
+
+      <div class="mb-3">
+        @Html.LabelFor(expression: model => model.Username, htmlAttributes: new { @class = "form-label" })
+        @Html.TextBoxFor(expression: model => model.Username, htmlAttributes: new { @class = "form-control" })
+        @Html.ValidationMessageFor(expression: model => model.Username)
+      </div>
+      <div class="mb-3">
+        @Html.LabelFor(expression: model => model.Password, htmlAttributes: new { @class = "form-label" })
+        @Html.PasswordFor(expression: model => model.Password, htmlAttributes: new { @class = "form-control" })
+        @Html.ValidationMessageFor(expression: model => model.Password)
+      </div>
+
+      <div class="d-flex justify-content-end">
+        @Html.ActionLink(linkText: Apartments.ResourceManager.GetString(name: "cancel"),
+                         actionName: "Index",
+                         controllerName: "Home",
+                         routeValues: null,
+                         htmlAttributes: new {
+                           @class = "btn btn-outline-secondary me-3"
+                         })
+        <button type="submit" class="btn btn-dark">@Apartments.ResourceManager.GetString(name: "login")</button>
+      </div>
+    }
+
+    <div class="text-center mt-5">
+      <span class="text-secondary">@Apartments.ResourceManager.GetString(name: "register-question")</span>
+      @Html.ActionLink(linkText: Apartments.ResourceManager.GetString(name: "register"),
+                         actionName: "Register",
+                         controllerName: "Account",
+                         routeValues: null,
+                         htmlAttributes: new {
+                           @class = "link-dark ms-2"
+                         })
+    </div>
+
+    <div class="text-center mt-2">
+      <span class="text-secondary">@Apartments.ResourceManager.GetString(name: "request-reset-password-question")</span>
+      <a class="link-dark" data-bs-toggle="modal" href="#modalResetPassword" role="button">
+        @Apartments.ResourceManager.GetString(name: "request-reset-password")
+      </a>
+    </div>
+  </div>
+</div>
+
+<div id="modalResetPassword" class="modal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">@Apartments.ResourceManager.GetString(name: "request-reset-password")</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        @using (Html.BeginForm(actionName: "RequestResetPassword",
+                               controllerName: "Account",
+                               method: FormMethod.Post,
+                               htmlAttributes: new {
+                                 id = "resetPasswordForm"
+                               })) {
+          @Html.AntiForgeryToken();
+
+          <p class="text-secondary">@Apartments.ResourceManager.GetString(name: "request-reset-password-description")</p>
+          <div class="mb-3">
+            @Html.Label(expression: "email", labelText: "Email", htmlAttributes: new { @class = "control-label col-md-4" })
+            @Html.TextBox(name: "email", value: null, htmlAttributes: new { id = "resetPasswordEmail", @class = "form-control", type = "email", required = "true" })
+          </div>
+          <div class="d-flex justify-content-end">
+            <button class="btn btn-outline-secondary me-3" data-bs-dismiss="modal" type="button" value="Odustani">
+              @Apartments.ResourceManager.GetString(name: "cancel")
+            </button>
+            <button id="btnResetPassword" class="btn btn-dark" type="submit" value="Pošalji">
+              @Apartments.ResourceManager.GetString(name: "submit")
+            </button>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>
+
+@section scripts{
+  @Scripts.Render("~/Scripts/jqval")
+
+  <script>
+    $(() => {
+      const form = $("#resetPasswordForm").validate({
+        rules: {
+          email: {
+            required: true,
+            email: true
+          }
+        },
+        messages: {
+          email: {
+            required: "@ModelValidation.ResourceManager.GetString(name: "email-required")",
+            email: "@ModelValidation.ResourceManager.GetString(name: "email-required")"
+          }
+        },
+        highlight: element => {
+          $(element).addClass('input-validation-error');
+        }, unhighlight: element => {
+          $(element).removeClass('input-validation-error');
+        }
+      });
+      $("#modalResetPassword").on("hide.bs.modal", () => {
+        $("#resetPasswordEmail").val("");
+        form.resetForm();
+      });
+    });
+  </script>
+}

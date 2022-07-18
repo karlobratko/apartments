@@ -1,5 +1,5 @@
 CREATE PROCEDURE [dbo].[StatusRead] (@Method AS int,
-                                     @Guid   AS uniqueidentifier = NULL)
+                                     @Id     AS int = NULL)
 AS BEGIN
   IF @Method = 1 BEGIN
     SELECT ALL
@@ -43,7 +43,7 @@ AS BEGIN
       [Name],
       [NameEng]
     FROM [dbo].[Statuses]
-    WHERE [Guid] = @Guid
+    WHERE [Id] = @Id
   END
   ELSE IF @Method = 4 BEGIN
     SELECT ALL
@@ -59,7 +59,7 @@ AS BEGIN
       [NameEng]
     FROM [dbo].[Statuses]
     WHERE [DeleteDate] IS NULL AND
-          [Guid] = @Guid
+          [Id] = @Id
   END
 END
 GO

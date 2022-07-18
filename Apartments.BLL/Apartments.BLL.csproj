@@ -32,7 +32,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -43,9 +46,11 @@
   <ItemGroup>
     <Compile Include="Base\DomainModels\BaseDomainModel.cs" />
     <Compile Include="Base\DomainModels\IDomainModel.cs" />
+    <Compile Include="Base\Helpers\IEmailSender.cs" />
     <Compile Include="Base\Managers\BaseDomainModelManager.cs" />
     <Compile Include="Base\Managers\DomainModels\IApartmentDomainModelManager.cs" />
     <Compile Include="Base\Managers\DomainModels\ICityDomainModelManager.cs" />
+    <Compile Include="Base\Managers\DomainModels\IMetadataDomainModelManager.cs" />
     <Compile Include="Base\Managers\DomainModels\IReservationDomainModelManager.cs" />
     <Compile Include="Base\Managers\DomainModels\IOwnerDomainModelManager.cs" />
     <Compile Include="Base\Managers\DomainModels\IPictureDomainModelManager.cs" />
@@ -58,6 +63,7 @@
     <Compile Include="Base\Managers\IDomainModelManager.cs" />
     <Compile Include="DomainModels\ApartmentDomainModel.cs" />
     <Compile Include="DomainModels\CityDomainModel.cs" />
+    <Compile Include="DomainModels\MetadataDomainModel.cs" />
     <Compile Include="DomainModels\OwnerDomainModel.cs" />
     <Compile Include="DomainModels\PictureDomainModel.cs" />
     <Compile Include="DomainModels\ReservationDomainModel.cs" />
@@ -67,14 +73,17 @@
     <Compile Include="DomainModels\TagDomainModel.cs" />
     <Compile Include="DomainModels\TagTypeDomainModel.cs" />
     <Compile Include="DomainModels\UserDomainModel.cs" />
+    <Compile Include="Extensions\HttpRequestExtensions.cs" />
+    <Compile Include="Helpers\EmailSender.cs" />
     <Compile Include="Managers\ApartmentDomainModelManager.cs" />
     <Compile Include="Managers\CityDomainModelManager.cs" />
+    <Compile Include="Managers\MetadataDomainModelManager.cs" />
     <Compile Include="Managers\OwnerDomainModelManager.cs" />
     <Compile Include="Managers\PictureDomainModelManager.cs" />
     <Compile Include="Managers\ReservationDomainModelManager.cs" />
     <Compile Include="Managers\ReviewDomainModelManager.cs" />
     <Compile Include="Managers\StatusDomainModelManager.cs" />
-    <Compile Include="Managers\TagApartmentDomainModelRepository.cs" />
+    <Compile Include="Managers\TagApartmentDomainModelManager.cs" />
     <Compile Include="Managers\TagDomainModelManager.cs" />
     <Compile Include="Managers\TagTypeDomainModelManager.cs" />
     <Compile Include="Managers\UserDomainModelManager.cs" />
@@ -84,6 +93,10 @@
     <ProjectReference Include="..\Apartments.DAL\Apartments.DAL.csproj">
       <Project>{4BAEF97D-5C50-4599-89F9-1CD7E47CF3BE}</Project>
       <Name>Apartments.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Apartments.Resources\Apartments.Resources.csproj">
+      <Project>{ff6e4ff6-77cb-4ff2-a808-6f327a278d08}</Project>
+      <Name>Apartments.Resources</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

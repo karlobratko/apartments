@@ -85,6 +85,10 @@
     <Folder Include="Programmability\Reviews\CRUD" />
     <Folder Include="Programmability\TagsApartments" />
     <Folder Include="Programmability\TagsApartments\CRUD" />
+    <Folder Include="Programmability\Metadata" />
+    <Folder Include="Programmability\Metadata\CRUD" />
+    <Folder Include="Programmability\TagsApartments\BL" />
+    <Folder Include="Programmability\Reviews\BL" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\Apartments.sql" />
@@ -155,6 +159,13 @@
     <Build Include="Programmability\TagsApartments\CRUD\Read.sql" />
     <Build Include="Programmability\TagsApartments\CRUD\Update.sql" />
     <Build Include="Programmability\TagsApartments\CRUD\Delete.sql" />
+    <Build Include="Tables\Metadata.sql" />
+    <Build Include="Programmability\Metadata\CRUD\Read.sql" />
+    <Build Include="Programmability\TagsApartments\BL\ReadByApartmentFK.sql" />
+    <Build Include="Programmability\Apartments\BL\ReadByTagFK.sql" />
+    <Build Include="Programmability\Pictures\BL\ReadRepresentative.sql" />
+    <Build Include="Programmability\Tags\BL\ReadByApartmentFK.sql" />
+    <Build Include="Programmability\Reviews\BL\ReadByApartmentFK.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DB.publish.xml" />

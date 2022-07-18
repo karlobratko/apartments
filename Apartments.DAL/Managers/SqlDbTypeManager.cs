@@ -16,7 +16,7 @@ namespace Apartments.DAL.Managers {
         { typeof(Int32?),         SqlDbType.Int },
         { typeof(Int64),          SqlDbType.BigInt },
         { typeof(Int64?),         SqlDbType.BigInt },
-        { typeof(Byte[]),         SqlDbType.Image },
+        { typeof(Byte[]),         SqlDbType.VarBinary },
         { typeof(Boolean),        SqlDbType.Bit },
         { typeof(Boolean?),       SqlDbType.Bit },
         { typeof(DateTime),       SqlDbType.DateTime },

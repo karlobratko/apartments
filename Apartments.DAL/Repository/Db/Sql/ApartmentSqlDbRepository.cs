@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 
 using Apartments.DAL.Base.Managers;
 using Apartments.DAL.Base.Repository.Db.Sql;
@@ -39,7 +41,7 @@ namespace Apartments.DAL.Repository.Db.Sql {
         OwnerFK = reader.GetInt32(reader.GetOrdinal(nameof(ApartmentTableModel.OwnerFK))),
         StatusFK = reader.GetInt32(reader.GetOrdinal(nameof(ApartmentTableModel.StatusFK))),
         Name = reader.GetString(reader.GetOrdinal(nameof(ApartmentTableModel.Name))),
-        NameEng = reader.GetString(reader.GetOrdinal(nameof(ApartmentTableModel.Name))),
+        NameEng = reader.GetString(reader.GetOrdinal(nameof(ApartmentTableModel.NameEng))),
         CityFK = reader.GetInt32(reader.GetOrdinal(nameof(ApartmentTableModel.CityFK))),
         Address = reader.GetString(reader.GetOrdinal(nameof(ApartmentTableModel.Address))),
         Price = reader.GetDecimal(reader.GetOrdinal(nameof(ApartmentTableModel.Price))),
@@ -66,5 +68,33 @@ namespace Apartments.DAL.Repository.Db.Sql {
 
     #endregion
 
+    #region Public Methods
+
+    public IEnumerable<ApartmentTableModel> ReadByTagFK(Int32 tagFK) {
+      IList<SqlParameter> parameters = new List<SqlParameter> {
+        new SqlParameter {
+          ParameterName = "@TagFK",
+          Direction = ParameterDirection.Input,
+          SqlDbType = SqlDbTypeManager.GetSqlDbType(typeof(TagTableModel).GetProperty(nameof(TagTableModel.Id)).PropertyType),
+          Value = tagFK
+        }
+      };
+
+      using (var sqlConnection = new SqlConnection(ConnectionString)) {
+        SqlCommand sqlCommand = sqlConnection.CreateCommand();
+        sqlCommand.CommandText = $"[dbo].[{EntityName}{nameof(ApartmentSqlDbRepository.ReadByTagFK)}]";
+        sqlCommand.CommandType = CommandType.StoredProcedure;
+        sqlCommand.Parameters.AddRange(values: parameters.ToArray());
+
+        sqlConnection.Open();
+        SqlDataReader reader = sqlCommand.ExecuteReader();
+
+        while (reader.Read()) {
+          yield return Model(reader: reader);
+        }
+      }
+    }
+
+    #endregion
   }
 }

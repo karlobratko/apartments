@@ -7,7 +7,7 @@ namespace Apartments.DAL.Base.Repository {
   public interface IIdentifiableRepository<TKey, TModel> : IReadWriteRepository<TModel>
     where TModel : class, IIdentifiable<TKey>
     where TKey : struct {
-    TModel ReadByGuid(Guid guid);
+    TModel ReadById(TKey id);
     UpdateStatus Update(Guid guid, TModel model);
     DeleteStatus Delete(Guid guid);
   }

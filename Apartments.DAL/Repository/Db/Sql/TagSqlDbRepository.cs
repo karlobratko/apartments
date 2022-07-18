@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 
 using Apartments.DAL.Base.Managers;
 using Apartments.DAL.Base.Repository.Db.Sql;
@@ -48,6 +50,60 @@ namespace Apartments.DAL.Repository.Db.Sql {
         new SqlParameter { ParameterName = $"@{nameof(TagTableModel.NameEng)}", SqlDbType = SqlDbTypeManager.GetSqlDbType(typeof(TagTableModel).GetProperty(nameof(TagTableModel.NameEng)).PropertyType), Value = model.NameEng },
         new SqlParameter { ParameterName = $"@{nameof(TagTableModel.TagTypeFK)}", SqlDbType = SqlDbTypeManager.GetSqlDbType(typeof(TagTableModel).GetProperty(nameof(TagTableModel.TagTypeFK)).PropertyType), Value = model.TagTypeFK },
       };
+
+    #endregion
+
+    #region MyRegion
+
+    public IEnumerable<TagTableModel> ReadUnassigned(Int32 apartmentFK) {
+      IList<SqlParameter> parameters = new List<SqlParameter> {
+        new SqlParameter {
+          ParameterName = "@ApartmentFK",
+          Direction = ParameterDirection.Input,
+          SqlDbType = SqlDbTypeManager.GetSqlDbType(typeof(ApartmentTableModel).GetProperty(nameof(ApartmentTableModel.Id)).PropertyType),
+          Value = apartmentFK
+        }
+      };
+
+      using (var sqlConnection = new SqlConnection(ConnectionString)) {
+        SqlCommand sqlCommand = sqlConnection.CreateCommand();
+        sqlCommand.CommandText = $"[dbo].[{EntityName}{nameof(TagSqlDbRepository.ReadUnassigned)}]";
+        sqlCommand.CommandType = CommandType.StoredProcedure;
+        sqlCommand.Parameters.AddRange(values: parameters.ToArray());
+
+        sqlConnection.Open();
+        SqlDataReader reader = sqlCommand.ExecuteReader();
+
+        while (reader.Read()) {
+          yield return Model(reader: reader);
+        }
+      }
+    }
+
+    public IEnumerable<TagTableModel> ReadByApartmentFK(Int32 apartmentFK) {
+      IList<SqlParameter> parameters = new List<SqlParameter> {
+        new SqlParameter {
+          ParameterName = "@ApartmentFK",
+          Direction = ParameterDirection.Input,
+          SqlDbType = SqlDbTypeManager.GetSqlDbType(typeof(ApartmentTableModel).GetProperty(nameof(ApartmentTableModel.Id)).PropertyType),
+          Value = apartmentFK
+        }
+      };
+
+      using (var sqlConnection = new SqlConnection(ConnectionString)) {
+        SqlCommand sqlCommand = sqlConnection.CreateCommand();
+        sqlCommand.CommandText = $"[dbo].[{EntityName}{nameof(TagSqlDbRepository.ReadByApartmentFK)}]";
+        sqlCommand.CommandType = CommandType.StoredProcedure;
+        sqlCommand.Parameters.AddRange(values: parameters.ToArray());
+
+        sqlConnection.Open();
+        SqlDataReader reader = sqlCommand.ExecuteReader();
+
+        while (reader.Read()) {
+          yield return Model(reader: reader);
+        }
+      }
+    }
 
     #endregion
 

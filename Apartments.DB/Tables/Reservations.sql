@@ -18,7 +18,7 @@ CREATE TABLE [dbo].[Reservations]
   [UserFName]         nvarchar(50)  NOT NULL,
   [UserLName]         nvarchar(50)  NOT NULL,
   [UserEmail]         nvarchar(256) NOT NULL,
-  [UserPhoneNumber]   nvarchar(20)  NOT NULL,
+  [UserPhoneNumber]   nvarchar(20)  NULL,
   [UserAddress]       nvarchar(200) NOT NULL,
 
   CONSTRAINT [PK_Reservations] PRIMARY KEY CLUSTERED ([Id] ASC),

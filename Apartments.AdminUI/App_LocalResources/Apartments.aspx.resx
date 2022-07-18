@@ -1,0 +1,444 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="btnAddPicture.Text" xml:space="preserve">
+    <value>Upload picture</value>
+  </data>
+  <data name="btnBack.Text" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="btnCancel.Text" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="btnCancelDelete.Text" xml:space="preserve">
+    <value>No, cancel delete.</value>
+  </data>
+  <data name="btnCreate.Text" xml:space="preserve">
+    <value>Create new apartment</value>
+  </data>
+  <data name="btnDelete.Text" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="btnDeletePicture.Text" xml:space="preserve">
+    <value>Delete picture</value>
+  </data>
+  <data name="btnEdit.Text" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="btnPictures.Text" xml:space="preserve">
+    <value>Pictures</value>
+  </data>
+  <data name="btnSave.Text" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="btnSelectPicture.Text" xml:space="preserve">
+    <value>Select picture as representative</value>
+  </data>
+  <data name="btnStatus.Text" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="btnSubmit.Text" xml:space="preserve">
+    <value>Submit</value>
+  </data>
+  <data name="btnSubmitDelete.Text" xml:space="preserve">
+    <value>Yes, delete apartment.</value>
+  </data>
+  <data name="btnTag.Text" xml:space="preserve">
+    <value>Tags</value>
+  </data>
+  <data name="btnUploadPicture.Text" xml:space="preserve">
+    <value>Upload picture</value>
+  </data>
+  <data name="cvPictureSize.Text" xml:space="preserve">
+    <value>Picture size must be max 512 KB!</value>
+  </data>
+  <data name="gvbfAddress.HeaderText" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="gvbfBeachDistance.HeaderText" xml:space="preserve">
+    <value>Beach distance</value>
+  </data>
+  <data name="gvbfCity.HeaderText" xml:space="preserve">
+    <value>City</value>
+  </data>
+  <data name="gvbfId.HeaderText" xml:space="preserve">
+    <value>Id</value>
+  </data>
+  <data name="gvbfMaxAdults.HeaderText" xml:space="preserve">
+    <value>Adults</value>
+  </data>
+  <data name="gvbfMaxChildren.HeaderText" xml:space="preserve">
+    <value>Children</value>
+  </data>
+  <data name="gvbfName.DataField" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="gvbfName.HeaderText" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="gvbfName.SortExpression" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="gvbfPictures.HeaderText" xml:space="preserve">
+    <value>Pictures</value>
+  </data>
+  <data name="gvbfPrice.HeaderText" xml:space="preserve">
+    <value>Price</value>
+  </data>
+  <data name="gvbfTotalRooms.HeaderText" xml:space="preserve">
+    <value>Total rooms</value>
+  </data>
+  <data name="hApartmentPictures.InnerText" xml:space="preserve">
+    <value>Apartment pictures</value>
+  </data>
+  <data name="hCreateApartment.InnerText" xml:space="preserve">
+    <value>Create apartment</value>
+  </data>
+  <data name="hDeleteApartment.InnerText" xml:space="preserve">
+    <value>Do you really want to delete apartment?</value>
+  </data>
+  <data name="hStatusApartment.InnerText" xml:space="preserve">
+    <value>Change status</value>
+  </data>
+  <data name="hTagApartment.InnerText" xml:space="preserve">
+    <value>Tag apartment</value>
+  </data>
+  <data name="hUpdateApartment.InnerText" xml:space="preserve">
+    <value>Edit apartment</value>
+  </data>
+  <data name="lblAddress.Text" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="lblBeachDistance.Text" xml:space="preserve">
+    <value>Beach distance</value>
+  </data>
+  <data name="lblCity.Text" xml:space="preserve">
+    <value>City</value>
+  </data>
+  <data name="lblCreateNameCro.Text" xml:space="preserve">
+    <value>Croatian name</value>
+  </data>
+  <data name="lblCreateNameEng.Text" xml:space="preserve">
+    <value>English name</value>
+  </data>
+  <data name="lblDetails.Text" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="lblMaxAdults.Text" xml:space="preserve">
+    <value>Adults</value>
+  </data>
+  <data name="lblMaxChildren.Text" xml:space="preserve">
+    <value>Children</value>
+  </data>
+  <data name="lblName.Text" xml:space="preserve">
+    <value>Name (cro.)</value>
+  </data>
+  <data name="lblNameEng.Text" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="lblOrder.Text" xml:space="preserve">
+    <value>Order</value>
+  </data>
+  <data name="lblOwner.Text" xml:space="preserve">
+    <value>Owner</value>
+  </data>
+  <data name="lblPictureName.Text" xml:space="preserve">
+    <value>Picture name</value>
+  </data>
+  <data name="lblPrice.Text" xml:space="preserve">
+    <value>Price</value>
+  </data>
+  <data name="lblRegisteredUser.Text" xml:space="preserve">
+    <value>User</value>
+  </data>
+  <data name="lblSort.Text" xml:space="preserve">
+    <value>Sort by</value>
+  </data>
+  <data name="lblStatus.Text" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="lblTags.Text" xml:space="preserve">
+    <value>Tag</value>
+  </data>
+  <data name="lblTotalRooms.Text" xml:space="preserve">
+    <value>Total rooms</value>
+  </data>
+  <data name="lblUnregisteredUserAddress.Text" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="lblUnregisteredUserEmail.Text" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="lblUnregisteredUserFName.Text" xml:space="preserve">
+    <value>First name</value>
+  </data>
+  <data name="lblUnregisteredUserLName.Text" xml:space="preserve">
+    <value>Last name</value>
+  </data>
+  <data name="lblUnregisteredUserPhone.Text" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="lblUserType.Text" xml:space="preserve">
+    <value>User type</value>
+  </data>
+  <data name="liAddress.Text" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="liBeachDistance.Text" xml:space="preserve">
+    <value>Beach distance</value>
+  </data>
+  <data name="liCity.Text" xml:space="preserve">
+    <value>City</value>
+  </data>
+  <data name="liDefaultCity" xml:space="preserve">
+    <value>Select city</value>
+  </data>
+  <data name="liDefaultOwner" xml:space="preserve">
+    <value>Select owner</value>
+  </data>
+  <data name="liDefaultRegisteredUser" xml:space="preserve">
+    <value>Select user</value>
+  </data>
+  <data name="liDefaultSort.Text" xml:space="preserve">
+    <value>Select column</value>
+  </data>
+  <data name="liDefaultStatus" xml:space="preserve">
+    <value>Select status</value>
+  </data>
+  <data name="liDefaultTag" xml:space="preserve">
+    <value>Select tag</value>
+  </data>
+  <data name="liDefaultUserType.Text" xml:space="preserve">
+    <value>Select user type</value>
+  </data>
+  <data name="liMaxAdults.Text" xml:space="preserve">
+    <value>Adults</value>
+  </data>
+  <data name="liMaxChildren.Text" xml:space="preserve">
+    <value>Children</value>
+  </data>
+  <data name="liName.Text" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="liName.Value" xml:space="preserve">
+    <value>NameEng</value>
+  </data>
+  <data name="liOrderAsc.Text" xml:space="preserve">
+    <value>Ascending</value>
+  </data>
+  <data name="liOrderDesc.Text" xml:space="preserve">
+    <value>Descending</value>
+  </data>
+  <data name="liPictures.Text" xml:space="preserve">
+    <value>Pictures</value>
+  </data>
+  <data name="liPrice.Text" xml:space="preserve">
+    <value>Price</value>
+  </data>
+  <data name="liRegisteredUser.Text" xml:space="preserve">
+    <value>Registered</value>
+  </data>
+  <data name="liTotalRooms.Text" xml:space="preserve">
+    <value>Total rooms</value>
+  </data>
+  <data name="liUnregisteredUser.Text" xml:space="preserve">
+    <value>Unregistered</value>
+  </data>
+  <data name="pDeleteApartment.InnerText" xml:space="preserve">
+    <value>Deleted apartment can be returned only by database administrator.</value>
+  </data>
+  <data name="rfvCreateAddress.Text" xml:space="preserve">
+    <value>Address is required!</value>
+  </data>
+  <data name="rfvCreateBeachDistance.Text" xml:space="preserve">
+    <value>Beach distance is required!</value>
+  </data>
+  <data name="rfvCreateCity.Text" xml:space="preserve">
+    <value>City is required!</value>
+  </data>
+  <data name="rfvCreateMaxAdults.Text" xml:space="preserve">
+    <value>Adults count is required!</value>
+  </data>
+  <data name="rfvCreateMaxChildren.Text" xml:space="preserve">
+    <value>Children count is required!</value>
+  </data>
+  <data name="rfvCreateNameCro.Text" xml:space="preserve">
+    <value>Croatian apartment name is required!</value>
+  </data>
+  <data name="rfvCreateNameEng.Text" xml:space="preserve">
+    <value>English apartment name is required!</value>
+  </data>
+  <data name="rfvCreateOwner.Text" xml:space="preserve">
+    <value>Owner is required!</value>
+  </data>
+  <data name="rfvCreatePrice.Text" xml:space="preserve">
+    <value>Price is required!</value>
+  </data>
+  <data name="rfvCreateTotalRooms.Text" xml:space="preserve">
+    <value>Total rooms count is required!</value>
+  </data>
+  <data name="rfvPictureName.Text" xml:space="preserve">
+    <value>Picture name is required!</value>
+  </data>
+  <data name="rfvUnregisteredUserAddress.Text" xml:space="preserve">
+    <value>Address is required!</value>
+  </data>
+  <data name="rfvUnregisteredUserEmail.Text" xml:space="preserve">
+    <value>Email is required!</value>
+  </data>
+  <data name="rfvUnregisteredUserFName.Text" xml:space="preserve">
+    <value>First name is required!</value>
+  </data>
+  <data name="rfvUnregisteredUserLName.Text" xml:space="preserve">
+    <value>Last name is required!</value>
+  </data>
+  <data name="rfvUnregisteredUserPhone.Text" xml:space="preserve">
+    <value>Phone is required!</value>
+  </data>
+  <data name="rvCreateBeachDistance.Text" xml:space="preserve">
+    <value>Beach distance must be number!</value>
+  </data>
+  <data name="rvCreateMaxAdults.Text" xml:space="preserve">
+    <value>Adults count must be number between 1 and 10!</value>
+  </data>
+  <data name="rvCreateMaxChildren.Text" xml:space="preserve">
+    <value>Children count must be number between 1 and 10!</value>
+  </data>
+  <data name="rvCreatePrice.Text" xml:space="preserve">
+    <value>Price must be currency!</value>
+  </data>
+  <data name="rvCreateTotalRooms.Text" xml:space="preserve">
+    <value>Total rooms count must be number!</value>
+  </data>
+  <data name="rvEditBeachDistance.Text" xml:space="preserve">
+    <value>Beach distance must be number!</value>
+  </data>
+  <data name="rvEditMaxAdults.Text" xml:space="preserve">
+    <value>Adults count must be number between 1 and 10!</value>
+  </data>
+  <data name="rvEditMaxChildren.Text" xml:space="preserve">
+    <value>Children count must be number between 1 and 10!</value>
+  </data>
+  <data name="rvEditPrice.Text" xml:space="preserve">
+    <value>Price must be currency!</value>
+  </data>
+  <data name="rvEditTotalRooms.Text" xml:space="preserve">
+    <value>Total rooms count must be number!</value>
+  </data>
+</root>

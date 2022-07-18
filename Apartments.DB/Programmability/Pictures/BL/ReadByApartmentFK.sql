@@ -2,6 +2,7 @@ CREATE PROCEDURE [dbo].[PictureReadByApartmentFK] (@ApartmentFK AS int)
 AS BEGIN
   SELECT ALL
     [Id],
+    [Guid],
     [CreateDate],
     [CreatedBy],
     [UpdateDate],
@@ -10,10 +11,11 @@ AS BEGIN
     [DeletedBy],
     [ApartmentFK],
     [Title],
-    [Path],
+    [Data],
+    [MimeType],
     [IsRepresentative]
   FROM [dbo].[Pictures]
-  WHERE [ApartmentFK] = @ApartmentFK AND [DeleteDate] IS NULL
-  ORDER BY [CreateDate] DESC
+  WHERE [DeleteDate] IS NULL AND
+        [ApartmentFK] = @ApartmentFK
 END
 GO

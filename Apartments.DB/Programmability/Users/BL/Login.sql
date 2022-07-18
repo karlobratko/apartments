@@ -33,7 +33,6 @@ AS BEGIN
           [IsRegistered] = 1
   END
   ELSE BEGIN
-      IF @Username IS NULL BEGIN
     SELECT ALL
       [Id],
       [Guid],
@@ -60,7 +59,6 @@ AS BEGIN
           [Username] = @Username AND
           [PasswordHash] = @PasswordHash AND
           [IsRegistered] = 1
-  END
   END
 END
 GO

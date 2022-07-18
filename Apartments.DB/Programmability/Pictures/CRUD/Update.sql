@@ -1,7 +1,8 @@
 CREATE PROCEDURE [dbo].[PictureUpdate] (@Guid             AS uniqueidentifier,
                                         @ApartmentFK      AS int,
                                         @Title            AS nvarchar(100),
-                                        @Path             AS nvarchar(500),
+                                        @Data             AS varbinary(MAX),
+                                        @MimeType         AS nvarchar(50),
                                         @IsRepresentative AS bit,
                                         @UpdatedBy        AS int = 1)
 AS BEGIN
@@ -29,6 +30,7 @@ AS BEGIN
     @DeleteDate = [DeleteDate]
   FROM [dbo].[Pictures]
   WHERE [Title] = @Title AND
+        [ApartmentFK] = @ApartmentFK AND
         [Guid] <> @Guid
 
   DECLARE @PicturesCount AS int
@@ -70,7 +72,8 @@ AS BEGIN
     [UpdateDate]       = GETDATE(),
     [ApartmentFK]      = @ApartmentFK,
     [Title]            = @Title,
-    [Path]             = @Path,
+    [Data]             = @Data,
+    [MimeType]         = @MimeType,
     [IsRepresentative] = @IsRepresentative
   WHERE [Guid] = @Guid
 

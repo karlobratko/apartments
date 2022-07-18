@@ -12,10 +12,11 @@ CREATE TABLE [dbo].[Pictures]
   [DeleteDate]  datetime      NULL,
   [DeletedBy]   int           NULL,
 
-  [ApartmentFK]       int           NOT NULL,
-  [Title]             nvarchar(100) NOT NULL,
-  [Path]              nvarchar(500) NOT NULL,
-  [IsRepresentative]  bit           NOT NULL
+  [ApartmentFK]       int             NOT NULL,
+  [Title]             nvarchar(100)   NOT NULL,
+  [Data]              varbinary(MAX) NOT NULL,
+  [MimeType]          nvarchar(50)    NOT NULL,
+  [IsRepresentative]  bit             NOT NULL
     CONSTRAINT [DF_Pictures_IsRepresentative] DEFAULT 0,
 
   CONSTRAINT [PK_Pictures] PRIMARY KEY CLUSTERED ([Id] ASC),
@@ -31,5 +32,5 @@ GO
 CREATE UNIQUE NONCLUSTERED INDEX [IX_Pictures_Guid] ON [dbo].[Pictures] ([Guid] ASC)
 GO
 
-CREATE UNIQUE NONCLUSTERED INDEX [IX_Pictures_TitlePath] ON [dbo].[Pictures] ([Title] ASC)
+CREATE UNIQUE NONCLUSTERED INDEX [IX_Pictures_TitleApartmentFK] ON [dbo].[Pictures] ([Title] ASC, [ApartmentFK] ASC)
 GO

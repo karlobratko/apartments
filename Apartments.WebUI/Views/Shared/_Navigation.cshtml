@@ -1,0 +1,53 @@
+﻿@using Apartments.BLL.DomainModels
+
+@{
+  UserDomainModel user = Session["user"] as UserDomainModel;
+  var metadata = HttpContext.Current.Application.GetApplicationState("metadata") as MetadataDomainModel;
+}
+
+<nav class="p-3 border-bottom mb-auto">
+  <div class="container">
+    <div class="navbar d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+      <a href="@Url.Action(actionName: "Index", controllerName: "Home")" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none me-5">
+        <svg class="bi me-2" width="40" height="32" role="img" fill="currentColor">
+          <use xlink:href="~/Content/bootstrap-icons.svg#house" />
+        </svg>
+        <span class="fs-5">@metadata.Name</span>
+      </a>
+
+      <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+        <li><a href="@Url.Action(actionName: "Index", controllerName: "Home")" class="nav-link px-2 link-dark">@Apartments.ResourceManager.GetString(name: "home")</a></li>
+        <li><a href="@Url.Action(actionName: "Search", controllerName: "Apartment")" class="nav-link px-2 link-dark">@Apartments.ResourceManager.GetString(name: "search")</a></li>
+      </ul>
+
+      @Html.Partial(partialViewName: "_CultureSwitcher")
+
+      @if (!(user is null)) {
+        <div class="ms-5 dropdown text-end">
+          <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="ddlUser" data-bs-toggle="dropdown" aria-expanded="false">@user.FName @user.LName</a>
+          <ul class="dropdown-menu text-small" aria-labelledby="ddlUser">
+            <li>
+              <a class="dropdown-item" href="@Url.Action(actionName: "Details", controllerName: "User")">@Apartments.ResourceManager.GetString(name: "profile")</a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li>
+              <a class="dropdown-item" href="@Url.Action(actionName: "Logout", controllerName: "Account")">@Apartments.ResourceManager.GetString(name: "logout")</a>
+            </li>
+          </ul>
+        </div>
+      }
+      else {
+        <ul class="ms-5 nav d-flex align-items-center">
+          <li class="nav-item me-3">
+            <a href="@Url.Action(actionName: "Login", controllerName: "Account")" class="nav-link link-dark px-2">@Apartments.ResourceManager.GetString(name: "login")</a>
+          </li>
+          <li class="nav-item">
+            <a href="@Url.Action(actionName: "Register", controllerName: "Account")" class="btn btn-outline-dark px-2">@Apartments.ResourceManager.GetString(name: "register")</a>
+          </li>
+        </ul>
+      }
+    </div>
+  </div>
+</nav>
