@@ -165,6 +165,9 @@
   <data name="btnUploadPicture.Text" xml:space="preserve">
     <value>Upload slike</value>
   </data>
+  <data name="cvPictureSize.Text" xml:space="preserve">
+    <value>Veličina slike mora biti maksimalno 512 KB!</value>
+  </data>
   <data name="gvbfAddress.HeaderText" xml:space="preserve">
     <value>Adresa</value>
   </data>

@@ -80,7 +80,8 @@ namespace Apartments.WebUI.Controllers {
                     Status = culture == "en" ? status.NameEng : status.Name,
                     RepresentativePicture = pictures.FirstOrDefault(predicate: picture => picture.IsRepresentative),
                     Pictures = pictures.OrderBy(keySelector: picture => picture.IsRepresentative),
-                    Tags = _tagManager.GetByApartment(model)
+                    Tags = _tagManager.GetByApartment(model),
+                    ReviewsCount = _reviewManager.GetByApartment(model).Count()
                   });
     }
 

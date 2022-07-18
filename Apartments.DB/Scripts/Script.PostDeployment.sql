@@ -1704,6 +1704,528 @@ IF NOT EXISTS (SELECT ALL * FROM [dbo].[TagsApartments] WHERE [TagFK] = 9 AND [A
 END
 GO
 
+IF NOT EXISTS (SELECT ALL * FROM [dbo].[TagsApartments] WHERE [TagFK] = 13 AND [ApartmentFK] = 1) BEGIN
+  INSERT INTO [dbo].[TagsApartments]
+  (
+    [CreatedBy],
+    [UpdatedBy],
+    [TagFK],
+    [ApartmentFK]
+  )
+  VALUES
+  (
+    1,
+    1,
+    13,
+    1
+  )
+END
+GO
+
+IF NOT EXISTS (SELECT ALL * FROM [dbo].[TagsApartments] WHERE [TagFK] = 7 AND [ApartmentFK] = 1) BEGIN
+  INSERT INTO [dbo].[TagsApartments]
+  (
+    [CreatedBy],
+    [UpdatedBy],
+    [TagFK],
+    [ApartmentFK]
+  )
+  VALUES
+  (
+    1,
+    1,
+    7,
+    1
+  )
+END
+GO
+
+IF NOT EXISTS (SELECT ALL * FROM [dbo].[TagsApartments] WHERE [TagFK] = 21 AND [ApartmentFK] = 1) BEGIN
+  INSERT INTO [dbo].[TagsApartments]
+  (
+    [CreatedBy],
+    [UpdatedBy],
+    [TagFK],
+    [ApartmentFK]
+  )
+  VALUES
+  (
+    1,
+    1,
+    21,
+    1
+  )
+END
+GO
+
+IF NOT EXISTS (SELECT ALL * FROM [dbo].[TagsApartments] WHERE [TagFK] = 4 AND [ApartmentFK] = 1) BEGIN
+  INSERT INTO [dbo].[TagsApartments]
+  (
+    [CreatedBy],
+    [UpdatedBy],
+    [TagFK],
+    [ApartmentFK]
+  )
+  VALUES
+  (
+    1,
+    1,
+    4,
+    1
+  )
+END
+GO
+
+IF NOT EXISTS (SELECT ALL * FROM [dbo].[TagsApartments] WHERE [TagFK] = 14 AND [ApartmentFK] = 2) BEGIN
+  INSERT INTO [dbo].[TagsApartments]
+  (
+    [CreatedBy],
+    [UpdatedBy],
+    [TagFK],
+    [ApartmentFK]
+  )
+  VALUES
+  (
+    1,
+    1,
+    14,
+    2
+  )
+END
+GO
+
+IF NOT EXISTS (SELECT ALL * FROM [dbo].[TagsApartments] WHERE [TagFK] = 11 AND [ApartmentFK] = 3) BEGIN
+  INSERT INTO [dbo].[TagsApartments]
+  (
+    [CreatedBy],
+    [UpdatedBy],
+    [TagFK],
+    [ApartmentFK]
+  )
+  VALUES
+  (
+    1,
+    1,
+    11,
+    3
+  )
+END
+GO
+
+IF NOT EXISTS (SELECT ALL * FROM [dbo].[TagsApartments] WHERE [TagFK] = 19 AND [ApartmentFK] = 3) BEGIN
+  INSERT INTO [dbo].[TagsApartments]
+  (
+    [CreatedBy],
+    [UpdatedBy],
+    [TagFK],
+    [ApartmentFK]
+  )
+  VALUES
+  (
+    1,
+    1,
+    19,
+    3
+  )
+END
+GO
+
+IF NOT EXISTS (SELECT ALL * FROM [dbo].[TagsApartments] WHERE [TagFK] = 3 AND [ApartmentFK] = 4) BEGIN
+  INSERT INTO [dbo].[TagsApartments]
+  (
+    [CreatedBy],
+    [UpdatedBy],
+    [TagFK],
+    [ApartmentFK]
+  )
+  VALUES
+  (
+    1,
+    1,
+    3,
+    4
+  )
+END
+GO
+
+IF NOT EXISTS (SELECT ALL * FROM [dbo].[TagsApartments] WHERE [TagFK] = 2 AND [ApartmentFK] = 4) BEGIN
+  INSERT INTO [dbo].[TagsApartments]
+  (
+    [CreatedBy],
+    [UpdatedBy],
+    [TagFK],
+    [ApartmentFK]
+  )
+  VALUES
+  (
+    1,
+    1,
+    2,
+    4
+  )
+END
+GO
+
+IF NOT EXISTS (SELECT ALL * FROM [dbo].[TagsApartments] WHERE [TagFK] = 8 AND [ApartmentFK] = 4) BEGIN
+  INSERT INTO [dbo].[TagsApartments]
+  (
+    [CreatedBy],
+    [UpdatedBy],
+    [TagFK],
+    [ApartmentFK]
+  )
+  VALUES
+  (
+    1,
+    1,
+    8,
+    4
+  )
+END
+GO
+
+IF NOT EXISTS (SELECT ALL * FROM [dbo].[TagsApartments] WHERE [TagFK] = 11 AND [ApartmentFK] = 4) BEGIN
+  INSERT INTO [dbo].[TagsApartments]
+  (
+    [CreatedBy],
+    [UpdatedBy],
+    [TagFK],
+    [ApartmentFK]
+  )
+  VALUES
+  (
+    1,
+    1,
+    11,
+    4
+  )
+END
+GO
+
+IF NOT EXISTS (SELECT ALL * FROM [dbo].[TagsApartments] WHERE [TagFK] = 15 AND [ApartmentFK] = 4) BEGIN
+  INSERT INTO [dbo].[TagsApartments]
+  (
+    [CreatedBy],
+    [UpdatedBy],
+    [TagFK],
+    [ApartmentFK]
+  )
+  VALUES
+  (
+    1,
+    1,
+    15,
+    4
+  )
+END
+GO
+
+IF NOT EXISTS (SELECT ALL * FROM [dbo].[TagsApartments] WHERE [TagFK] = 6 AND [ApartmentFK] = 4) BEGIN
+  INSERT INTO [dbo].[TagsApartments]
+  (
+    [CreatedBy],
+    [UpdatedBy],
+    [TagFK],
+    [ApartmentFK]
+  )
+  VALUES
+  (
+    1,
+    1,
+    6,
+    4
+  )
+END
+GO
+
+IF NOT EXISTS (SELECT ALL * FROM [dbo].[TagsApartments] WHERE [TagFK] = 7 AND [ApartmentFK] = 4) BEGIN
+  INSERT INTO [dbo].[TagsApartments]
+  (
+    [CreatedBy],
+    [UpdatedBy],
+    [TagFK],
+    [ApartmentFK]
+  )
+  VALUES
+  (
+    1,
+    1,
+    7,
+    4
+  )
+END
+GO
+
+IF NOT EXISTS (SELECT ALL * FROM [dbo].[TagsApartments] WHERE [TagFK] = 3 AND [ApartmentFK] = 5) BEGIN
+  INSERT INTO [dbo].[TagsApartments]
+  (
+    [CreatedBy],
+    [UpdatedBy],
+    [TagFK],
+    [ApartmentFK]
+  )
+  VALUES
+  (
+    1,
+    1,
+    3,
+    5
+  )
+END
+GO
+
+IF NOT EXISTS (SELECT ALL * FROM [dbo].[TagsApartments] WHERE [TagFK] = 6 AND [ApartmentFK] = 5) BEGIN
+  INSERT INTO [dbo].[TagsApartments]
+  (
+    [CreatedBy],
+    [UpdatedBy],
+    [TagFK],
+    [ApartmentFK]
+  )
+  VALUES
+  (
+    1,
+    1,
+    6,
+    5
+  )
+END
+GO
+
+IF NOT EXISTS (SELECT ALL * FROM [dbo].[TagsApartments] WHERE [TagFK] = 9 AND [ApartmentFK] = 5) BEGIN
+  INSERT INTO [dbo].[TagsApartments]
+  (
+    [CreatedBy],
+    [UpdatedBy],
+    [TagFK],
+    [ApartmentFK]
+  )
+  VALUES
+  (
+    1,
+    1,
+    9,
+    5
+  )
+END
+GO
+
+IF NOT EXISTS (SELECT ALL * FROM [dbo].[TagsApartments] WHERE [TagFK] = 2 AND [ApartmentFK] = 5) BEGIN
+  INSERT INTO [dbo].[TagsApartments]
+  (
+    [CreatedBy],
+    [UpdatedBy],
+    [TagFK],
+    [ApartmentFK]
+  )
+  VALUES
+  (
+    1,
+    1,
+    2,
+    5
+  )
+END
+GO
+
+IF NOT EXISTS (SELECT ALL * FROM [dbo].[TagsApartments] WHERE [TagFK] = 19 AND [ApartmentFK] = 5) BEGIN
+  INSERT INTO [dbo].[TagsApartments]
+  (
+    [CreatedBy],
+    [UpdatedBy],
+    [TagFK],
+    [ApartmentFK]
+  )
+  VALUES
+  (
+    1,
+    1,
+    19,
+    5
+  )
+END
+GO
+
+IF NOT EXISTS (SELECT ALL * FROM [dbo].[TagsApartments] WHERE [TagFK] = 24 AND [ApartmentFK] = 5) BEGIN
+  INSERT INTO [dbo].[TagsApartments]
+  (
+    [CreatedBy],
+    [UpdatedBy],
+    [TagFK],
+    [ApartmentFK]
+  )
+  VALUES
+  (
+    1,
+    1,
+    24,
+    5
+  )
+END
+GO
+
+IF NOT EXISTS (SELECT ALL * FROM [dbo].[TagsApartments] WHERE [TagFK] = 27 AND [ApartmentFK] = 5) BEGIN
+  INSERT INTO [dbo].[TagsApartments]
+  (
+    [CreatedBy],
+    [UpdatedBy],
+    [TagFK],
+    [ApartmentFK]
+  )
+  VALUES
+  (
+    1,
+    1,
+    27,
+    5
+  )
+END
+GO
+
+IF NOT EXISTS (SELECT ALL * FROM [dbo].[TagsApartments] WHERE [TagFK] = 21 AND [ApartmentFK] = 5) BEGIN
+  INSERT INTO [dbo].[TagsApartments]
+  (
+    [CreatedBy],
+    [UpdatedBy],
+    [TagFK],
+    [ApartmentFK]
+  )
+  VALUES
+  (
+    1,
+    1,
+    21,
+    5
+  )
+END
+GO
+
+IF NOT EXISTS (SELECT ALL * FROM [dbo].[TagsApartments] WHERE [TagFK] = 4 AND [ApartmentFK] = 6) BEGIN
+  INSERT INTO [dbo].[TagsApartments]
+  (
+    [CreatedBy],
+    [UpdatedBy],
+    [TagFK],
+    [ApartmentFK]
+  )
+  VALUES
+  (
+    1,
+    1,
+    4,
+    6
+  )
+END
+GO
+
+IF NOT EXISTS (SELECT ALL * FROM [dbo].[TagsApartments] WHERE [TagFK] = 7 AND [ApartmentFK] = 6) BEGIN
+  INSERT INTO [dbo].[TagsApartments]
+  (
+    [CreatedBy],
+    [UpdatedBy],
+    [TagFK],
+    [ApartmentFK]
+  )
+  VALUES
+  (
+    1,
+    1,
+    7,
+    6
+  )
+END
+GO
+
+IF NOT EXISTS (SELECT ALL * FROM [dbo].[TagsApartments] WHERE [TagFK] = 27 AND [ApartmentFK] = 6) BEGIN
+  INSERT INTO [dbo].[TagsApartments]
+  (
+    [CreatedBy],
+    [UpdatedBy],
+    [TagFK],
+    [ApartmentFK]
+  )
+  VALUES
+  (
+    1,
+    1,
+    27,
+    6
+  )
+END
+GO
+
+IF NOT EXISTS (SELECT ALL * FROM [dbo].[TagsApartments] WHERE [TagFK] = 24 AND [ApartmentFK] = 6) BEGIN
+  INSERT INTO [dbo].[TagsApartments]
+  (
+    [CreatedBy],
+    [UpdatedBy],
+    [TagFK],
+    [ApartmentFK]
+  )
+  VALUES
+  (
+    1,
+    1,
+    24,
+    6
+  )
+END
+GO
+
+IF NOT EXISTS (SELECT ALL * FROM [dbo].[TagsApartments] WHERE [TagFK] = 17 AND [ApartmentFK] = 6) BEGIN
+  INSERT INTO [dbo].[TagsApartments]
+  (
+    [CreatedBy],
+    [UpdatedBy],
+    [TagFK],
+    [ApartmentFK]
+  )
+  VALUES
+  (
+    1,
+    1,
+    17,
+    6
+  )
+END
+GO
+
+IF NOT EXISTS (SELECT ALL * FROM [dbo].[TagsApartments] WHERE [TagFK] = 20 AND [ApartmentFK] = 6) BEGIN
+  INSERT INTO [dbo].[TagsApartments]
+  (
+    [CreatedBy],
+    [UpdatedBy],
+    [TagFK],
+    [ApartmentFK]
+  )
+  VALUES
+  (
+    1,
+    1,
+    20,
+    6
+  )
+END
+GO
+
+IF NOT EXISTS (SELECT ALL * FROM [dbo].[TagsApartments] WHERE [TagFK] = 12 AND [ApartmentFK] = 6) BEGIN
+  INSERT INTO [dbo].[TagsApartments]
+  (
+    [CreatedBy],
+    [UpdatedBy],
+    [TagFK],
+    [ApartmentFK]
+  )
+  VALUES
+  (
+    1,
+    1,
+    12,
+    6
+  )
+END
+GO
+
 -- REVIEWS
 
 IF NOT EXISTS (SELECT ALL * FROM [dbo].[Reviews] WHERE [UserFK] = 3 AND [ApartmentFK] = 1) BEGIN

@@ -300,7 +300,7 @@ namespace Apartments.AdminUI {
       ddlUserType.SelectedIndex = 0;
       taDetails.Text = String.Empty;
 
-      pnlReservation.Visible = statusFK == 1 || statusFK == 2;
+      pnlReservation.Visible = statusFK == 2 || statusFK == 3;
     }
 
     protected void SelectUserType(Object sender, EventArgs e) {
@@ -338,7 +338,7 @@ namespace Apartments.AdminUI {
       if (statusFK == -1) {
         return;
       }
-      else if (statusFK == 1 || statusFK == 2) {
+      else if (statusFK == 2 || statusFK == 3) {
         Int32 userType = Int32.Parse(ddlUserType.SelectedItem.Value);
         switch (userType) {
           case 0: {
@@ -352,9 +352,9 @@ namespace Apartments.AdminUI {
               UserFK = userFK,
               UserFName = user.FName,
               UserLName = user.LName,
-              UserAddress = user.Address,
+              UserAddress = String.IsNullOrEmpty(user.Address) ? "" : user.Address,
               UserEmail = user.Email,
-              UserPhoneNumber = user.PhoneNumber
+              UserPhoneNumber = String.IsNullOrEmpty(user.PhoneNumber) ? "" : user.PhoneNumber
             });
             break;
           }
@@ -448,11 +448,13 @@ namespace Apartments.AdminUI {
       FillPicturesForm();
     }
 
+    protected void ValidatePictureSize(Object source, ServerValidateEventArgs args) 
+      => args.IsValid = fuUploadPicture.FileBytes.Length <= 512 * 1024;
+
     protected void UploadPicture(Object sender, EventArgs e) {
       if (!fuUploadPicture.HasFile) return;
 
-      //String extension = fuUploadPicture.FileName.Substring(fuUploadPicture.FileName.LastIndexOf("."));
-      if (fuUploadPicture.PostedFile.ContentLength > 250 * 1024) return;
+      if (fuUploadPicture.PostedFile.ContentLength > 512 * 1024) return;
 
       var picture = new PictureDomainModel {
         ApartmentFK = EditedApartment.Id,

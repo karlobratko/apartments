@@ -270,7 +270,7 @@
           </div>
           <div class="modal-footer flex-row">
             <asp:Button meta:resourcekey="btnCancel" runat="server" CssClass="btn btn-outline-secondary" CausesValidation="false" OnClick="CloseCreateModal" />
-            <asp:Button meta:resourcekey="btnSubmit" runat="server" CssClass="btn btn-warning" CausesValidation="true" OnClick="SubmitCreate" />
+            <asp:Button meta:resourcekey="btnSubmit" runat="server" CssClass="btn btn-warning" CausesValidation="true" UseSubmitBehavior="false" OnClick="SubmitCreate" />
           </div>
         </div>
       </div>
@@ -455,6 +455,14 @@
               <div class="mb-4">
                 <asp:Label runat="server" AssociatedControlID="fuUploadPicture" CssClass="form-label"></asp:Label>
                 <asp:FileUpload ID="fuUploadPicture" runat="server" AllowMultiple="false" CssClass="form-control" />
+                <asp:CustomValidator 
+                  ID="cvPictureSize"
+                  runat="server"
+                  ControlToValidate="fuUploadPicture"
+                  meta:resourcekey="cvPictureSize"
+                  Display="Dynamic"
+                  ForeColor="Red"
+                  OnServerValidate="ValidatePictureSize"></asp:CustomValidator>
               </div>
             </div>
           </div>

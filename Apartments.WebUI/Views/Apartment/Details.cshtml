@@ -394,20 +394,20 @@ else {
 
   <div class="d-flex justify-content-center">
     @Ajax.ActionLink(linkText: Apartments.ResourceManager.GetString(name: "review-load-more"),
-                     actionName: "GetReviewsJson",
-                     controllerName: "Apartment",
-                     ajaxOptions: new AjaxOptions {
-                       HttpMethod = "Get",
-                       OnComplete = "showReviews",
-                       UpdateTargetId = reviewCardCollection
-                     },
-                     routeValues: new {
-                       apartmentFK = Model.Id
-                     },
-                     htmlAttributes: new {
-                       id = reviewLoadMoreButton,
-                       @class = "btn btn-outline-dark "
-                     })
+                         actionName: "GetReviewsJson",
+                         controllerName: "Apartment",
+                         ajaxOptions: new AjaxOptions {
+                           HttpMethod = "Get",
+                           OnComplete = "showReviews",
+                           UpdateTargetId = reviewCardCollection
+                         },
+                         routeValues: new {
+                           apartmentFK = Model.Id
+                         },
+                         htmlAttributes: new {
+                           id = reviewLoadMoreButton,
+                           @class = $"btn btn-outline-dark {(Model.ReviewsCount == 0 ? "visually-hidden" : "")}"
+                         })
   </div>
 </div>
 

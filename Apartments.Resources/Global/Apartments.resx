@@ -378,6 +378,18 @@
   <data name="search" xml:space="preserve">
     <value>Search</value>
   </data>
+  <data name="sort-by-address" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="sort-by-city" xml:space="preserve">
+    <value>City</value>
+  </data>
+  <data name="sort-by-name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="sort-by-owner" xml:space="preserve">
+    <value>Owner</value>
+  </data>
   <data name="submit" xml:space="preserve">
     <value>Submit</value>
   </data>

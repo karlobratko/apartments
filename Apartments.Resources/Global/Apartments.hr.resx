@@ -378,6 +378,18 @@
   <data name="search" xml:space="preserve">
     <value>Pretraživanje</value>
   </data>
+  <data name="sort-by-address" xml:space="preserve">
+    <value>Adresa</value>
+  </data>
+  <data name="sort-by-city" xml:space="preserve">
+    <value>Grad</value>
+  </data>
+  <data name="sort-by-name" xml:space="preserve">
+    <value>Naziv</value>
+  </data>
+  <data name="sort-by-owner" xml:space="preserve">
+    <value>Vlasnik</value>
+  </data>
   <data name="submit" xml:space="preserve">
     <value>Potvrdi</value>
   </data>

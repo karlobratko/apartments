@@ -72,7 +72,7 @@
                            selectList: typeof(ApartmentCardViewModel).GetProperties()
                                                                      .Where(predicate: prop => new String[] { "Name", "Address", "City", "Owner", }.Contains(prop.Name))
                                                                      .Select(selector: prop => new SelectListItem {
-                                                                       Text = prop.Name,
+                                                                       Text = Apartments.ResourceManager.GetString(name: $"sort-by-{prop.Name.ToLower()}"),
                                                                        Value = prop.Name,
                                                                        Selected = prop.Name == Model.SearchSettings.SortBy
                                                                      }),
@@ -137,14 +137,9 @@
                                                                                 class="card-img-top align-self-center"
                                                                                 style="width: 150px; z-index: 1">
                                                                            <div class="card-body">
-                                                                             <h5 class="card-title" style="height: 3rem">${apartment.Name}</h5>
+                                                                             <h5 class="card-title mt-2" style="height: 3rem">${apartment.Name}</h5>
                                                                              <hr />
-                                                                             <p>
-                                                                               ${apartment.City}
-                                                                             </p>
-                                                                             <p>
-                                                                               ${apartment.Status}
-                                                                             </p>
+                                                                             <p>${apartment.Address}, ${apartment.City}</p>
                                                                              <a href="${apartment.DetailsUrl}" class="stretched-link"></a>
                                                                            </div>
                                                                          </div>

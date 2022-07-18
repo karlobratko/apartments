@@ -37,6 +37,7 @@ namespace Apartments.WebUI.ViewModels {
 
     [Display(Name = nameof(Resources.Global.ModelValidation.owner), ResourceType = typeof(Resources.Global.ModelValidation))]
     public String Owner { get; set; }
+    public Int32 ReviewsCount { get; set; }
     public PictureDomainModel RepresentativePicture { get; set; }
     public IEnumerable<PictureDomainModel> Pictures { get; set; }
     public IEnumerable<TagDomainModel> Tags { get; set; }

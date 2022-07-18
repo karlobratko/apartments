@@ -844,6 +844,42 @@ namespace Apartments.Resources.Global {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Address.
+        /// </summary>
+        public static string sort_by_address {
+            get {
+                return ResourceManager.GetString("sort-by-address", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to City.
+        /// </summary>
+        public static string sort_by_city {
+            get {
+                return ResourceManager.GetString("sort-by-city", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string sort_by_name {
+            get {
+                return ResourceManager.GetString("sort-by-name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Owner.
+        /// </summary>
+        public static string sort_by_owner {
+            get {
+                return ResourceManager.GetString("sort-by-owner", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Submit.
         /// </summary>
         public static string submit {

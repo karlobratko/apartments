@@ -74,7 +74,7 @@
           </ul>
 
           <div class="text-end ms-lg-5">
-            <asp:Button runat="server" ID="btnLogout" meta:resourcekey="btnLogout" CssClass="btn btn-outline-warning" OnClick="btnLogout_Click" />
+            <asp:Button runat="server" ID="btnLogout" meta:resourcekey="btnLogout" CausesValidation="false" UseSubmitBehavior="false" CssClass="btn btn-outline-warning" OnClick="btnLogout_Click" />
           </div>
         </div>
       </div>
