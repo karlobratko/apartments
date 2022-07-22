@@ -8,6 +8,73 @@
 
 @section styles {
   @Styles.Render("~/Content/jqui")
+
+  <style>
+    .rating {
+      display: block;
+      position: relative;
+      height: 50px;
+      line-height: 50px;
+    }
+
+      .rating label {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        cursor: pointer;
+      }
+
+        .rating label:last-child {
+          position: static;
+        }
+
+        .rating label:nth-child(1) {
+          z-index: 5;
+        }
+
+        .rating label:nth-child(2) {
+          z-index: 4;
+        }
+
+        .rating label:nth-child(3) {
+          z-index: 3;
+        }
+
+        .rating label:nth-child(4) {
+          z-index: 2;
+        }
+
+        .rating label:nth-child(5) {
+          z-index: 1;
+        }
+
+        .rating label input {
+          position: absolute;
+          top: 0;
+          left: 0;
+          opacity: 0;
+        }
+
+        .rating label .icon {
+          float: left;
+          color: transparent;
+        }
+
+        .rating label:last-child .icon {
+          color: #000;
+        }
+
+      .rating:not(:hover) label input:checked ~ .icon,
+      .rating:hover label:hover input ~ .icon {
+        color: #FFDF00;
+      }
+
+      .rating label input:focus:not(:checked) ~ .icon:last-child {
+        color: #000;
+        text-shadow: 0 0 5px #FFDF00;
+      }
+  </style>
 }
 
 <h2 class="display-5 mb-5 text-center">@Model.Name</h2>
@@ -281,12 +348,14 @@
             </div>
           </div>
 
-          <div class="d-flex align-items-end flex-column mb-3">
-            <div>
-              <div id="reCaptchaCheckbox"></div>
-              <input type="hidden" id="reCaptcha" name="reCaptcha" class="reCaptcha required" />
+          if (user is null) {
+            <div class="d-flex align-items-end flex-column mb-3">
+              <div>
+                <div id="reCaptchaCheckbox"></div>
+                <input type="hidden" id="reCaptcha" name="reCaptcha" class="reCaptcha required" />
+              </div>
             </div>
-          </div>
+          }
 
           <div class="d-flex justify-content-end">
             <button id="@modalReservationHideButton" type="button" class="btn btn-outline-secondary me-3" data-bs-dismiss="modal">
@@ -336,14 +405,102 @@
             <div class="row">
               @Html.Hidden(name: "ApartmentFK", value: Model.Id)
               @Html.Hidden(name: "UserFK", value: user.Id)
-
               <div class="mb-3">
                 @Html.Label(expression: "Stars",
                             labelText: Apartments.ResourceManager.GetString(name: "label-stars"),
-                            htmlAttributes: new { @class = "form-label" })
-                @Html.TextBox(name: "Stars",
-                              value: null,
-                              htmlAttributes: new { @class = "form-control", type = "number", min = 1, max = 5 })
+                            htmlAttributes: new { @class = "form-label d-block" })
+                <div class="rating">
+                  <label>
+                    @Html.RadioButton(name: "Stars", value: 1, isChecked: false)
+                    <span class="icon">
+                      <svg class="bi me-2" width="40" height="32" role="img" fill="currentColor">
+                        <use xlink:href="~/Content/bootstrap-icons.svg#star-fill" />
+                      </svg>
+                    </span>
+                  </label>
+                  <label>
+                    @Html.RadioButton(name: "Stars", value: 2, isChecked: false)
+                    <span class="icon">
+                      <svg class="bi me-2" width="40" height="32" role="img" fill="currentColor">
+                        <use xlink:href="~/Content/bootstrap-icons.svg#star-fill" />
+                      </svg>
+                    </span>
+                    <span class="icon">
+                      <svg class="bi me-2" width="40" height="32" role="img" fill="currentColor">
+                        <use xlink:href="~/Content/bootstrap-icons.svg#star-fill" />
+                      </svg>
+                    </span>
+                  </label>
+                  <label>
+                    @Html.RadioButton(name: "Stars", value: 3, isChecked: false)
+                    <span class="icon">
+                      <svg class="bi me-2" width="40" height="32" role="img" fill="currentColor">
+                        <use xlink:href="~/Content/bootstrap-icons.svg#star-fill" />
+                      </svg>
+                    </span>
+                    <span class="icon">
+                      <svg class="bi me-2" width="40" height="32" role="img" fill="currentColor">
+                        <use xlink:href="~/Content/bootstrap-icons.svg#star-fill" />
+                      </svg>
+                    </span>
+                    <span class="icon">
+                      <svg class="bi me-2" width="40" height="32" role="img" fill="currentColor">
+                        <use xlink:href="~/Content/bootstrap-icons.svg#star-fill" />
+                      </svg>
+                    </span>
+                  </label>
+                  <label>
+                    @Html.RadioButton(name: "Stars", value: 4, isChecked: false)
+                    <span class="icon">
+                      <svg class="bi me-2" width="40" height="32" role="img" fill="currentColor">
+                        <use xlink:href="~/Content/bootstrap-icons.svg#star-fill" />
+                      </svg>
+                    </span>
+                    <span class="icon">
+                      <svg class="bi me-2" width="40" height="32" role="img" fill="currentColor">
+                        <use xlink:href="~/Content/bootstrap-icons.svg#star-fill" />
+                      </svg>
+                    </span>
+                    <span class="icon">
+                      <svg class="bi me-2" width="40" height="32" role="img" fill="currentColor">
+                        <use xlink:href="~/Content/bootstrap-icons.svg#star-fill" />
+                      </svg>
+                    </span>
+                    <span class="icon">
+                      <svg class="bi me-2" width="40" height="32" role="img" fill="currentColor">
+                        <use xlink:href="~/Content/bootstrap-icons.svg#star-fill" />
+                      </svg>
+                    </span>
+                  </label>
+                  <label>
+                    @Html.RadioButton(name: "Stars", value: 5, isChecked: true)
+                    <span class="icon">
+                      <svg class="bi me-2" width="40" height="32" role="img" fill="currentColor">
+                        <use xlink:href="~/Content/bootstrap-icons.svg#star-fill" />
+                      </svg>
+                    </span>
+                    <span class="icon">
+                      <svg class="bi me-2" width="40" height="32" role="img" fill="currentColor">
+                        <use xlink:href="~/Content/bootstrap-icons.svg#star-fill" />
+                      </svg>
+                    </span>
+                    <span class="icon">
+                      <svg class="bi me-2" width="40" height="32" role="img" fill="currentColor">
+                        <use xlink:href="~/Content/bootstrap-icons.svg#star-fill" />
+                      </svg>
+                    </span>
+                    <span class="icon">
+                      <svg class="bi me-2" width="40" height="32" role="img" fill="currentColor">
+                        <use xlink:href="~/Content/bootstrap-icons.svg#star-fill" />
+                      </svg>
+                    </span>
+                    <span class="icon">
+                      <svg class="bi me-2" width="40" height="32" role="img" fill="currentColor">
+                        <use xlink:href="~/Content/bootstrap-icons.svg#star-fill" />
+                      </svg>
+                    </span>
+                  </label>
+                </div>
               </div>
 
               <div class="mb-3">
@@ -676,11 +833,17 @@ else {
       });
 
       const reviewForm = $("#@reviewForm").validate({
+        errorPlacement: function (error, element) {
+          if (element.attr("id") == "Stars") {
+            error.appendTo(element.parent("label").parent("div").parent("div"));
+          }
+          else {
+            error.insertAfter(element);
+          }
+        },
         rules: {
           Stars: {
             required: true,
-            max: 5,
-            min: 1
           },
           Details: {
             required: true,
@@ -690,8 +853,6 @@ else {
         messages: {
           Stars: {
             required: "@ModelValidation.ResourceManager.GetString(name: "stars-required")",
-            max: "@ModelValidation.ResourceManager.GetString(name: "stars-max")",
-            min: "@ModelValidation.ResourceManager.GetString(name: "stars-min")"
           },
           Details: {
             required: "@ModelValidation.ResourceManager.GetString(name: "details-required")",
